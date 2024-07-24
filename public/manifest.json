@@ -1,0 +1,10 @@
+{
+"name": "gymBuddy",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en-EN",
+  "theme_color": "#370909",
+  "display": "standalone",
+  "background_color": "#370909",
+  "orientation": "portrait"
+}
