@@ -72,6 +72,10 @@
     left:32vw;
     background-color: #B2675E;
     border-radius: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     color: #fff;
     font-family: "NTR", sans-serif;
     font-size: 1.2em;

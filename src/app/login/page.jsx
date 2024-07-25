@@ -100,7 +100,7 @@ export default function Login() {
             </div>
           </form>
             <button onClick={handleGoogleLogin} className={styles.googleLoginButton}>
-                <img src="/google.png"/> Login with Google
+                <img src="/gymbuddy/google.png"/> Login with Google
             </button>
 
         </main>

@@ -14,6 +14,8 @@ export default withPWA({
     },
 
   output: "export",
+  basePath:"/gymbuddy",
+  assetPrefix: "/gymbuddy/",
   images: {
     unoptimized: true,
   },
