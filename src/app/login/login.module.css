@@ -1,0 +1,83 @@
+.name {
+  font-size: 3rem;
+  letter-spacing: -0.15em;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  position: absolute;
+  margin-top: -70vh;
+}
+
+.mainContainer {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.googleLoginButton{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left:19vw;
+    flex-direction: row;
+    background-color: rgba(0,0,0,0);
+    border: 0px;
+    color: #F8F4E3;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2em;;
+}
+
+.googleLoginButton img{
+    width: 30px;
+    height: 30px;
+    margin: 0 20px;
+    margin-top:7px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  height: 20vh;
+  margin-top:-10vh;
+}
+
+.label{
+    position: absolute;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    color: #fff;
+    margin: 0px 50px;
+    margin-bottom: 10px;
+}
+
+.inputField{
+    position: relative;
+    width: 60vw;
+    margin:50px;
+    height: 5vh;
+    background-color: rgba(248, 244, 227, 0.5);
+    border-radius: 10px;
+}
+
+.submitButton{
+    position: absolute;
+    width: 40vw;
+    border-radius: 10px;
+    height: 5vh;
+    left:32vw;
+    background-color: #B2675E;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2em;
+    border: 0px;
+}
