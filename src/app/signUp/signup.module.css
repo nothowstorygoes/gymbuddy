@@ -7,6 +7,7 @@
   width: 90vw !important;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
+  z-index: 0;
 }
 
 .firstContainer {
@@ -85,7 +86,7 @@
   transition: transform 0.8s ease-in-out;
   width: 100%; /* Ensure it takes full width */
   max-width: 700px;
-  position: absolute; /* Position it absolutely */
+  position:   absolute; /* Position it absolutely */
   left: 100%; /* Start off-screen to the right */
 }
 

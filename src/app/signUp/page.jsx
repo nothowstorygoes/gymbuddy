@@ -172,7 +172,7 @@ export default function SignUp() {
                 </label>
                 <input
                   id="ConfirmPassword"
-                  autoComplete="off"
+                  autoComplete="new-password"
                   name="confirmPSW"
                   type="text"
                   required
