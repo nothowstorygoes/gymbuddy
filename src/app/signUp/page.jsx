@@ -169,7 +169,7 @@ export default function SignUp() {
         ) : (
           <div className={styles.googleContainer}>
             <p className={styles.titleGoogle}>
-              You're almost there.. <br />
+              You &apos; re almost there.. <br />
               Set your username
             </p>
             <form className={styles.formContainerGoogle} onSubmit={nextStep}>
