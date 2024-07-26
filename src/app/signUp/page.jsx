@@ -144,12 +144,12 @@ export default function SignUp() {
                 <input
                   id="password"
                   name="PSW"
-                  type="password"
+                  type="text"
                   required
                   autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className={styles.inputField}
+                  className={styles.inputFieldPSW}
                 />
               </div>
 
@@ -161,11 +161,11 @@ export default function SignUp() {
                   id="ConfirmPassword"
                   autoComplete="new-password"
                   name="confirmPSW"
-                  type="password"
+                  type="text"
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className={styles.inputField}
+                  className={styles.inputFieldPSW}
                 />
               </div>
               {passwordError && <p className={styles.error}>{passwordError}</p>}

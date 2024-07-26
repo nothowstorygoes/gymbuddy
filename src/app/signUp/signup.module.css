@@ -1,12 +1,13 @@
 .mainContainer {
   display: flex;
-  position: relative;
+  position: absolute;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 90vw !important;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
+  z-index: 0;
 }
 
 .firstContainer {
@@ -85,7 +86,7 @@
   transition: transform 0.8s ease-in-out;
   width: 100%; /* Ensure it takes full width */
   max-width: 700px;
-  position: relative; /* Position it absolutely */
+  position:   absolute; /* Position it absolutely */
   left: 100%; /* Start off-screen to the right */
 }
 
@@ -99,13 +100,13 @@
 }
 
 .formContainer {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50vw;
   top: -20vh;
-  left: 0;
+  left: -25vw;
   height: 20vh;
   justify-content: center;
   align-items: center;
@@ -232,7 +233,7 @@
 .thirdContainer {
   display: flex;
   position: absolute;
-  top:30vh;
+  top:25vh;
   flex-direction: column;
   transition: transform 0.8s ease-in-out;
   width: 100%; /* Ensure it takes full width */
@@ -382,4 +383,24 @@
 
 .clicked {
   background-color: #b2675e;
+}
+
+
+@font-face {
+  font-family: 'password';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
+}
+
+.inputFieldPSW {
+  position: relative;
+  width: 60vw;
+  color:white;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+  font-family: 'password';
 }
