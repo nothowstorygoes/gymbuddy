@@ -13,7 +13,6 @@ export default withPWA({
       return config;
     },
 
-  output: "export",
   basePath:"/gymbuddy",
   assetPrefix: "/gymbuddy/",
   images: {
