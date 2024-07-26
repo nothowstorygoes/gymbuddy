@@ -40,19 +40,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+
         <link rel="apple-touch-icon" href="/gymbuddy/icon-192x192.png" />
-        <link
-          rel="apple-touch-icon-precomposed"
-          href="/gymbuddy/icon-192x192.png"
-        />
-        <link
-          rel="apple-touch-icon-120x120-precomposed"
-          href="/gymbuddy/icon-192x192.png"
-        />
-        <link
-          rel="apple-touch-icon-120x120"
-          href="/gymbuddy/icon-192x192.png"
-        />
+        <link rel="apple-touch-icon-120x120" href="/gymbuddy/icon-192x192.png" />
+        <link rel="apple-touch-icon-120x120-precomposed" href="/gymbuddy/icon-192x192.png" />
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"

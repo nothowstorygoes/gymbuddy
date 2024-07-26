@@ -134,6 +134,27 @@
   border-radius: 10px;
 }
 
+
+
+.inputFieldPSW {
+  font-family: "password";
+  position: relative;
+  width: 60vw;
+  color: #fff;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+}
+
+@font-face {
+  font-family: "password";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
+}
+
 .submitButton {
   position: absolute;
   width: 40vw;
@@ -233,7 +254,7 @@
 .thirdContainer {
   display: flex;
   position: absolute;
-  top:25vh;
+  top: 30vh;
   flex-direction: column;
   transition: transform 0.8s ease-in-out;
   width: 100%; /* Ensure it takes full width */
@@ -246,61 +267,60 @@
   transform: translateX(-120%); /* Slide in from the right */
 }
 
-
-.formLeft{
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    margin-top: 0;
+.formLeft {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  margin-top: 0;
 }
 
-.inputFieldSign3{
-    position: relative;
-    width: 30vw;
-    font-family: "NTR", sans-serif;
-    color: #fff;
-    font-size: 18px;
-    margin: 50px;
-    height: 5vh;
-    background-color: rgba(248, 244, 227, 0.5);
-    border-radius: 10px;
+.inputFieldSign3 {
+  position: relative;
+  width: 30vw;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
 }
 
-.labelSign3{
-    position: absolute;
-    font-family: "NTR", sans-serif;
-    font-size: 1.9rem;
-    color: #fff;
-    margin: 0px 50px;
-    width: 15vh;
-    margin-bottom: 10px;
-    text-align: right;
+.labelSign3 {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 15vh;
+  margin-bottom: 10px;
+  text-align: right;
 }
 
-.formRigth{
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    margin-top: 80vh;
-    right: -90%;
+.formRigth {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  margin-top: 80vh;
+  right: -90%;
 }
 
-.formMeasures{
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    top:35vh;
-    left: 10vw;
+.formMeasures {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 35vh;
+  left: 10vw;
 }
 
-.buttonMeasure{
-    position: relative;
-    width: 30vw;
-    margin: 5vh 0;
-    border-radius: 10px;
-    height: 5vh;
-    background-color: #F8F4E3;
-    text-align: center;
+.buttonMeasure {
+  position: relative;
+  width: 30vw;
+  margin: 5vh 0;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #f8f4e3;
+  text-align: center;
 }
 
 .buttonMeasure p {
@@ -312,16 +332,15 @@
   width: 20vw;
   font-weight: lighter;
   text-align: center;
-
 }
 
-.formSex{
-    display: flex;
+.formSex {
+  display: flex;
 
-    position: absolute;
-    flex-direction: row;
-    top: 15vh;
-    right: 10vw;
+  position: absolute;
+  flex-direction: row;
+  top: 15vh;
+  right: 10vw;
 }
 
 .buttonSex p {
@@ -336,19 +355,19 @@
   text-align: center;
 }
 
-.buttonSex{
+.buttonSex {
   width: 10vw;
-    margin: 0vw 4vw;
-    border-radius: 10px;
-    height: 5vh;
-    margin-top: 5vh;
-    /* left: -30vw; */
-    position: relative;
-    background-color: #F8F4E3;
-    text-align: center;
+  margin: 0vw 4vw;
+  border-radius: 10px;
+  height: 5vh;
+  margin-top: 5vh;
+  /* left: -30vw; */
+  position: relative;
+  background-color: #f8f4e3;
+  text-align: center;
 }
 
-.labelSex{
+.labelSex {
   position: absolute;
   font-family: "NTR", sans-serif;
   font-size: 1.9rem;
@@ -358,7 +377,6 @@
   left: -9vw;
   margin-bottom: 10px;
   text-align: right;
-
 }
 
 .submitButton2 {
@@ -370,7 +388,7 @@
   border-radius: 10px;
   display: flex;
   left: 25vw;
-  top:80vh;
+  top: 80vh;
   text-align: center;
   font-weight: lighter;
   align-items: center;
@@ -382,25 +400,206 @@
 }
 
 .clicked {
-  background-color: #b2675e;
+  background-color: #b2675e !important;
 }
 
-
-@font-face {
-  font-family: 'password';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
+.thirdContainer.slideOut {
+  transform: translateX(-220%);
 }
 
-.inputFieldPSW {
+.fourthContainer {
+  display: flex;
+  position: absolute;
+  top: 30vh;
+  flex-direction: column;
+  transition: transform 0.8s ease-in-out;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 700px;
+  position: absolute; /* Position it absolutely */
+  left: 200%; /* Start off-screen to the right */
+}
+
+.fourthContainer.next3 {
+  transform: translateX(-150%); /* Slide in from the right */
+}
+
+.formGoal {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.labelActivity {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 90vw;
+  margin-bottom: 10px;
+  top: -5vh;
+  text-align: center;
+  left: -33vw;
+  display: flex;
+  justify-content: center;
+}
+
+.inputFieldGoal {
   position: relative;
-  width: 60vw;
-  color:white;
+  width: 15vw;
   font-size: 18px;
+  font-family: "NTR", sans-serif;
+  left: 3vw;
+  color: #fff;
+  font-size: 18px;
+  top: 5vh;
   margin: 50px;
   height: 5vh;
   background-color: rgba(248, 244, 227, 0.5);
   border-radius: 10px;
-  font-family: 'password';
+}
+
+.labelActivity2 {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 90vw;
+  margin-bottom: 10px;
+  top: 25vh;
+  text-align: center;
+  left: -29vw;
+  display: flex;
+  justify-content: center;
+}
+
+.activityContainer {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 35vh;
+  left: 3.5vw;
+}
+
+.buttonActivity {
+  width: 40vw;
+  margin: 0vw 4vw;
+  border-radius: 10px;
+  height: 6vh;
+  margin-top: 5vh;
+  /* left: -30vw; */
+  position: relative;
+  background-color: #f8f4e3;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "NTR", sans-serif;
+  font-size: 1.7rem;
+  color: #370909;
+}
+
+.submitButton3 {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: 7vw;
+  top: 80vh;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+.fourthContainer.slideOut4 {
+  transform: translateX(-300%); /* Slide in from the right */
+}
+
+
+.next4 {
+  transform: translateX(-250%);
+}
+
+.doneContainer {
+  display: flex;
+  position: absolute;
+  top: 30vh;
+  flex-direction: column;
+  transition: transform 0.8s ease-in-out;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 700px;
+  position: absolute; /* Position it absolutely */
+  left: 300%; /* Start off-screen to the right */
+}
+
+.doneTitle {
+  position: absolute;
+  top: -20vh;
+  display: flex;
+  left: -25vw;
+  line-height: 100%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 2.5rem;
+  text-align: center;
+  width: 60vw;
+}
+
+.doneText {
+  position: absolute;
+  top: 2vh;
+  display: flex;
+  left: -25vw;
+  text-align: center;
+  line-height: 120%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 1.8rem;
+  width: 60vw;
+}
+
+.doneButton {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: -15vw;
+  top: 40vh;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+
+.doneLogo {
+  position: absolute;
+  top: 25vh;
+  display: flex;
+  left: -7vw;
+  text-align: center;
+  line-height: 120%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 1.8rem;
+  letter-spacing: -0.2rem;
+  width: 60vw;
 }
