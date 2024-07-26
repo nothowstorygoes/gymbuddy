@@ -40,6 +40,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="apple-touch-icon" href="/gymbuddy/icon-192x192.png" />
+        <link
+          rel="apple-touch-icon-precomposed"
+          href="/gymbuddy/icon-192x192.png"
+        />
+        <link
+          rel="apple-touch-icon-120x120-precomposed"
+          href="/gymbuddy/icon-192x192.png"
+        />
+        <link
+          rel="apple-touch-icon-120x120"
+          href="/gymbuddy/icon-192x192.png"
+        />
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
@@ -140,7 +153,12 @@ export default function RootLayout({
           media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
           href="/gymbuddy/splashScreen/4__iPhone_SE__iPod_touch_5th_generation_and_later_portrait.png"
         />
-
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="GymBuddy" />
         <link rel="manifest" href="/gymbuddy/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
