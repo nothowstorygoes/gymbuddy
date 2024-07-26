@@ -300,12 +300,86 @@
     height: 5vh;
     background-color: #F8F4E3;
     text-align: center;
-
 }
 
 .buttonMeasure p {
-    font-family: "NTR", sans-serif;
-    font-size: 1.2rem;
-    font-weight: lighter;
+  font-family: "NTR", sans-serif;
+  font-size: 1.4rem;
+  color: #370909;
+  position: absolute;
+  top: -2.5vh;
+  width: 20vw;
+  font-weight: lighter;
+  text-align: center;
 
+}
+
+.formSex{
+    display: flex;
+
+    position: absolute;
+    flex-direction: row;
+    top: 15vh;
+    right: 10vw;
+}
+
+.buttonSex p {
+  font-family: "NTR", sans-serif;
+  font-size: 1.4rem;
+  color: #370909;
+  position: absolute;
+  top: -2.5vh;
+  width: 3vw;
+  margin-left: -6px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.buttonSex{
+  width: 10vw;
+    margin: 0vw 4vw;
+    border-radius: 10px;
+    height: 5vh;
+    margin-top: 5vh;
+    /* left: -30vw; */
+    position: relative;
+    background-color: #F8F4E3;
+    text-align: center;
+}
+
+.labelSex{
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  top: -3vh;
+  left: -9vw;
+  margin-bottom: 10px;
+  text-align: right;
+
+}
+
+.submitButton2 {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: 25vw;
+  top:80vh;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+
+.clicked {
+  background-color: #b2675e;
 }
