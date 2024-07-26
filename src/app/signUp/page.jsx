@@ -24,6 +24,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  
+
 
   //signup using email and password, other info will be added following steps
   const handleSignUp = async (e) => {
@@ -38,6 +40,7 @@ export default function SignUp() {
     }
     return false;
   };
+
   //signup using google, other info will be added following steps
   const handleSignUpGoogle = async (e) => {
     e.preventDefault();
@@ -69,6 +72,11 @@ export default function SignUp() {
       handleSignUpGoogle(e);
     }
     setIsNextInfo(true);
+  };
+
+  const nextStep2 = (e) => {
+    e.preventDefault();
+    setIsNextBody(true);
   };
 
   return (
@@ -135,9 +143,10 @@ export default function SignUp() {
                 </label>
                 <input
                   id="password"
-                  name="password"
+                  name="PSW"
                   type="password"
                   required
+                  autoComplete="off"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className={styles.inputField}
@@ -150,7 +159,8 @@ export default function SignUp() {
                 </label>
                 <input
                   id="ConfirmPassword"
-                  name="ConfirmPassword"
+                  autoComplete="off"
+                  name="confirmPSW"
                   type="password"
                   required
                   value={confirmPassword}
@@ -199,10 +209,12 @@ export default function SignUp() {
         <div
           className={`${styles.thirdContainer} ${
             isNextInfo ? styles.next2 : ""
+          } ${
+            isNextBody ? styles.slideOut : ""
           }`}
         >
           <div className={styles.infoContainer}>
-            <form className={styles.formContainer} onSubmit={nextStep}>
+            <form className={styles.formContainer} onSubmit={nextStep2}>
               <div className={styles.formLeft}>
                 <div className={styles.formComplete}>
                   <label htmlFor="age" className={styles.label}>
@@ -218,20 +230,15 @@ export default function SignUp() {
                     className={styles.inputFieldSign3}
                   />
                 </div>
-                <div className={styles.formComplete}>
-                  <label htmlFor="sex" className={styles.label}>
-                    sex
-                  </label>
-                  <input
-                    id="sex"
-                    name="sex"
-                    type="string"
-                    required
-                    value={sex}
-                    onChange={(e) => setSex(e.target.value)}
-                    className={styles.inputFieldSign3}
-                  />
-                </div>
+                <div className={styles.formSex}>
+                  <p className={styles.labelSex}>Sex</p>
+                <button onClick={() => {setSex("M")}} className={`${styles.buttonSex} ${ sex==="M" ? styles.clicked : ""}`}>
+                  <p>M</p>
+                </button>
+                <button onClick={() => {setSex("F")}} className={`${styles.buttonSex} ${sex==="F" ? styles.clicked : ""}`}>
+                  <p>F</p>
+                </button>
+              </div>
               </div>
               <div className={styles.formRigth}>
                 <div className={styles.formComplete}>
@@ -264,16 +271,20 @@ export default function SignUp() {
                 </div>
               </div>
               <div className={styles.formMeasures}>
-                <button onClick={() => {setChosenMeasure("metric")}} className={styles.buttonMeasure}>
+                <button onClick={() => {setChosenMeasure("metric")}} className={`${styles.buttonMeasure} ${chosenMeasure ==="metric" ? styles.clicked : ""}`}>
                   <p>metric</p>
                 </button>
-                <button onClick={() => {setChosenMeasure("imperial")}} className={styles.buttonMeasure}>
+                <button onClick={() => {setChosenMeasure("imperial")}} className={`${styles.buttonMeasure} ${chosenMeasure==="imperial" ? styles.clicked : ""}`}>
                   <p>imperial</p>
                 </button>
               </div>
+              <button type="submit" className={styles.submitButton2}>next</button>
             </form>
           </div>
         </div>
+        <div className={`${styles.fourthContainer} ${
+            isNextBody ? styles.next : ""
+          } `}></div>
     </main>
   );
 }
