@@ -85,7 +85,7 @@
   transition: transform 0.8s ease-in-out;
   width: 100%; /* Ensure it takes full width */
   max-width: 700px;
-  position: absolute; /* Position it absolutely */
+  position: relative; /* Position it absolutely */
   left: 100%; /* Start off-screen to the right */
 }
 
@@ -99,13 +99,13 @@
 }
 
 .formContainer {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50vw;
   top: -20vh;
-  left: -25vw;
+  left: 0;
   height: 20vh;
   justify-content: center;
   align-items: center;
