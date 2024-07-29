@@ -16,8 +16,9 @@ const BarChart = ({proteinIntake, dataProtein}) => {
             {
                 label: 'Your protein intake',
                 data: dataProtein,
-                backgroundColor: '#B2675E',
+                backgroundColor: 'rgba(178, 103, 94, 0.5)',
                 borderWidth: 0,
+                borderRadius: 10,
             },
         ],
     };
@@ -31,7 +32,7 @@ const BarChart = ({proteinIntake, dataProtein}) => {
                 grid:{display:false},
                 ticks: {display: false}
             },
-            x:{grid:{display:false}}
+            x:{grid:{display:false}, ticks: {color :'#fff'}}
         },
         plugins: {
             legend: { display: false } // Hide the dataset label

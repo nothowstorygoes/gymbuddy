@@ -10,18 +10,21 @@ import {
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '../components/loadingSpinner/loadingSpinner';
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
   
     // if logged in pushes to home
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
+          setLoading(true);
           setUser(user);
   
           router.push("/dashBoard");
@@ -32,7 +35,10 @@ export default function Login() {
   
       return () => unsubscribe();
     }, [router]);
-  
+    
+    if(loading){
+      return <LoadingSpinner/>
+    }
     //login using firebase auth functions
     const handleLogin = async (e) => {
       e.preventDefault();

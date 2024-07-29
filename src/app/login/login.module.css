@@ -3,25 +3,24 @@
   letter-spacing: -0.15em;
   font-family: "NTR", sans-serif;
   color: #fff;
-  position: absolute;
-  margin-top: -70vh;
+  position: relative;
+  margin-top: 5vh;
 }
 
 .mainContainer {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  height: 95vh;
+  width: 96vw;
+  overflow: hidden !important;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
 .googleLoginButton{
     display: flex;
-    position: absolute;
-    bottom: 0;
-    left:19vw;
+    position: relative;
+    bottom: -40vh;
+    left:-3vw;
     flex-direction: row;
     background-color: rgba(0,0,0,0);
     border: 0px;
@@ -43,11 +42,11 @@
   align-items: center;
   width: 50vw;
   height: 20vh;
-  margin-top:-10vh;
+  margin-top:10vh;
 }
 
 .label{
-    position: absolute;
+    position: relative;
     font-family: "NTR", sans-serif;
     font-size: 1.7rem;
     color: #fff;
@@ -65,11 +64,11 @@
 }
 
 .submitButton{
-    position: absolute;
+    position: relative;
     width: 40vw;
+    margin-top: 5vh;
     border-radius: 10px;
     height: 5vh;
-    left:32vw;
     background-color: #B2675E;
     border-radius: 10px;
     display: flex;
