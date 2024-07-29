@@ -24,7 +24,7 @@ export default function Login() {
         if (user) {
           setUser(user);
   
-          router.push("/Dashboard");
+          router.push("/dashBoard");
         } else {
           setUser(null);
         }
@@ -42,7 +42,7 @@ export default function Login() {
           email,
           password
         );
-        router.push("/Dashboard");
+        router.push("/dashBoard");
       } catch (error) {
         setErrorMessage(error.code);
       }
@@ -54,7 +54,7 @@ export default function Login() {
       const provider = new GoogleAuthProvider();
       try {
         const result = await signInWithPopup(auth, provider);
-        router.push("/Dashboard");
+        router.push("/dashBoard");
       } catch (error) {
         setErrorMessage(error.code);
       }

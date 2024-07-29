@@ -19,6 +19,15 @@
   transition: transform 0.8s ease-in-out;
 }
 
+.pswError{
+  position: absolute;
+  top: 40vh;
+  font-family: 'NTR', sans-serif;
+  color: #ffff;
+  text-align: center;
+  margin-top: 5vh;
+}
+
 .firstContainer.next {
   transform: translateX(-100%);
 }
@@ -172,6 +181,7 @@
   font-family: "NTR", sans-serif;
   font-size: 1.2em;
   border: 0px;
+  top:55vh;
 }
 
 .googleContainer {
