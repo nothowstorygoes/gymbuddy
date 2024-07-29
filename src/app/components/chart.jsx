@@ -8,8 +8,9 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = ({proteinIntake, dataProtein}) => {
-
+const BarChart = ({proteinIntake, dataProtein, chosenM}) => {
+    let proteinGoal=proteinIntake;
+    if(chosenM ==="imperial") {proteinGoal=Math.floor(proteinIntake/453.6)}
     const data = {
         labels: ['1', '2', '3', '4', '5', '6', '7'],
         datasets: [
@@ -28,7 +29,7 @@ const BarChart = ({proteinIntake, dataProtein}) => {
         scales:{
             y:{
                 display:false,
-                max:proteinIntake,
+                max:proteinGoal,
                 grid:{display:false},
                 ticks: {display: false}
             },

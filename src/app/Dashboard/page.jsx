@@ -80,8 +80,8 @@ const HomePage = () => {
     infoChMs = `${info} gr`;
   } else {
     wkMsg = "2 lbs";
-    infonum = parseInt(info)*2.20;
-    infoChMs = `${infonum} libs`; }
+    infonum = (Math.floor(parseInt(info)/453.6));
+    infoChMs = `${infonum} lbs`; }
 
   const [proteinIntakeValues, setProteinIntakeValues] = useState([]);
 
@@ -130,7 +130,7 @@ const HomePage = () => {
     <main className={styles.mainContainer}>
       <div className={styles.welcomeTitle}>Ehi {username},</div>
       <div className={styles.chartContainer}>
-        <BarChart proteinIntake={info} dataProtein={proteinIntakeValues} />
+        <BarChart proteinIntake={info} dataProtein={proteinIntakeValues} chosenMeasure={chosenM}/>
       </div>
       <div className={styles.messageGoal}>
         {message} Your goal is set to {infoChMs}.
