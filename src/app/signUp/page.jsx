@@ -116,17 +116,17 @@ export default function SignUp() {
       proteinIntake: proteinIntake
     };
 
-    const wk = [{}];
-    const pr = [{
-      date:  new Date().toDateString(),
-      proteinIntake: 0
-    }];     
+    const wk = [];
+    const pr = [];     
+    const sc = [];
     const uid = auth.currentUser.uid;
     const userRef = ref(storage, `${uid}/info.json`);
     const userWk = ref(storage, `${uid}/workout.json` );
+    const userSc = ref(storage, `${uid}/schedule.json`);
     const userPr = ref(storage, `${uid}/protein.json`)
     await uploadString(userRef, JSON.stringify(userInfo));
     await uploadString(userWk, JSON.stringify(wk));
+    await uploadString(userSc, JSON.stringify(sc));
     await uploadString(userPr, JSON.stringify(pr));
   };
 

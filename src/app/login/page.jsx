@@ -108,6 +108,9 @@ export default function Login() {
             <button onClick={handleGoogleLogin} className={styles.googleLoginButton}>
                 <img src="/gymbuddy/google.png"/> Login with Google
             </button>
+            <button onClick={() => router.push("/signUp")} className={styles.signupButton}>
+                Sign up
+            </button>
 
         </main>
     )

@@ -1,0 +1,202 @@
+.mainContainer{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 97vh !important;
+    margin-top: 20px;
+    overflow-x: hidden !important;
+    width: 96vw !important;
+}
+
+.mainContainer.back{
+    height: 145vh !important;
+    max-height: 145vh !important;
+    overflow-y: hidden !important;
+}
+
+.firstContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 135vh !important;
+    top:5vh;
+    margin-top: 20px;
+    transition: transform 0.5s ease-in-out, height 3s ease-in-out;
+}
+
+.firstContainer.nextStep{
+    transform: translateX(-100%);
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    position: relative;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .input {
+    position: relative;
+    width: 70vw;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    font-size: 18px;
+    height: 5vh;
+    background-color: rgba(248, 244, 227, 0.5);
+    border-radius: 25px;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20vh;
+    margin-top: 20px;
+  }
+
+.buttonBodyPart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    border-radius: 25px;
+    height: 30vw;
+    background-color: #F8F4E3;
+    color:#370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    line-height: 120%;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for background and text color */
+    margin: 10px; /* Add some margin to space out the buttons */
+}
+
+.error{
+    color: #fff;
+    font-size: 1.3rem;
+    font-family: "NTR", sans-serif;
+    text-align: center;
+}
+
+.errorContainer{
+    width: 90vw;
+    margin-bottom:5vh;
+    height: 5vh;
+}
+
+.selected{
+    background-color: #B2675E;
+    color: #fff;
+}
+
+.nextButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    border-radius: 15px;
+    height: 15vw;
+    background-color: #B2675E;
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    line-height: 120%;
+    margin-top: 5vh; /* Add some margin to space out the buttons */
+}
+
+.secondContainer{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    top:0;
+    height: 0;
+    align-items: center;
+    left:100%;
+    transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.secondContainer.nextStep2{
+    transform: translateX(-103%);    
+    height: auto;
+}
+
+.secondContainer.back{
+    height: 0;
+    transform: translateX(103%);
+}
+
+.nextButton2{
+    position: relative;
+}
+
+.subContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bodyPartName{
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 80vw;
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+}
+
+.buttonName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    border-radius: 25px;
+    height: 20vw;
+    background-color: #B2675E;
+    color:#370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    line-height: 120%;
+    margin: 10px; /* Add some margin to space out the buttons */
+}
+
+.stickyButtons{
+    position: sticky;
+    top:-0.2vh;
+    display: flex;
+    margin-bottom:3vh;
+    width: 100%;
+    flex-direction: row;
+    background-color: #370909;
+    justify-content:end;
+}
+
+.stickyButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:15vw;
+    border-radius: 15px;
+    height: 5vh;
+    background-color: #F8F4E3;
+    color:#370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    line-height: 120%;
+    margin:3vw;
+}
