@@ -183,7 +183,7 @@
     width: 100%;
     flex-direction: row;
     background-color: #370909;
-    justify-content:end;
+    justify-content:flex-end;
 }
 
 .stickyButton{
@@ -199,4 +199,86 @@
     font-size: 1.2rem;
     line-height: 120%;
     margin:3vw;
+}
+
+.thirdContainer{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    top:0;
+    height: 0;
+    align-items: center;
+    left:200%;
+    transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.thirdContainer.lastStep{
+    transform: translateX(-230%);    
+    height: auto;
+}
+
+.secondContainer.nextStep3{
+    transform: translateX(-206%);    
+    height: 0;
+}
+
+.thirdContainer.back{
+    height: 0;
+    transform: translateX(206%);
+}
+
+
+.exerciseName{
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 80vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+.formLabel{
+    position: relative;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 80%;
+    text-align: left;
+}
+
+.formInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    margin-bottom: 2vh;
+}
+
+.exerciseInfoSelected{
+    margin-bottom:10vh;
+}
+
+.buttonLastStep{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    border-radius: 15px;
+    height: 15vw;
+    background-color: #B2675E;
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    line-height: 120%;
+    margin-bottom: 15vh; /* Add some margin to space out the buttons */
+}
+
+.divider{
+    width: 40vw;
+    margin-top: 7vh;
 }

@@ -54,12 +54,12 @@ const ExerciseList = ({
   
   }
 
-  const handleButtonClick = (reps, sets, weight) => {
-    updateSelectedExercises(id, reps, sets, weight);
+  const handleButtonClick = (exerciseId, exerciseName) => {
+    updateSelectedExercises(exerciseId, exerciseName);
   };
 
   const isSelected = (exerciseId) => {
-    return id === exerciseId;
+    return selectedExercises.some((exercise) => exercise.id === exerciseId);
   };
 
   return (
@@ -87,58 +87,12 @@ const ExerciseList = ({
                 }`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleExName(exercise.id);
+                  handleButtonClick(exercise.id , exercise.name);
                 }}
               >
                 +
               </p>
             </div>
-            {isSelected(exercise.id) ? <div className={styles.exerciseInfoSelected}>
-                <form className={styles.formContainer}>
-                  <div className={styles.formInfo}>
-                  <label className={styles.label}>Sets</label>
-                  <input
-                    className={styles.input}
-                    type="number"
-                    required
-                    value={exercise.sets}
-                    onChange={(e) => {
-                      setSets(e.target.value);
-                    }}
-                  />
-                  </div>
-                  <div className={styles.formInfo}>
-                  <label className={styles.label}>Reps</label>
-                  <input
-                    className={styles.input}
-                    type="number"
-                    required
-                    value={exercise.reps}
-                    onChange={(e) => {
-                      setReps(e.target.value);
-                    }}
-
-                  />
-                  </div>
-                  <div className={styles.formInfo}>
-                  <label className={styles.label}>Weight</label>
-                  <input
-                    className={styles.input}
-                    type="number"
-                    required
-                    value={exercise.weight}
-                    onChange={(e) => {
-                      setWeight(e.target.value);
-                    }}  
-                  />
-                  </div>
-                  <button
-                    onClick={() =>
-                      handleButtonClick(reps, sets, weight)
-                    }
-                    className={styles.button}>Done</button>
-                  </form>
-              </div> : ""} 
             <div
               className={`${styles.exerciseDescription} ${
                 visibleDetails[index] ? styles.expanded : ""
