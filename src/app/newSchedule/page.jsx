@@ -31,8 +31,10 @@ export default function NewSchedule() {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [number, setNumber] = useState(10);
+  const [next2Main, setNext2Main] = useState(false);
   const [next, setNext] = useState(false);
   const [exerciseSets, setExerciseSets] = useState({});
+  const [backLastStep, setBackLastStep] = useState(false);
   const [next2, setNext2] = useState(false);
   const [exerciseInfos, setExerciseInfos] = useState({});
   const [lastStep, setLastStep] = useState(false);
@@ -58,7 +60,15 @@ export default function NewSchedule() {
     );
   };
 
- 
+  const handleBackFirst = () => {
+    document.getElementById("firstContainer").scrollIntoView({behavior: "smooth"});
+    setTimeout(() => {
+    setNext(false);
+    setBack(true);
+    setSelectedExercises([]);
+    
+    },100);}
+
   const handleSetChange = (exerciseId, value) => {
     setExerciseSets((prevSets) => ({
       ...prevSets,
@@ -66,7 +76,10 @@ export default function NewSchedule() {
     }));
     setExerciseInfos((prevInfos) => ({
       ...prevInfos,
-      [exerciseId]: Array.from({ length: value }, () => ({ reps: "", weight: "" })),
+      [exerciseId]: Array.from({ length: value }, () => ({
+        reps: "",
+        weight: "",
+      })),
     }));
   };
   useEffect(() => {
@@ -75,7 +88,9 @@ export default function NewSchedule() {
 
   const nextStep = () => {
     if (selectedBodyParts.length != 0 && name !== "") {
+      
       setNext(true);
+      document.getElementById("secondContainer").scrollIntoView({});
       setBack(false);
     } else if (selectedBodyParts.length == 0) {
       setError("Please select at least one body part");
@@ -95,8 +110,6 @@ export default function NewSchedule() {
     console.log(newExercises);
   };
 
-
-
   const handleInputChange = (exerciseId, setIndex, field, value) => {
     setExerciseInfos((prevInfos) => {
       const updatedInfos = { ...prevInfos };
@@ -111,6 +124,54 @@ export default function NewSchedule() {
     });
   };
 
+  useEffect(() => {
+    const mainContainer = document.getElementById("mainContainer");
+    const firstContainer = document.getElementById("firstContainer");
+    if(next2Main){
+    if (mainContainer && firstContainer) {
+      const resizeObserver = new ResizeObserver(() => {
+        mainContainer.style.setProperty(
+          "height",
+          `${firstContainer.offsetHeight}px`,
+          "important"
+        );
+      });
+
+      resizeObserver.observe(firstContainer);
+
+      // Cleanup observer on component unmount
+      return () => {
+        resizeObserver.unobserve(firstContainer);
+      };
+    } 
+  }
+  }, [next2Main]);
+
+  useEffect(() => {
+    
+      const mainContainer = document.getElementById("mainContainer");
+      const secondContainer = document.getElementById("secondContainer");
+      if (backLastStep && !next2Main) {
+        if (mainContainer && secondContainer) {
+          const resizeObserver = new ResizeObserver(() => {
+            mainContainer.style.setProperty(
+              "height",
+              `${secondContainer.offsetHeight}px`,
+              "important"
+            );
+            
+          });
+  
+          resizeObserver.observe(secondContainer);
+         
+          // Cleanup observer on component unmount
+          return () => {
+            resizeObserver.unobserve(secondContainer);
+          };
+        }
+      }
+    });
+
   const allFormsFilled = () => {
     for (const exerciseId in exerciseInfos) {
       const sets = exerciseInfos[exerciseId];
@@ -123,13 +184,10 @@ export default function NewSchedule() {
     return true;
   };
 
-
   const updateSelectedExercises = (exerciseId, exerciseName) => {
     setSelectedExercises((prevSelected) => {
       if (prevSelected.some((exercise) => exercise.id === exerciseId)) {
-        return prevSelected.map((exercise) =>
-          exercise.id === exerciseId ? { ...exercise } : exercise
-        );
+        return prevSelected.filter((exercise) => exercise.id !== exerciseId);
       } else {
         return [...prevSelected, { id: exerciseId, name: exerciseName }];
       }
@@ -137,10 +195,12 @@ export default function NewSchedule() {
   };
 
   const lastNextStep = () => {
+    document.body.scrollTo({top:0});
     setLastStep(true);
     setNext2(true);
   };
 
+  
 
   useEffect(() => {
     if (savedExercises.length > 0) {
@@ -173,9 +233,40 @@ export default function NewSchedule() {
     }
   };
 
+  useEffect(() => {
+    const mainContainer = document.getElementById("mainContainer");
+    const thirdContainer = document.getElementById("thirdContainer");
+    if (lastStep) {
+      if (mainContainer && thirdContainer) {
+        const resizeObserver = new ResizeObserver(() => {
+          mainContainer.style.setProperty(
+            "height",
+            `${thirdContainer.offsetHeight}px`,
+            "important"
+          );
+          setTimeout(() => {
+          document.getElementById("thirdContainer").scrollIntoView({inline: "end" , behavior: "smooth"});
+          },500);
+        });
+
+        resizeObserver.observe(thirdContainer);
+
+        // Cleanup observer on component unmount
+        return () => {
+          resizeObserver.unobserve(thirdContainer);
+        };
+      }
+    }
+  }, [lastStep]);
+
   return (
-    <main className={`${styles.mainContainer} ${back ? styles.back : ""}`}>
-      <div
+    <main
+      id="mainContainer"
+      className={`${styles.mainContainer} ${back ? styles.back : ""} ${
+        lastStep ? styles.lastStep : ""
+      }`}
+    >
+      <div id="firstContainer"
         className={`${styles.firstContainer} ${next ? styles.nextStep : ""}`}
       >
         <form className={styles.formContainer}>
@@ -222,7 +313,7 @@ export default function NewSchedule() {
           </button>
         </div>
       </div>
-      <div
+      <div id="secondContainer"
         className={`${styles.secondContainer} ${next ? styles.nextStep2 : ""} ${
           back ? styles.back : ""
         } ${next2 ? styles.nextStep3 : ""}`}
@@ -237,7 +328,7 @@ export default function NewSchedule() {
             <div
               className={styles.stickyButton}
               onClick={() => {
-                setNext(false), setBack(true);
+                {setNext2Main(true); setNext(false); setBack(true); setSelectedExercises([])}
               }}
             >
               Back
@@ -271,7 +362,15 @@ export default function NewSchedule() {
           ))}
         </div>
       </div>
-      <div className={`${styles.thirdContainer} ${lastStep ? styles.lastStep : ""}`}>
+      <div
+        id="thirdContainer"
+        className={`${styles.thirdContainer} ${
+          lastStep ? styles.lastStep : ""
+        }`}
+      >
+        <div className="stickyButtons">
+          <div className="stickyButton">
+            <button onClick={() => {setLastStep(false); setNext2(false); setBackLastStep(true)}}>Back</button></div></div>
         {selectedExercises.map((exercise) => (
           <div key={exercise.id} className={styles.exerciseInfoSelected}>
             <div className={styles.exerciseName}>{exercise.name}</div>
@@ -286,35 +385,51 @@ export default function NewSchedule() {
                   onChange={(e) => handleSetChange(exercise.id, e.target.value)}
                 />
               </div>
-              {Array.from({ length: exerciseSets[exercise.id] || 0 }).map((_, setIndex) => (
-                <div key={setIndex} className={styles.exerciseFormInfoSet}>
-                  <hr className={styles.divider} />
-                  <div className={styles.formInfo}>
-                    <label className={styles.formLabel}>Reps</label>
-                    <input
-                      className={styles.input}
-                      type="number"
-                      required
-                      value={exerciseInfos[exercise.id]?.[setIndex]?.reps || ""}
-                      onChange={(e) =>
-                        handleInputChange(exercise.id, setIndex, "reps", e.target.value)
-                      }
-                    />
+              {Array.from({ length: exerciseSets[exercise.id] || 0 }).map(
+                (_, setIndex) => (
+                  <div key={setIndex} className={styles.exerciseFormInfoSet}>
+                    <hr className={styles.divider} />
+                    <div className={styles.formInfo}>
+                      <label className={styles.formLabel}>Reps</label>
+                      <input
+                        className={styles.input}
+                        type="number"
+                        required
+                        value={
+                          exerciseInfos[exercise.id]?.[setIndex]?.reps || ""
+                        }
+                        onChange={(e) =>
+                          handleInputChange(
+                            exercise.id,
+                            setIndex,
+                            "reps",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </div>
+                    <div className={styles.formInfo}>
+                      <label className={styles.formLabel}>Weight</label>
+                      <input
+                        className={styles.input}
+                        type="number"
+                        required
+                        value={
+                          exerciseInfos[exercise.id]?.[setIndex]?.weight || ""
+                        }
+                        onChange={(e) =>
+                          handleInputChange(
+                            exercise.id,
+                            setIndex,
+                            "weight",
+                            e.target.value
+                          )
+                        }
+                      />
+                    </div>
                   </div>
-                  <div className={styles.formInfo}>
-                    <label className={styles.formLabel}>Weight</label>
-                    <input
-                      className={styles.input}
-                      type="number"
-                      required
-                      value={exerciseInfos[exercise.id]?.[setIndex]?.weight || ""}
-                      onChange={(e) =>
-                        handleInputChange(exercise.id, setIndex, "weight", e.target.value)
-                      }
-                    />
-                  </div>
-                </div>
-              ))}
+                )
+              )}
             </form>
             <hr className={styles.divider} />
           </div>

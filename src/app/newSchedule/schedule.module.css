@@ -9,9 +9,7 @@
     width: 96vw !important;
 }
 
-.mainContainer.back{
-    height: 145vh !important;
-    max-height: 145vh !important;
+.mainContainer.lastStep{
     overflow-y: hidden !important;
 }
 
@@ -21,10 +19,8 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    height: 135vh !important;
     top:5vh;
-    margin-top: 20px;
-    transition: transform 0.5s ease-in-out, height 3s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .firstContainer.nextStep{
@@ -120,8 +116,8 @@
     flex-direction: column;
     justify-content: center;
     top:0;
-    height: 0;
     align-items: center;
+    height: 0;
     left:100%;
     transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
 }
@@ -132,8 +128,11 @@
 }
 
 .secondContainer.back{
-    height: 0;
     transform: translateX(103%);
+}
+
+.secondContainer.lastStep{
+    height: 0;
 }
 
 .nextButton2{

@@ -57,7 +57,7 @@
 
 .schedule{
     background-color: #B2675E;
-    width: 45%; /* Adjust width to fit two items per row */
+    width: 25vw; /* Adjust width to fit two items per row */
     height: 5vh;
     border-radius: 10px;
     color: #fff;
