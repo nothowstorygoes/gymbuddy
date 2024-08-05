@@ -12,28 +12,37 @@ const ExerciseList = ({
 }) => {
   const [exercises, setExercises] = useState([]);
   const [visibleDetails, setVisibleDetails] = useState({});
-  const [bodyPart, setBodyPart] = useState("");
   const [id, setId] = useState("");
   const [reps, setReps] = useState(0);
   const [sets, setSets] = useState(0);
+  const [bodyPart, setBodyPart] = useState(0);
   const [weight, setWeight] = useState(0);
 
   useEffect(() => {
-    setBodyPart(part.toLowerCase());
+    if(part) setBodyPart(part);
     if (go) {
       const fetchExercises = async (bodyPart) => {
         const response = await fetch(
-          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=${number}&offset=0`,
+          `https://wger.de/api/v2/exercisebaseinfo/?category=${part}&limit=${number}`,
           {
             method: "GET",
             headers: {
-              "x-rapidapi-key": process.env.NEXT_PUBLIC_APIEXERCISES,
-              "x-rapidapi-host": process.env.NEXT_PUBLIC_APIEXERCISESHOST,
+              "Authorization": `Token ${process.env.NEXT_PUBLIC_APIEXERCISES}`,
             },
           }
         );
         const data = await response.json();
-        setExercises(data);
+        if (Array.isArray(data.results)) {
+          const filteredExercises = data.results.flatMap(result => 
+            result.exercises.filter(exercise => 
+              exercise.language === 2 && /(with|and|is|your)/i.test(exercise.description)
+            )
+          );
+          console.log(filteredExercises);
+          setExercises(filteredExercises);
+        } else {
+          setExercises([]);
+        }
         setLoading(false);
       };
 
@@ -63,7 +72,7 @@ const ExerciseList = ({
   };
 
   return (
-    <div className={styles.listContainer}>
+    <div className={`${styles.listContainer} ${next ? styles.display : ""}`}>
       {Array.isArray(exercises) &&
         exercises.map((exercise, index) => (
           <div
@@ -98,15 +107,8 @@ const ExerciseList = ({
                 visibleDetails[index] ? styles.expanded : ""
               }`}
             >
-              <img
-                src={exercise.gifUrl}
-                alt={`${exercise.name} gif`}
-                className={styles.exerciseGif}
-              />
-              <div className={styles.exerciseInstructions}>
-                {exercise.instructions.map((instruction, index) => (
-                  <p key={index}>{instruction}</p>
-                ))}
+              <div className={styles.exerciseInstructions}     dangerouslySetInnerHTML={{ __html: exercise.description }}
+              >
               </div>
             </div>
           </div>

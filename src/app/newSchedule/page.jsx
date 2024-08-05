@@ -11,36 +11,35 @@ import ExerciseList from "./exerciseList/exerciseList";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 
 const bodyParts = [
-  "Chest",
-  "Back",
-  "Neck",
-  "Waist",
-  "Shoulders",
-  "Cardio",
-  "Lower Arms",
-  "Upper Arms",
-  "Lower Legs",
-  "Upper Legs",
+  {
+    display: "Chest",
+    part: 11,
+  },
+  { display: "Back", part: 12 },
+  { display: "Legs", part: 9 },
+  { display: "Shoulders", part: 13 },
+  { display: "Arms", part: 8 },
+  { display: "Abs", part: 10 },
+  { display: "Calves", part: 14 },
+  { display: "Cardio", part: 15 },
 ];
 
 export default function NewSchedule() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
-  const [back, setBack] = useState(false);
   const [savedExercises, setSavedExercises] = useState([]);
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [number, setNumber] = useState(10);
-  const [next2Main, setNext2Main] = useState(false);
-  const [next, setNext] = useState(false);
   const [exerciseSets, setExerciseSets] = useState({});
-  const [backLastStep, setBackLastStep] = useState(false);
-  const [next2, setNext2] = useState(false);
   const [exerciseInfos, setExerciseInfos] = useState({});
-  const [lastStep, setLastStep] = useState(false);
   const [error, setError] = useState("");
+  const [currentContainer, setCurrentContainer] = useState("firstContainer");
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [selectedBodyParts, setSelectedBodyParts] = useState([]);
+  const [firstVisibility,setFirstVisibility] = useState(true);
+  const [secondVisibility,setSecondVisibility] = useState(false);
+  const [thirdVisibility, setThirdVisibility] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -52,22 +51,13 @@ export default function NewSchedule() {
     });
   });
 
-  const handleButtonClick = (part) => {
+  const handleButtonClick = (partObj) => {
     setSelectedBodyParts((prevParts) =>
-      prevParts.includes(part)
-        ? prevParts.filter((p) => p !== part)
-        : [...prevParts, part]
+      prevParts.some((p) => p.part === partObj.part)
+        ? prevParts.filter((p) => p.part !== partObj.part)
+        : [...prevParts, partObj]
     );
   };
-
-  const handleBackFirst = () => {
-    document.getElementById("firstContainer").scrollIntoView({behavior: "smooth"});
-    setTimeout(() => {
-    setNext(false);
-    setBack(true);
-    setSelectedExercises([]);
-    
-    },100);}
 
   const handleSetChange = (exerciseId, value) => {
     setExerciseSets((prevSets) => ({
@@ -86,23 +76,11 @@ export default function NewSchedule() {
     console.log(selectedBodyParts);
   }, [selectedBodyParts]);
 
-  const nextStep = () => {
-    if (selectedBodyParts.length != 0 && name !== "") {
-      
-      setNext(true);
-      document.getElementById("secondContainer").scrollIntoView({});
-      setBack(false);
-    } else if (selectedBodyParts.length == 0) {
-      setError("Please select at least one body part");
-    } else if (name === "") {
-      setError("Please enter a name for the schedule");
-    }
-  };
-
   const updateSelectedExercisesInfos = () => {
     const newExercises = selectedExercises.map((exercise) => {
       return {
         id: exercise.id,
+        name: exercise.name,
         sets: exerciseInfos[exercise.id] || [],
       };
     });
@@ -124,54 +102,6 @@ export default function NewSchedule() {
     });
   };
 
-  useEffect(() => {
-    const mainContainer = document.getElementById("mainContainer");
-    const firstContainer = document.getElementById("firstContainer");
-    if(next2Main){
-    if (mainContainer && firstContainer) {
-      const resizeObserver = new ResizeObserver(() => {
-        mainContainer.style.setProperty(
-          "height",
-          `${firstContainer.offsetHeight}px`,
-          "important"
-        );
-      });
-
-      resizeObserver.observe(firstContainer);
-
-      // Cleanup observer on component unmount
-      return () => {
-        resizeObserver.unobserve(firstContainer);
-      };
-    } 
-  }
-  }, [next2Main]);
-
-  useEffect(() => {
-    
-      const mainContainer = document.getElementById("mainContainer");
-      const secondContainer = document.getElementById("secondContainer");
-      if (backLastStep && !next2Main) {
-        if (mainContainer && secondContainer) {
-          const resizeObserver = new ResizeObserver(() => {
-            mainContainer.style.setProperty(
-              "height",
-              `${secondContainer.offsetHeight}px`,
-              "important"
-            );
-            
-          });
-  
-          resizeObserver.observe(secondContainer);
-         
-          // Cleanup observer on component unmount
-          return () => {
-            resizeObserver.unobserve(secondContainer);
-          };
-        }
-      }
-    });
-
   const allFormsFilled = () => {
     for (const exerciseId in exerciseInfos) {
       const sets = exerciseInfos[exerciseId];
@@ -187,20 +117,18 @@ export default function NewSchedule() {
   const updateSelectedExercises = (exerciseId, exerciseName) => {
     setSelectedExercises((prevSelected) => {
       if (prevSelected.some((exercise) => exercise.id === exerciseId)) {
+        console.log(selectedExercises);
+
         return prevSelected.filter((exercise) => exercise.id !== exerciseId);
+
       } else {
+        console.log(selectedExercises);
+
         return [...prevSelected, { id: exerciseId, name: exerciseName }];
+
       }
     });
   };
-
-  const lastNextStep = () => {
-    document.body.scrollTo({top:0});
-    setLastStep(true);
-    setNext2(true);
-  };
-
-  
 
   useEffect(() => {
     if (savedExercises.length > 0) {
@@ -233,41 +161,43 @@ export default function NewSchedule() {
     }
   };
 
-  useEffect(() => {
-    const mainContainer = document.getElementById("mainContainer");
-    const thirdContainer = document.getElementById("thirdContainer");
-    if (lastStep) {
-      if (mainContainer && thirdContainer) {
-        const resizeObserver = new ResizeObserver(() => {
-          mainContainer.style.setProperty(
-            "height",
-            `${thirdContainer.offsetHeight}px`,
-            "important"
-          );
-          setTimeout(() => {
-          document.getElementById("thirdContainer").scrollIntoView({inline: "end" , behavior: "smooth"});
-          },500);
-        });
-
-        resizeObserver.observe(thirdContainer);
-
-        // Cleanup observer on component unmount
-        return () => {
-          resizeObserver.unobserve(thirdContainer);
-        };
-      }
+  const handleNext = () => {
+    if (currentContainer === "firstContainer") {
+      setSecondVisibility(true); // Set next to true when transitioning to the second container
+      setCurrentContainer("secondContainer");
+      setFirstVisibility(false);
+    } else if (currentContainer === "secondContainer" && selectedExercises.length != 0) {
+        setSecondVisibility(false);
+        setThirdVisibility(true);
+        setCurrentContainer("thirdContainer");
     }
-  }, [lastStep]);
+    else if(currentContainer === "secondContainer" && selectedExercises.length == 0)
+    {
+      console.log(currentContainer);
+      setError("Please select at least one exercise");
+    }
+  };
+
+  const handleBack = () => {
+    if (currentContainer === "thirdContainer") {
+      setSecondVisibility(true);
+    setThirdVisibility(false);  
+      setCurrentContainer("secondContainer");
+    } else if (currentContainer === "secondContainer") {
+      setCurrentContainer("firstContainer");
+      setFirstVisibility(true);
+      setSecondVisibility(false);
+    }
+  };
 
   return (
     <main
       id="mainContainer"
-      className={`${styles.mainContainer} ${back ? styles.back : ""} ${
-        lastStep ? styles.lastStep : ""
-      }`}
+      className={styles.mainContainer}
     >
-      <div id="firstContainer"
-        className={`${styles.firstContainer} ${next ? styles.nextStep : ""}`}
+      <div
+        id="firstContainer"
+        className={`${styles.firstContainer} ${!firstVisibility ? styles.firstVisibility : ""}`}
       >
         <form className={styles.formContainer}>
           <label className={styles.label}>
@@ -282,15 +212,15 @@ export default function NewSchedule() {
           />
         </form>
         <div className={styles.buttonContainer}>
-          {bodyParts.map((part, index) => (
+          {bodyParts.map((bodyPart, index) => (
             <button
               key={index}
               className={`${styles.buttonBodyPart} ${
-                selectedBodyParts.includes(part) ? styles.selected : ""
+                selectedBodyParts.includes(bodyPart) ? styles.selected : ""
               }`}
-              onClick={() => handleButtonClick(part)}
+              onClick={() => handleButtonClick(bodyPart)}
             >
-              {part}
+              {bodyPart.display}
             </button>
           ))}
           <div className={styles.errorContainer}>
@@ -308,49 +238,45 @@ export default function NewSchedule() {
               onChange={(e) => setNumber(e.target.value)}
             />
           </form>
-          <button onClick={nextStep} className={styles.nextButton}>
+          <button onClick={handleNext} className={styles.nextButton}>
             Next
           </button>
         </div>
       </div>
-      <div id="secondContainer"
-        className={`${styles.secondContainer} ${next ? styles.nextStep2 : ""} ${
-          back ? styles.back : ""
-        } ${next2 ? styles.nextStep3 : ""}`}
-      >
+      <div id="secondContainer" className={`${styles.secondContainer} ${secondVisibility ? styles.secondVisibility : ""}`}>
         {loading ? (
           <LoadingSpinner />
         ) : (
           <div className={styles.stickyButtons}>
-            <div className={styles.stickyButton}>
-              <p onClick={lastNextStep}>Next</p>
+            <div className={styles.stickyButton} onClick={handleNext}>
+              Next
             </div>
-            <div
-              className={styles.stickyButton}
-              onClick={() => {
-                {setNext2Main(true); setNext(false); setBack(true); setSelectedExercises([])}
-              }}
-            >
+            <div className={styles.stickyButton} onClick={handleBack}>
               Back
             </div>
           </div>
         )}
-        <div className={styles.exerciseList}>
+        <div
+          className={`${styles.exerciseListContainer}`}
+        >
           {selectedBodyParts.map((part, index) => (
-            <div key={index} className={styles.subContainer}>
+            <div
+              key={index}
+              className={`${styles.subContainer} ${secondVisibility ? styles.secondVisibility : ""}`}
+            >
               {loading ? (
                 <LoadingSpinner />
               ) : (
                 <div className={styles.bodyPartName}>
                   Here's a list for{" "}
-                  <div className={styles.buttonName}>{part}</div>
+                  <div className={styles.buttonName}>{part.display}</div>
                 </div>
               )}
 
-              <div className={styles.exerciseList}>
+              <div id="exerciseList" className={styles.exerciseList}>
                 <ExerciseList
-                  part={part}
-                  go={next}
+                  part={part.part}
+                  go={secondVisibility}
                   updateSelectedExercises={updateSelectedExercises}
                   selectedExercises={selectedExercises}
                   setLoading={setLoading}
@@ -365,12 +291,13 @@ export default function NewSchedule() {
       <div
         id="thirdContainer"
         className={`${styles.thirdContainer} ${
-          lastStep ? styles.lastStep : ""
+          thirdVisibility ? styles.thirdVisibility : ""
         }`}
       >
-        <div className="stickyButtons">
-          <div className="stickyButton">
-            <button onClick={() => {setLastStep(false); setNext2(false); setBackLastStep(true)}}>Back</button></div></div>
+        <div className={styles.stickyButtons}>
+          <div className={styles.stickyButton} onClick={handleBack}>
+            Back          </div>
+        </div>
         {selectedExercises.map((exercise) => (
           <div key={exercise.id} className={styles.exerciseInfoSelected}>
             <div className={styles.exerciseName}>{exercise.name}</div>

@@ -1,0 +1,47 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.scheduleDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.scheduleTitle{
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family:"NTR", sans-serif;
+    color:white;
+    margin-top:10vh;
+}
+
+.scheduleInfo{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family:"NTR", sans-serif;
+    color:white;
+}
+
+.exerciseName{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top:5vh;
+    margin-bottom: 0;
+    font-family:"NTR", sans-serif;
+    color:white;
+}
+
+.set{
+    display: flex;
+    font-weight: 100;
+    flex-direction: row;
+    margin-top: -4vh;
+}
