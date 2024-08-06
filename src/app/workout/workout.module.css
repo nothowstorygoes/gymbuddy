@@ -1,0 +1,118 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 96vw;
+    height: 90vh;
+}
+
+.newSchedule{
+    color:#fff;
+    margin-top:5vh;
+    font-family: "NTR", sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 100;
+}
+
+.savedSchedulesContainer{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 20vh;
+    margin-top: 5vh;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: #F8F4E3
+}
+
+.savedSchedulesTitle{
+    color:#B2675E;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 100;
+    margin-top: 5px;
+}
+
+.savedSchedules{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listAllButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4vw;
+}
+
+.listButton{
+    width: 40px;
+    height: 40px;
+}
+
+.schedule{
+    background-color: #B2675E;
+    width: 25vw; /* Adjust width to fit two items per row */
+    height: 5vh;
+    border-radius: 10px;
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-size: 0.8rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 100;
+    margin: 2.5%; /* Add margin to create space between items */
+}
+
+.schedulesContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ensure items are spaced evenly */
+    margin: 0 4vw;
+}
+
+.previousWorkoutContainer{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 40vh;
+    margin-top: 5vh;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: #F8F4E3
+}
+
+.previousWorkoutTitle{
+    color:#B2675E;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 100;
+    margin-top: 5px;
+}
+
+.listButton2{
+    width: 30px;
+    height: 30px;
+}
+
+.previousWorkout{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vh;
+    width: 70vw;
+    margin-left: 5vw;
+    font-family: "NTR", sans-serif;
+    font-size: 0.7rem;
+    color: B2675E;
+}

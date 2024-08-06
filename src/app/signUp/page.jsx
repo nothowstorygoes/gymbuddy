@@ -26,22 +26,82 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isDone, setIsDone] = useState(false);
   const [passwordError, setPasswordError] = useState("");
+  const [goalError,setGoalError] =useState(false);
   const router = useRouter();
 
   //signup using email and password, other info will be added following steps
   const handleSignUp = async (e) => {
+    let basalSex = 0;
+    let mBasalW = 0;
+    let mBasalH = 0;
+    let activityLevel = 0;
+    let goalLevel = 0;
+    let mBasal = 0;
+    let proteinIntake = 0;
+    
+    if (sex === "M") {
+      basalSex = 5;
+    } else {
+      basalSex = -161;
+    }
+    
+    if (chosenMeasure === "imperial") {
+      mBasalW = parseFloat(weight) / 2.20;
+      mBasalH = parseFloat(height) * 2.54;
+    } else {
+      mBasalW = parseFloat(weight);
+      mBasalH = parseFloat(height);
+    }
+    
+    switch (parseInt(goal)) {
+      case 0:
+        activityLevel = 1.2;
+        break;
+      case 1:
+      case 2:
+        activityLevel = 1.375;
+        break;
+      case 3:
+      case 4:
+      case 5:
+        activityLevel = 1.55;
+        break;
+      case 6:
+      case 7:
+        activityLevel = 1.725;
+        break;
+      default:
+        activityLevel = 1.2;
+    }
+    
+    switch (activity) {
+      case 'cutting':
+        goalLevel = -500;
+        break;
+      case 'bulking':
+        goalLevel = 500;
+        break;
+      case 'maintenance':
+        goalLevel = 0;
+        break;
+      default:
+        goalLevel = 0;
+    }
+    
     e.preventDefault();
     if (chosenProvider === "email") {
-      if (confirmPassword !== password) {
-        setPasswordError("Passwords do not match");
-      } else {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-      }
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     }
+    
+    console.log(basalSex);
+    console.log(mBasalW);
+    console.log(mBasalH);
+    
+    mBasal = ((10 * mBasalW) + (6.25 * mBasalH) - (5 * age) + basalSex) * activityLevel;
+    proteinIntake = Math.floor((((mBasal + goalLevel) * 30) / 100) / 4);
+    
+    console.log(mBasal);
+    console.log(proteinIntake);
     const userInfo = {
       email: email,
       username: username,
@@ -52,10 +112,22 @@ export default function SignUp() {
       weight: weight,
       goal: goal,
       activity: activity,
+      mBasal: mBasal,
+      proteinIntake: proteinIntake
     };
+
+    const wk = [];
+    const pr = [];     
+    const sc = [];
     const uid = auth.currentUser.uid;
     const userRef = ref(storage, `${uid}/info.json`);
+    const userWk = ref(storage, `${uid}/workout.json` );
+    const userSc = ref(storage, `${uid}/schedule.json`);
+    const userPr = ref(storage, `${uid}/protein.json`)
     await uploadString(userRef, JSON.stringify(userInfo));
+    await uploadString(userWk, JSON.stringify(wk));
+    await uploadString(userSc, JSON.stringify(sc));
+    await uploadString(userPr, JSON.stringify(pr));
   };
 
   //handler to call Google Auth Provider
@@ -78,7 +150,13 @@ export default function SignUp() {
   //Handler to switch container to next step
   const nextStep = (e) => {
     e.preventDefault();
-    setIsNextInfo(true);
+    if(password===confirmPassword)
+    {
+      setIsNextInfo(true);
+    }
+    else{
+      setPasswordError(true);
+    }
   };
 
   const nextStep2 = (e) => {
@@ -88,6 +166,7 @@ export default function SignUp() {
 
   const nextStep3 = (e) => {
     e.preventDefault();
+    if(goal>7) setGoalError(true);
     setIsDone(true);
     handleSignUp(e);
   };
@@ -181,7 +260,7 @@ export default function SignUp() {
                   className={styles.inputFieldPSW}
                 />
               </div>
-              {passwordError && <p className={styles.error}>{passwordError}</p>}
+              { passwordError ? <div className={styles.pswError}>Password doesn't match, try again</div> : ""}
               <div>
                 <button type="submit" className={styles.submitButton}>
                   <p>next</p>
@@ -353,38 +432,39 @@ export default function SignUp() {
               <button
                 type="button"
                 onClick={() => {
-                  setActivity("leaner");
+                  setActivity("cutting");
                 }}
                 className={`${styles.buttonActivity} ${
-                  activity === "leaner" ? styles.clicked : ""
+                  activity === "cutting" ? styles.clicked : ""
                 }`}
               >
-                leaner
+                cutting
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setActivity("powerful");
+                  setActivity("bulking");
                 }}
                 className={`${styles.buttonActivity} ${
-                  activity === "powerful" ? styles.clicked : ""
+                  activity === "bulking" ? styles.clicked : ""
                 }`}
               >
-                powerful
+                bulking
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setActivity("healthier");
+                  setActivity("maintenance");
                 }}
                 className={`${styles.buttonActivity} ${
-                  activity === "healthier" ? styles.clicked : ""
+                  activity === "maintenance" ? styles.clicked : ""
                 }`}
               >
-                healthier
+                maintenance
               </button>
             </div>
           </div>
+          {goalError ? <div className={styles.errorGoal}>Maximum is 7!</div> : ""}
           <button type="submit" className={styles.submitButton3}>
             Done
           </button>

@@ -10,21 +10,24 @@ import {
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import LoadingSpinner from '../components/loadingSpinner/loadingSpinner';
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
   
     // if logged in pushes to home
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
+          setLoading(true);
           setUser(user);
   
-          router.push("/Dashboard");
+          router.push("/dashBoard");
         } else {
           setUser(null);
         }
@@ -32,7 +35,10 @@ export default function Login() {
   
       return () => unsubscribe();
     }, [router]);
-  
+    
+    if(loading){
+      return <LoadingSpinner/>
+    }
     //login using firebase auth functions
     const handleLogin = async (e) => {
       e.preventDefault();
@@ -42,7 +48,7 @@ export default function Login() {
           email,
           password
         );
-        router.push("/Dashboard");
+        router.push("/dashBoard");
       } catch (error) {
         setErrorMessage(error.code);
       }
@@ -54,7 +60,7 @@ export default function Login() {
       const provider = new GoogleAuthProvider();
       try {
         const result = await signInWithPopup(auth, provider);
-        router.push("/Dashboard");
+        router.push("/dashBoard");
       } catch (error) {
         setErrorMessage(error.code);
       }
@@ -101,6 +107,9 @@ export default function Login() {
           </form>
             <button onClick={handleGoogleLogin} className={styles.googleLoginButton}>
                 <img src="/gymbuddy/google.png"/> Login with Google
+            </button>
+            <button onClick={() => router.push("/signUp")} className={styles.signupButton}>
+                Sign up
             </button>
 
         </main>
