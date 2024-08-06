@@ -268,7 +268,7 @@ export default function NewSchedule() {
                 <LoadingSpinner />
               ) : (
                 <div className={styles.bodyPartName}>
-                  Here's a list for{" "}
+                  Here&apos;s a list for{" "}
                   <div className={styles.buttonName}>{part.display}</div>
                 </div>
               )}
