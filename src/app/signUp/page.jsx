@@ -260,7 +260,7 @@ export default function SignUp() {
                   className={styles.inputFieldPSW}
                 />
               </div>
-              { passwordError ? <div className={styles.pswError}>Password doesn't match, try again</div> : ""}
+              { passwordError ? <div className={styles.pswError}>Password doesn&apos;t match, try again</div> : ""}
               <div>
                 <button type="submit" className={styles.submitButton}>
                   <p>next</p>
