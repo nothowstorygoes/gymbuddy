@@ -22,7 +22,7 @@ export default function ScheduleListAll() {
                 router.push("/login");
             }
         })
-    },[user]);
+    },[user, router]);
 
     useEffect(() => {
         if (user) {

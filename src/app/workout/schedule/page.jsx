@@ -79,7 +79,7 @@ const SchedulePage = () => {
           );
       });
     }
-  }, [name, user]);
+  }, [name, user, matchingSchedule]);
 
   const getExerciseData = (exerciseName) => {
     return filteredWorkouts
