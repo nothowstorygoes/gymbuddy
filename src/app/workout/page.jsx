@@ -5,7 +5,7 @@ import Navbar from "../components/navbar/navbar";
 import { auth, storage } from "../firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 
 export default function Workout() {
@@ -50,6 +50,10 @@ export default function Workout() {
     router.push(`/workout/schedule?${params.toString()}`);
   };
 
+  const handleListAll = () => {
+    router.push("/workout/scheduleListAll");
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -74,7 +78,7 @@ export default function Workout() {
               )) : ""}
           </div>
           {savedSchedules.length > 0 ?
-        <div className={styles.listAllButton}>
+        <div className={styles.listAllButton} onClick={handleListAll}>
             <img src="/gymbuddy/listAll.png" className={styles.listButton} />
           </div> : ""}
       </div>
@@ -82,10 +86,10 @@ export default function Workout() {
         
       <div className={styles.previousWorkoutContainer}>
         <div className={styles.previousWorkoutTitle}>Previous workouts</div>
-        {workoutData.length > 1 ? workoutData.map((item, index) => (
+        {workoutData.length > 0 ? workoutData.map((item, index) => (
             <div key={index} className={styles.previousWorkout}>
-              {item.date} - {item.schedule} - {item.duration} 
-              <img src="/gymbuddy/listAll.png" className={styles.listButton} />
+              {item.date} - {item.schedule.name} - {item.duration} 
+              <img src="/gymbuddy/listAll.png" className={styles.listButton2} />
             </div>
           )) : ""}
       </div>

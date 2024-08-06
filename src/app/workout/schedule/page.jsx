@@ -1,16 +1,18 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import styles from "./schedule.module.css";
-import  BarChart  from './chart.jsx';
+import LineChart from "./chart.jsx";
 import { auth, storage } from "../../firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SchedulePage = () => {
   const searchParams = useSearchParams();
   const [chosenM, setChosenM] = useState("");
   const [user, setUser] = useState(null);
+  const router = useRouter();
   const name = searchParams.get("name");
   const [savedSchedules, setSavedSchedules] = useState([]);
   const [matchingSchedule, setMatchingSchedule] = useState(null);
@@ -64,12 +66,10 @@ const SchedulePage = () => {
             // Filter the array of workout objects
             const filteredWorkouts = data.filter(
               (workout) =>
-                workout.schedule &&
-                workout.schedule.some(
-                  (scheduleItem) => scheduleItem.name === name
-                )
+                workout.schedule && // Ensure schedule exists
+                typeof workout.schedule === 'object' && // Ensure schedule is an object
+                workout.schedule.name === name // Check if schedule.name matches the name prop
             );
-
             // Set the filtered workouts to state
             setFilteredWorkouts(filteredWorkouts);
             console.log(filteredWorkouts);
@@ -82,41 +82,48 @@ const SchedulePage = () => {
   }, [name, user]);
 
   const getExerciseData = (exerciseName) => {
-    return filteredWorkouts.map((workout) => {
-      return workout.schedule.map((scheduleItem) => {
-        if (Array.isArray(scheduleItem.exercises)) {
-          const exercise = scheduleItem.exercises.find(
+    return filteredWorkouts
+      .map((workout) => {
+        if (Array.isArray(workout.schedule.exercises)) {
+          const exercises = workout.schedule.exercises.filter(
             (exerciseItem) => exerciseItem.name === exerciseName
           );
-          if (exercise) {
+          return exercises.map((exercise) => {
             const lastSet = exercise.sets[exercise.sets.length - 1];
             return { name: exercise.name, sets: lastSet };
-          }
+          });
         }
         return null;
-      }).filter(item => item !== null);
-    }).flat();
+      })
+      .filter((item) => item !== null)
+      .flat();
+  };
+
+  const handleBack = () => {  
+    router.push("/workout");
+return
   };
   return (
     <div className={styles.mainContainer}>
+      <div className={styles.stickyDiv}>
+        <div className={styles.stickyButton} onClick={handleBack}>
+          Back
+        </div>
+      </div>
       {matchingSchedule ? (
         <div className={styles.scheduleDetails}>
           <h1 className={styles.scheduleTitle}>{matchingSchedule.name}</h1>
           <div className={styles.scheduleInfo}>
-            {matchingSchedule.exercises.map((exercise) => (
-              <div key={exercise.name} className={styles.exercise}>
-                <p className={styles.exerciseName}>{exercise.name}</p>
-                <p>{exercise.description}</p>
-                {exercise.sets.map((set, index) => (
-                  <div key={index} className={styles.set}>
-                    <p>{`Set n° ${index + 1}`} : &nbsp; &nbsp;</p>
-                    <p>{`Reps: ${set.reps}`}&nbsp;&nbsp;</p>
-                    <p>{`Weight: ${set.weight} ${chosenM}`} &nbsp;</p>
-                  </div>
-                ))}
-                <BarChart sets={getExerciseData(exercise.name)} />
-              </div>
-            ))}
+            {matchingSchedule.exercises.map((exercise) => {
+              const exerciseData = getExerciseData(exercise.name);
+              return (
+                <div key={exercise.name} className={styles.exercise}>
+                  <p className={styles.exerciseName}>{exercise.name}</p>
+                  <p>{exercise.description}</p>
+                  <LineChart sets={exerciseData} />
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (
