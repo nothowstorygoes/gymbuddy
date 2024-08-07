@@ -45,7 +45,7 @@ export default function Workout() {
     });
   }, [router]);
 
-  const pushWithParams = ({item}) => {
+  const pushWithParams = ({ item }) => {
     const params = new URLSearchParams({ name: item.name.toString() });
     router.push(`/workout/schedule?${params.toString()}`);
   };
@@ -66,33 +66,51 @@ export default function Workout() {
         </a>
       </div>
       <div className={styles.savedSchedulesContainer}>
-        <p className={styles.savedSchedulesTitle}>Your saved exercise schedules</p>
+        <p className={styles.savedSchedulesTitle}>
+          Your saved exercise schedules
+        </p>
         <div className={styles.savedSchedules}>
-          
           <div className={styles.schedulesContainer}>
-            {savedSchedules.length > 0 ?
-              savedSchedules.slice(0,4).map((item, index) => (
-                <div key={index} className={styles.schedule} onClick={() => pushWithParams({item})}>
-                  {item.name}
-                </div>
-              )) : ""}
+            {savedSchedules.length > 0
+              ? savedSchedules.slice(0, 4).map((item, index) => (
+                  <div
+                    key={index}
+                    className={styles.schedule}
+                    onClick={() => pushWithParams({ item })}
+                  >
+                    {item.name}
+                  </div>
+                ))
+              : ""}
           </div>
-          {savedSchedules.length > 0 ?
-        <div className={styles.listAllButton} onClick={handleListAll}>
-            <img src="/gymbuddy/listAll.png" className={styles.listButton} />
-          </div> : ""}
-      </div>
-        </div>
-        
-      <div className={styles.previousWorkoutContainer}>
-        <div className={styles.previousWorkoutTitle}>Previous workouts</div>
-        {workoutData.length > 0 ? workoutData.map((item, index) => (
-            <div key={index} className={styles.previousWorkout}>
-              {item.date} - {item.schedule.name} - {item.duration} 
-              <img src="/gymbuddy/listAll.png" className={styles.listButton2} />
+          {savedSchedules.length > 0 ? (
+            <div className={styles.listAllButton} onClick={handleListAll}>
+              <img src="/gymbuddy/listAll.png" className={styles.listButton} />
             </div>
-          )) : ""}
+          ) : (
+            ""
+          )}
+        </div>
       </div>
+        <div className={styles.logWorkout}>
+          <a href="/gymbuddy/logWorkout" className={styles.logWorkoutButton}>
+            Log a workout +
+          </a>
+        </div>
+ì        <div className={styles.previousWorkoutContainer}>
+    <div className={styles.previousWorkoutTitle}>Previous workouts</div>
+    {workoutData.length > 0
+        ? workoutData.slice(-7).reverse().map((item, index) => (
+            <div key={index} className={styles.previousWorkout}>
+                {item.date} - {item.schedule.name}
+                <img
+                    src="/gymbuddy/listAll.png"
+                    className={styles.listButton2}
+                />
+            </div>
+        ))
+        : ""}
+</div>
       <Navbar />
     </main>
   );
