@@ -8,9 +8,11 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
+import LoadingSpinner from "@/app/components/loadingSpinner/loadingSpinner";
 
 function SearchParamsSchedule() {
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const [chosenM, setChosenM] = useState("");
   const [user, setUser] = useState(null);
   const router = useRouter();
@@ -79,6 +81,7 @@ function SearchParamsSchedule() {
             console.error("Error fetching workout.json:", error)
           );
       });
+      setLoading(false);
     }
   }, [name, user]);
 
@@ -106,6 +109,7 @@ function SearchParamsSchedule() {
   };
   return (
     <main className={styles.mainContainer}>
+      {loading ? <LoadingSpinner /> : ""}
       <div className={styles.stickyDiv}>
         <div className={styles.stickyButton} onClick={handleBack}>
           Back
@@ -117,12 +121,12 @@ function SearchParamsSchedule() {
           <div className={styles.scheduleInfo}>
             {matchingSchedule.exercises.map((exercise) => {
               const exerciseData = getExerciseData(exercise.name);
-              if (exerciseData.length == 0)
+              if (exerciseData.length <= 1)
                 {return (
                   <div key={exercise.name} className={styles.exercise}>
                   <p className={styles.exerciseName}>{exercise.name}</p>
                   <div className={styles.progressNone}>
-                    You haven&apos;t uploaded any new workouts for this schedule...
+                    There isn&apos;t enough data to show a graph for this exercise.
                   </div>
                   </div>
                 );}

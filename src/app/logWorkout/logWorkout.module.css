@@ -87,6 +87,9 @@
 
 .button{
     width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 5vh;
     border-radius: 25px;
     background-color: #B2675E;

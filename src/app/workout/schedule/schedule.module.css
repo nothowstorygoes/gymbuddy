@@ -18,7 +18,6 @@
   font-weight: bold;
   font-family: "NTR", sans-serif;
   color: white;
-  margin-top: 10vh;
 }
 
 .scheduleInfo {
@@ -48,7 +47,7 @@
 .stickyDiv {
   position: sticky;
   top: -7vh;
-  height: 15vh;
+  height: 13vh;
   display: flex;
   padding: 1vh;
   width: 100%;

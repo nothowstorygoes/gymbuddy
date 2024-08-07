@@ -12,6 +12,7 @@ import Navbar from "../components/navbar/navbar";
 export default function LogWorkout() {
     const [savedSchedules, setSavedSchedules] = useState([]);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
     const [item, setItem] = useState(null);
     const [modalClick, setModalClick] = useState(false);
@@ -27,6 +28,9 @@ export default function LogWorkout() {
                     .then((data) => {
                         console.log(data);
                         setSavedSchedules(data);
+                        setTimeout(() => {
+                            setLoading(false);
+                        }, 500);
                     })
                     .catch((error) =>
                         console.error("Error fetching schedules.json:", error)
@@ -100,7 +104,9 @@ export default function LogWorkout() {
         };
 
     return (
+        
         <main className={styles.mainContainer}>
+            {loading ? <LoadingSpinner /> : ""}
         {modalClick && item ? <Modal item={item} /> : ""}
         <p className={styles.title}>What schedule did you follow during your workout?</p>
         <div className={styles.scheduleContainer}>
