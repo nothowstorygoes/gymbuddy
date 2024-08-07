@@ -8,11 +8,14 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
+import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
-const SchedulePage = () => {
+function SearchParamsSchedule() {
+  const searchParams = useSearchParams();
   const [chosenM, setChosenM] = useState("");
   const [user, setUser] = useState(null);
   const router = useRouter();
+  const name = searchParams.get("name");
   const [savedSchedules, setSavedSchedules] = useState([]);
   const [matchingSchedule, setMatchingSchedule] = useState(null);
   const [filteredWorkouts, setFilteredWorkouts] = useState([]);
@@ -100,45 +103,42 @@ const SchedulePage = () => {
 
   const handleBack = () => {  
     router.push("/workout");
-    return;
+return
   };
-
   return (
-    <Suspense>
-      <main className={styles.mainContainer}>
-        <div className={styles.stickyDiv}>
-          <div className={styles.stickyButton} onClick={handleBack}>
-            Back
+    <main className={styles.mainContainer}>
+      <div className={styles.stickyDiv}>
+        <div className={styles.stickyButton} onClick={handleBack}>
+          Back
+        </div>
+      </div>
+      {matchingSchedule ? (
+        <div className={styles.scheduleDetails}>
+          <h1 className={styles.scheduleTitle}>{matchingSchedule.name}</h1>
+          <div className={styles.scheduleInfo}>
+            {matchingSchedule.exercises.map((exercise) => {
+              const exerciseData = getExerciseData(exercise.name);
+              return (
+                <div key={exercise.name} className={styles.exercise}>
+                  <p className={styles.exerciseName}>{exercise.name}</p>
+                  <p>{exercise.description}</p>
+                  <LineChart sets={exerciseData} />
+                </div>
+              );
+            })}
           </div>
         </div>
-        <Suspense>
-          {() => {
-            const searchParams = useSearchParams();
-            const name = searchParams.get("name");
-            return matchingSchedule ? (
-              <div className={styles.scheduleDetails}>
-                <h1 className={styles.scheduleTitle}>{matchingSchedule.name}</h1>
-                <div className={styles.scheduleInfo}>
-                  {matchingSchedule.exercises.map((exercise) => {
-                    const exerciseData = getExerciseData(exercise.name);
-                    return (
-                      <div key={exercise.name} className={styles.exercise}>
-                        <p className={styles.exerciseName}>{exercise.name}</p>
-                        <p>{exercise.description}</p>
-                        <LineChart sets={exerciseData} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ) : (
-              ""
-            );
-          }}
-        </Suspense>
-      </main>
-    </Suspense>
+      ) : (
+        ""
+      )}
+    </main>
   );
 };
 
-export default SchedulePage;
+export default function SchedulePage(){
+  return (
+    <Suspense>
+      <SearchParamsSchedule />
+    </Suspense>
+  );
+}
