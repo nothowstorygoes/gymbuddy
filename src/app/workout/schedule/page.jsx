@@ -7,6 +7,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Suspense } from "react";
 
 const SchedulePage = () => {
   const searchParams = useSearchParams();
@@ -104,7 +105,8 @@ const SchedulePage = () => {
 return
   };
   return (
-    <div className={styles.mainContainer}>
+    <Suspense>
+    <main className={styles.mainContainer}>
       <div className={styles.stickyDiv}>
         <div className={styles.stickyButton} onClick={handleBack}>
           Back
@@ -129,7 +131,8 @@ return
       ) : (
         ""
       )}
-    </div>
+    </main>
+    </Suspense>
   );
 };
 
