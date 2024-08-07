@@ -19,7 +19,7 @@
 .googleLoginButton{
     display: flex;
     position: relative;
-    bottom: -40vh;
+    bottom: -38vh;
     left:-3vw;
     flex-direction: row;
     background-color: rgba(0,0,0,0);
@@ -45,19 +45,25 @@
   margin-top:7vh;
 }
 
+.formComplete{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
 .label{
     position: relative;
     font-family: "NTR", sans-serif;
     font-size: 1.7rem;
     color: #fff;
-    margin: 0px 50px;
+    margin: 0px 30px;
     margin-bottom: 10px;
 }
 
 .inputField{
     position: relative;
     width: 60vw;
-    margin:50px;
+    margin:30px;
     height: 5vh;
     background-color: rgba(248, 244, 227, 0.5);
     border-radius: 10px;

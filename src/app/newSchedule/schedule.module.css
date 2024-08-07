@@ -20,11 +20,6 @@
     transition: transform 0.5s ease-in-out, height 0.1s ease-in-out;
 }
 
-.firstContainer.firstVisibility{
-    transform : translateX(-100%);
-    height: 0;
-}
-
 .formContainer{
     display: flex;
     flex-direction: column;
@@ -114,15 +109,9 @@
     flex-direction: column;
     justify-content: center;
     top:0;
-    height: 0;
-    align-items: center;
-    left:200%;
-    transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
-}
-
-.secondContainer.secondVisibility{
-    transform : translateX(-210%);
     height: auto;
+    align-items: center;
+    transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
 }
 
 .nextButton2{
@@ -130,16 +119,12 @@
 }
 
 .subContainer{
-    display: none;
-    
-}
-
-.subContainer.secondVisibility{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: auto;
+    
 }
 
 .bodyPartName{
@@ -172,11 +157,28 @@
 
 .stickyButtons{
     position: sticky;
-    top:-0.2vh;
+    top:-7vh;
+    height: 15vh;
     display: flex;
     margin-bottom:3vh;
     width: 100%;
     flex-direction: row;
+    align-items: flex-end;
+    background-color: #370909;
+    justify-content:flex-end;
+}
+
+.stickyDiv{
+    position: sticky;
+    top: -7vh;
+    z-index: 555;
+    height: 14vh;
+    display: flex;
+    margin-bottom:3vh;
+    margin-top:3vh;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-end;
     background-color: #370909;
     justify-content:flex-end;
 }
@@ -202,31 +204,8 @@
     flex-direction: column;
     justify-content: center;
     top:0;
-    height: 0;
+    height: auto;
     align-items: center;
-    left:350%;
-    transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
-}
-
-.thirdContainer.thirdVisibility{
-    transform : translateX(-410%);
-    height: auto;
-}
-
-.subContainer{
-    height: 0;
-}
-
-.subContainer.display{
-    height: auto;
-}
-
-.exerciseListContainer{
-    height: 0;
-}
-
-.exerciseListContainer.display{
-    height: auto;
 }
 
 .exerciseName{

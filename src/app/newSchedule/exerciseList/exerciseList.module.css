@@ -1,15 +1,11 @@
 .listContainer{
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
     margin-bottom:15vh;
-}
-
-.listContainer.display{
-    display:flex
 }
 
 .exercise{

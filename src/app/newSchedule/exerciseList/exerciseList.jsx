@@ -3,52 +3,46 @@ import styles from "./exerciseList.module.css";
 
 const ExerciseList = ({
   part,
-  go,
   updateSelectedExercises,
   selectedExercises,
   setLoading,
-  loading,
   number,
 }) => {
   const [exercises, setExercises] = useState([]);
   const [visibleDetails, setVisibleDetails] = useState({});
   const [id, setId] = useState("");
-  const [reps, setReps] = useState(0);
-  const [sets, setSets] = useState(0);
-  const [bodyPart, setBodyPart] = useState(0);
-  const [weight, setWeight] = useState(0);
+
+  const fetchExercises = async (part) => {
+    console.log("Fetching exercises...");
+    const response = await fetch(
+      `https://wger.de/api/v2/exercisebaseinfo/?category=${part}&limit=${number}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${process.env.NEXT_PUBLIC_APIEXERCISES}`,
+        },
+      }
+    );
+    const data = await response.json();
+    if (Array.isArray(data.results)) {
+      const filteredExercises = data.results.flatMap((result) =>
+        result.exercises.filter(
+          (exercise) =>
+            exercise.language === 2 &&
+            /(with|and|is|your)/i.test(exercise.description)
+        )
+      );
+      setExercises(filteredExercises);
+    } else {
+      setExercises([]);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    if(part) setBodyPart(part);
-    if (go) {
-      const fetchExercises = async (bodyPart) => {
-        const response = await fetch(
-          `https://wger.de/api/v2/exercisebaseinfo/?category=${part}&limit=${number}`,
-          {
-            method: "GET",
-            headers: {
-              "Authorization": `Token ${process.env.NEXT_PUBLIC_APIEXERCISES}`,
-            },
-          }
-        );
-        const data = await response.json();
-        if (Array.isArray(data.results)) {
-          const filteredExercises = data.results.flatMap(result => 
-            result.exercises.filter(exercise => 
-              exercise.language === 2 && /(with|and|is|your)/i.test(exercise.description)
-            )
-          );
-          console.log(filteredExercises);
-          setExercises(filteredExercises);
-        } else {
-          setExercises([]);
-        }
-        setLoading(false);
-      };
-
-      fetchExercises(bodyPart);
-    }
-  }, [bodyPart, go]);
+    setLoading(true);
+    fetchExercises(part);
+  }, [part, number]);
 
   const toggleDetails = (index) => {
     setVisibleDetails((prevState) => ({
@@ -57,11 +51,9 @@ const ExerciseList = ({
     }));
   };
 
-  const handleExName = (exercisesId) =>
-  {
+  const handleExName = (exercisesId) => {
     setId(exercisesId);
-  
-  }
+  };
 
   const handleButtonClick = (exerciseId, exerciseName) => {
     updateSelectedExercises(exerciseId, exerciseName);
@@ -72,7 +64,7 @@ const ExerciseList = ({
   };
 
   return (
-    <div className={`${styles.listContainer} ${next ? styles.display : ""}`}>
+    <div className={styles.listContainer}>
       {Array.isArray(exercises) &&
         exercises.map((exercise, index) => (
           <div
@@ -96,7 +88,7 @@ const ExerciseList = ({
                 }`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleButtonClick(exercise.id , exercise.name);
+                  handleButtonClick(exercise.id, exercise.name);
                 }}
               >
                 +
@@ -107,9 +99,10 @@ const ExerciseList = ({
                 visibleDetails[index] ? styles.expanded : ""
               }`}
             >
-              <div className={styles.exerciseInstructions}     dangerouslySetInnerHTML={{ __html: exercise.description }}
-              >
-              </div>
+              <div
+                className={styles.exerciseInstructions}
+                dangerouslySetInnerHTML={{ __html: exercise.description }}
+              ></div>
             </div>
           </div>
         ))}

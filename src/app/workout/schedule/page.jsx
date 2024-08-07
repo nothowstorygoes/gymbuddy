@@ -8,7 +8,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 
 function SearchParamsSchedule() {
   const searchParams = useSearchParams();
@@ -69,7 +68,7 @@ function SearchParamsSchedule() {
             const filteredWorkouts = data.filter(
               (workout) =>
                 workout.schedule && // Ensure schedule exists
-                typeof workout.schedule === 'object' && // Ensure schedule is an object
+                typeof workout.schedule === "object" && // Ensure schedule is an object
                 workout.schedule.name === name // Check if schedule.name matches the name prop
             );
             // Set the filtered workouts to state
@@ -81,7 +80,7 @@ function SearchParamsSchedule() {
           );
       });
     }
-  }, [name, user, matchingSchedule]);
+  }, [name, user]);
 
   const getExerciseData = (exerciseName) => {
     return filteredWorkouts
@@ -101,9 +100,9 @@ function SearchParamsSchedule() {
       .flat();
   };
 
-  const handleBack = () => {  
+  const handleBack = () => {
     router.push("/workout");
-return
+    return;
   };
   return (
     <main className={styles.mainContainer}>
@@ -118,13 +117,22 @@ return
           <div className={styles.scheduleInfo}>
             {matchingSchedule.exercises.map((exercise) => {
               const exerciseData = getExerciseData(exercise.name);
-              return (
-                <div key={exercise.name} className={styles.exercise}>
+              if (exerciseData.length == 0)
+                {return (
+                  <div key={exercise.name} className={styles.exercise}>
                   <p className={styles.exerciseName}>{exercise.name}</p>
-                  <p>{exercise.description}</p>
-                  <LineChart sets={exerciseData} />
-                </div>
-              );
+                  <div className={styles.progressNone}>
+                    You haven&apos;t uploaded any new workouts for this schedule...
+                  </div>
+                  </div>
+                );}
+              else{
+                return (
+                  <div key={exercise.name} className={styles.exercise}>
+                    <p className={styles.exerciseName}>{exercise.name}</p>
+                    <LineChart sets={exerciseData} />
+                  </div>
+                );}
             })}
           </div>
         </div>
@@ -133,9 +141,9 @@ return
       )}
     </main>
   );
-};
+}
 
-export default function SchedulePage(){
+export default function SchedulePage() {
   return (
     <Suspense>
       <SearchParamsSchedule />

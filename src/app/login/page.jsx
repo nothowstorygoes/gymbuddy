@@ -1,12 +1,15 @@
 'use client'
 import styles from  './login.module.css';
-import { auth } from '../firebase';
+import { auth , storage } from '../firebase';
 import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     GoogleAuthProvider,
+    deleteUser,
     signInWithPopup,
   } from "firebase/auth";
+
+import { ref, listAll } from 'firebase/storage';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -14,7 +17,9 @@ import LoadingSpinner from '../components/loadingSpinner/loadingSpinner';
 
 export default function Login() {
     const [email, setEmail] = useState("");
+    const [folderExists, setFolderExists] = useState(false);
     const [password, setPassword] = useState("");
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState(null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -23,7 +28,7 @@ export default function Login() {
     // if logged in pushes to home
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
+        if (user && !isLoggingIn && folderExists) {
           setLoading(true);
           setUser(user);
   
@@ -55,16 +60,44 @@ export default function Login() {
     };
   
   
-    //login with google popup
-    const handleGoogleLogin = async () => {
-      const provider = new GoogleAuthProvider();
-      try {
-        const result = await signInWithPopup(auth, provider);
-        router.push("/dashBoard");
-      } catch (error) {
-        setErrorMessage(error.code);
-      }
-    };
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  setIsLoggingIn(true);
+  try {
+     console.log("Starting Google login process...");
+    const result = await signInWithPopup(auth, provider);
+    console.log("signInWithPopup result:", result);
+
+    const user = result.user;
+    console.log("User signed in:", user);
+
+    const storageRef = ref(storage, user.uid);
+    console.log("Checking storage for folder:", user.uid);
+
+    const folderExist = await listAll(storageRef)
+      .then((res) => {
+        console.log("Storage list result:", res);
+        return res.items.length > 0 || res.prefixes.length > 0;
+      })
+      .catch((error) => {
+        console.error("Error checking storage:", error);
+        return false;
+      });
+    setFolderExists(folderExist);
+    console.log("Folder exists:", folderExists);
+    if (folderExists) {
+      console.log("Redirecting to /dashBoard");
+      router.push("/dashBoard");
+    } else {
+      console.log("Folder does not exist, deleting user and redirecting to /signUp");
+      await deleteUser(user);
+      router.push("/signUp");
+    }
+  } catch (error) {
+    setErrorMessage(error.code);
+  }
+};
+
     return(
         <main className={styles.mainContainer}>
             <div className={styles.name}>gymbuddy</div>
