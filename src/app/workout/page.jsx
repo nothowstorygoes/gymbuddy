@@ -97,7 +97,7 @@ export default function Workout() {
             Log a workout +
           </a>
         </div>
-ì        <div className={styles.previousWorkoutContainer}>
+        <div className={styles.previousWorkoutContainer}>
     <div className={styles.previousWorkoutTitle}>Previous workouts</div>
     {workoutData.length > 0
         ? workoutData.slice(-7).reverse().map((item, index) => (
