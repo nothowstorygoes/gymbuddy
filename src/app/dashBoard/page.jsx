@@ -17,6 +17,7 @@ const HomePage = () => {
   const [user, setUser] = useState(null);
   const [info, setInfo] = useState("");
   const [proteinArray, setProteinArray] = useState([]);
+  const [workoutData, setWorkoutData] = useState([]);
   const [NrWorkout, setNrWorkout] = useState(0);
   const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
@@ -60,7 +61,7 @@ const HomePage = () => {
           .then((url) => fetch(url))
           .then((response) => response.json())
           .then((data) => {
-            setNrWorkout(data.length); // Directly set the array
+            setWorkoutData(data); // Directly set the array
           })
           .catch((error) => {
             console.error("Error fetching the workout.json data:", error);
@@ -96,7 +97,6 @@ const HomePage = () => {
     infonum = Math.floor(parseInt(info) / 453.6);
     infoChMs = `${infonum} lbs`;
   }
-
 
   useEffect(() => {
     if (DownloadisDone) {
@@ -138,8 +138,29 @@ const HomePage = () => {
         setLoading(false);
       }
     }
-  }, [proteinArray, info, DownloadisDone, chosenM]);
-  
+    // Calculate the start and end of the current week
+    const currentDate = new Date();
+    const dayOfWeek = currentDate.getDay(); // 0 (Sun) to 6 (Sat)
+    const firstDayOfWeek = new Date(currentDate);
+    firstDayOfWeek.setDate(
+      currentDate.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1)
+    ); // Set to Monday
+    firstDayOfWeek.setHours(0, 0, 0, 0); // Set to start of the day
+
+    const lastDayOfWeek = new Date(firstDayOfWeek);
+    lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6); // Set to Sunday
+    lastDayOfWeek.setHours(23, 59, 59, 999); // Set to end of the day
+
+    // Filter workouts that fall within the current week
+    const workoutsThisWeek = workoutData.filter((entry) => {
+      const workoutDate = new Date(entry.date);
+      return workoutDate >= firstDayOfWeek && workoutDate <= lastDayOfWeek;
+    });
+
+    setNrWorkout(workoutsThisWeek.length); // Set the count of workouts this week
+    console.log("Workouts this week:", workoutsThisWeek);
+  }, [proteinArray, info, DownloadisDone, chosenM, workoutData]);
+
   if (loading || !user) {
     return <LoadingSpinner />;
   }

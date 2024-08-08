@@ -60,43 +60,45 @@ export default function Login() {
     };
   
   
-const handleGoogleLogin = async () => {
-  const provider = new GoogleAuthProvider();
-  setIsLoggingIn(true);
-  try {
-     console.log("Starting Google login process...");
-    const result = await signInWithPopup(auth, provider);
-    console.log("signInWithPopup result:", result);
-
-    const user = result.user;
-    console.log("User signed in:", user);
-
-    const storageRef = ref(storage, user.uid);
-    console.log("Checking storage for folder:", user.uid);
-
-    const folderExist = await listAll(storageRef)
-      .then((res) => {
-        console.log("Storage list result:", res);
-        return res.items.length > 0 || res.prefixes.length > 0;
-      })
-      .catch((error) => {
-        console.error("Error checking storage:", error);
-        return false;
-      });
-    setFolderExists(folderExist);
-    console.log("Folder exists:", folderExists);
-    if (folderExists) {
-      console.log("Redirecting to /dashBoard");
-      router.push("/dashBoard");
-    } else {
-      console.log("Folder does not exist, deleting user and redirecting to /signUp");
-      await deleteUser(user);
-      router.push("/signUp");
-    }
-  } catch (error) {
-    setErrorMessage(error.code);
-  }
-};
+    const handleGoogleLogin = async () => {
+      const provider = new GoogleAuthProvider();
+      setIsLoggingIn(true);
+      try {
+        console.log("Starting Google login process...");
+        const result = await signInWithPopup(auth, provider);
+        console.log("signInWithPopup result:", result);
+    
+        const user = result.user;
+        console.log("User signed in:", user);
+    
+        const storageRef = ref(storage, user.uid);
+        console.log("Checking storage for folder:", user.uid);
+    
+        const folderExist = await listAll(storageRef)
+          .then((res) => {
+            console.log("Storage list result:", res);
+            return res.items.length > 0 || res.prefixes.length > 0;
+          })
+          .catch((error) => {
+            console.error("Error checking storage:", error);
+            return false;
+          });
+    
+        console.log("Folder exists:", folderExist);
+        if (folderExist) {
+          console.log("Redirecting to /dashBoard");
+          router.push("/dashBoard");
+        } else {
+          console.log("Folder does not exist, deleting user and redirecting to /signUp");
+          await deleteUser(user);
+          router.push("/signUp");
+        }
+      } catch (error) {
+        setErrorMessage(error.code);
+      } finally {
+        setIsLoggingIn(false);
+      }
+    };
 
     return(
         <main className={styles.mainContainer}>
