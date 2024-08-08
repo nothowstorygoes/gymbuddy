@@ -49,14 +49,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const pullRequest = await github.pulls.list({
+            const pullRequest = await octokit.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
               head: 'dev'
             });
             if (pullRequest.data.length > 0) {
-              await github.pulls.merge({
+              await octokit.pulls.merge({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: pullRequest.data[0].number
