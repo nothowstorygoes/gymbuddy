@@ -1,0 +1,64 @@
+name: Auto PR and Merge
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  auto-pr-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Get the last commit message
+        id: get_commit_message
+        run: echo "::set-output name=message::$(git log -1 --pretty=format:'%s')"
+
+      - name: Check if the commit message starts with ❗
+        id: check_commit_message
+        run: |
+          if [[ "${{ steps.get_commit_message.outputs.message }}" == "❗"* ]]; then
+            echo "::set-output name=should_create_pr::true"
+          else
+            echo "::set-output name=should_create_pr::false"
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_commit_message.outputs.should_create_pr == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Merge dev into main
+          branch: main
+          base: main
+          title: 'Auto-merge dev into main'
+          body: 'This PR is automatically created to merge dev into main.'
+          assignees: 'your-github-username'
+
+      - name: Merge Pull Request
+        if: steps.check_commit_message.outputs.should_create_pr == 'true'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pullRequest = await github.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: 'dev'
+            });
+            if (pullRequest.data.length > 0) {
+              await github.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pullRequest.data[0].number
+              });
+            }
