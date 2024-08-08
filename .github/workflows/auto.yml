@@ -38,7 +38,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Merge dev into main
           branch: main
-          base: main
+          base: dev
           title: 'Auto-merge dev into main'
           body: 'This PR is automatically created to merge dev into main.'
           assignees: 'your-github-username'
