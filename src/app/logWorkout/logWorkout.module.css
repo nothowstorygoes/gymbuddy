@@ -1,0 +1,101 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    color:#fff;
+    margin-top:5vh;
+    font-family: "NTR", sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 100;
+}
+
+.scheduleContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+}
+
+.scheduleItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    height: 10vh;
+    margin-top: 5vh;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: #F8F4E3;
+}
+
+.scheduleItem p{
+    font-family: "NTR", sans-serif;
+    color: #370909;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.modalContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 30vh;
+    background-color: #F8F4E3;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    margin-top: -3vh;
+}
+
+.modalContent p{
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    color: #370909;
+    margin: 1vh 3vh;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    width: 55vw;
+}
+
+.button{
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    border-radius: 25px;
+    background-color: #B2675E;
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 100;
+}

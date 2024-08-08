@@ -1,0 +1,263 @@
+.mainContainer{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 97vh !important;
+    margin-top: 20px;
+    overflow-x: hidden !important;
+    width: 96vw !important;
+}
+
+.firstContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: auto;
+    top:5vh;
+    transition: transform 0.5s ease-in-out, height 0.1s ease-in-out;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    position: relative;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .input {
+    position: relative;
+    width: 70vw;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    font-size: 18px;
+    height: 5vh;
+    background-color: rgba(248, 244, 227, 0.5);
+    border-radius: 25px;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20vh;
+    margin-top: 20px;
+  }
+
+.buttonBodyPart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    border-radius: 25px;
+    height: 30vw;
+    background-color: #F8F4E3;
+    color:#370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    line-height: 120%;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for background and text color */
+    margin: 10px; /* Add some margin to space out the buttons */
+}
+
+.error{
+    color: #fff;
+    font-size: 1.3rem;
+    font-family: "NTR", sans-serif;
+    text-align: center;
+}
+
+.errorContainer{
+    width: 90vw;
+    margin-bottom:5vh;
+    height: 5vh;
+}
+
+.selected{
+    background-color: #B2675E;
+    color: #fff;
+}
+
+.nextButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    border-radius: 15px;
+    height: 15vw;
+    background-color: #B2675E;
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    line-height: 120%;
+    margin-top: 5vh; /* Add some margin to space out the buttons */
+}
+
+.secondContainer{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    top:0;
+    height: auto;
+    align-items: center;
+    transition: transform 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.nextButton2{
+    position: relative;
+}
+
+.subContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    
+}
+
+.bodyPartName{
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 80vw;
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+}
+
+.buttonName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    border-radius: 25px;
+    height: 20vw;
+    background-color: #B2675E;
+    color:#370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    line-height: 120%;
+    margin: 10px; /* Add some margin to space out the buttons */
+}
+
+.stickyButtons{
+    position: sticky;
+    top:-7vh;
+    height: 15vh;
+    display: flex;
+    margin-bottom:3vh;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: #370909;
+    justify-content:flex-end;
+}
+
+.stickyDiv{
+    position: sticky;
+    top: -7vh;
+    z-index: 555;
+    height: 14vh;
+    display: flex;
+    margin-bottom:3vh;
+    margin-top:3vh;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: #370909;
+    justify-content:flex-end;
+}
+
+.stickyButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:15vw;
+    border-radius: 15px;
+    height: 5vh;
+    background-color: #F8F4E3;
+    color:#370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    line-height: 120%;
+    margin:3vw;
+}
+
+.thirdContainer{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    top:0;
+    height: auto;
+    align-items: center;
+}
+
+.exerciseName{
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 80vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+.formLabel{
+    position: relative;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 80%;
+    text-align: left;
+}
+
+.formInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    margin-bottom: 2vh;
+}
+
+.exerciseInfoSelected{
+    margin-bottom:10vh;
+}
+
+.buttonLastStep{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    border-radius: 15px;
+    height: 15vw;
+    background-color: #B2675E;
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    line-height: 120%;
+    margin-bottom: 15vh; /* Add some margin to space out the buttons */
+}
+
+.divider{
+    width: 40vw;
+    margin-top: 7vh;
+}

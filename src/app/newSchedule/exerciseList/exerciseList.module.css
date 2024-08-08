@@ -1,0 +1,142 @@
+.listContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom:15vh;
+}
+
+.exercise{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    background-color: #F8F4E3;
+    border-radius: 25px;
+    max-height: 150vh;
+    margin: 10px;
+    overflow: hidden;
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.exerciseName{
+    font-family: "NTR", sans-serif;
+    font-size: 1.3rem;
+    width: 50vw;
+    color: #370909;
+    text-align: left;
+    margin-left:5vw;
+    line-height: 120%;}
+
+.exerciseDescription{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    overflow: hidden;
+}
+
+.exerciseDescription.expanded{
+    max-height: 220vh;
+}
+
+.exerciseGif{
+    width: 200px;
+    margin-top:3vh;
+    height: 200px;
+    border-radius: 25px;
+}
+
+.exerciseInstructions{
+    font-family: "NTR", sans-serif;
+    font-size: 1.3rem;
+    color: #370909;
+    text-align: justify;
+    margin: 2vh 5vw;
+    line-height: 120%;
+}
+
+
+
+.nameAndButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exercise.selected {
+    background-color: #B2675E;
+}
+
+
+.button {
+    background-color: rgba(0, 0, 0, 0);
+    font-family: "NTR", sans-serif;
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 2%;
+    margin: 2vw 2vh;
+    color: #370909;
+    transition: transform 0.5s ease;
+    transform-origin: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button.rotated {
+    transform: rotate(135deg); /* Rotate 405 degrees on the X-axis */
+}
+
+.detailsButton{
+    width: 30px;
+    height: 30px;
+    transition: transform 0.5s ease;
+}
+
+.detailsButton.rotated{
+    transform: rotate(180deg);
+}
+
+.exerciseInfoSelected{
+   background-color: rgba(0, 0, 0, 0);
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    width: 80vw;
+    height: 10vh;
+    padding-top: 2%;
+    margin: 2vw 2vh;
+    color: #370909;
+    transition: transform 0.5s ease;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.formInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    height: 10vh;
+    background-color: #F8F4E3;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 10px;
+}
+

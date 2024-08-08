@@ -1,0 +1,112 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    color:#fff;
+    margin-top:5vh;
+    font-family: "NTR", sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 100;
+}
+
+.exerciseName{
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 80vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+.formLabel{
+    position: relative;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 80%;
+    text-align: left;
+}
+
+.formInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    margin-bottom: 2vh;
+}
+
+.input {
+    position: relative;
+    width: 70vw;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    font-size: 18px;
+    height: 5vh;
+    background-color: rgba(248, 244, 227, 0.5);
+    border-radius: 25px;
+  }
+
+
+.exerciseInfoSelected{
+    margin-bottom:10vh;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.removeButton{
+    background-color: #370909;
+    border-radius: 25px;
+    color: #fff;
+    border: solid 2px #fff;
+    font-family: "NTR", sans-serif;
+    display: flex;
+    margin: 5vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.addButton{
+    background-color: #fff;
+    border-radius: 25px;
+    width: 30vw;
+    margin: 5vw;
+    color: #370909;
+    font-family: "NTR", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.savedSchedule{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    margin-top: 5vh;
+    color: #370909;
+    margin-bottom: 5vh;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    background-color: #F8F4E3;
+}
+
+.buttonContainer{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
