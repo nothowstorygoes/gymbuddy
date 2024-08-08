@@ -1,0 +1,615 @@
+.mainContainer {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 90vw !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  z-index: 0;
+}
+
+.firstContainer {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  flex-direction: column !important;
+  transition: transform 0.8s ease-in-out;
+}
+
+.pswError{
+  position: absolute;
+  top: 40vh;
+  font-family: 'NTR', sans-serif;
+  color: #ffff;
+  text-align: center;
+  margin-top: 5vh;
+}
+
+.firstContainer.next {
+  transform: translateX(-100%);
+}
+
+.buttonContainer {
+  left: 6vw;
+  position: absolute;
+  top: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+
+.steps {
+  font-weight: 100 !important;
+  font-size: 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-family: "NTR", sans-serif;
+  position: absolute;
+  top: 5vh;
+  left: 15vw;
+  font-weight: lighter;
+}
+
+.provider {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  width: 80vw;
+  margin: 2vh 2vw;
+  height: 10vh;
+  flex-direction: row !important;
+  position: relative;
+}
+
+.providerIcon {
+  width: 40px;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
+}
+
+.provider p {
+  top: -2.5vh;
+  left: 25vw;
+  font-family: "NTR", sans-serif;
+  color: white;
+  font-weight: lighter;
+  font-size: 1.5rem;
+  position: absolute;
+}
+
+.secondContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: transform 0.8s ease-in-out;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 700px;
+  position:   absolute; /* Position it absolutely */
+  left: 100%; /* Start off-screen to the right */
+}
+
+.secondContainer.next {
+  transform: translateX(-97%); /* Slide in from the right */
+}
+
+.emailContainer {
+  position: absolute;
+  top: 0;
+}
+
+.formContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  top: -20vh;
+  left: -25vw;
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.label {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.7rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.inputField {
+  position: relative;
+  width: 60vw;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+}
+
+
+
+.inputFieldPSW {
+  font-family: "password";
+  position: relative;
+  width: 60vw;
+  color: #fff;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+}
+
+@font-face {
+  font-family: "password";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
+}
+
+.submitButton {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: 5vw;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+  top:55vh;
+}
+
+.googleContainer {
+  position: absolute;
+  top: 0;
+}
+
+.titleGoogle {
+  position: absolute;
+  top: -45vh;
+  display: flex;
+  left: -32vw;
+  line-height: 100%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 1.8rem;
+  width: 60vw;
+}
+
+.labelGoogle {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.7rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.inputFieldGoogle {
+  position: relative;
+  width: 60vw;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+}
+
+.submitButtonGoogle {
+  position: absolute;
+  width: 30vw;
+  border-radius: 10px;
+  height: 7vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  top: 30vh;
+  left: 7vw;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+
+.formContainerGoogle {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+  top: -15vh;
+  left: -24vw;
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.secondContainer.next.slideOut {
+  transform: translateX(-200%);
+}
+
+.thirdContainer {
+  display: flex;
+  position: absolute;
+  top: 30vh;
+  flex-direction: column;
+  transition: transform 0.8s ease-in-out;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 700px;
+  position: absolute; /* Position it absolutely */
+  left: 150%; /* Start off-screen to the right */
+}
+
+.thirdContainer.next2 {
+  transform: translateX(-120%); /* Slide in from the right */
+}
+
+.formLeft {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.inputFieldSign3 {
+  position: relative;
+  width: 30vw;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-size: 18px;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+}
+
+.labelSign3 {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 15vh;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.formRigth {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  margin-top: 80vh;
+  right: -90%;
+}
+
+.formMeasures {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 35vh;
+  left: 10vw;
+}
+
+.buttonMeasure {
+  position: relative;
+  width: 30vw;
+  margin: 5vh 0;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #f8f4e3;
+  text-align: center;
+}
+
+.buttonMeasure p {
+  font-family: "NTR", sans-serif;
+  font-size: 1.4rem;
+  color: #370909;
+  position: absolute;
+  top: -2.5vh;
+  width: 20vw;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.formSex {
+  display: flex;
+
+  position: absolute;
+  flex-direction: row;
+  top: 15vh;
+  right: 10vw;
+}
+
+.buttonSex p {
+  font-family: "NTR", sans-serif;
+  font-size: 1.4rem;
+  color: #370909;
+  position: absolute;
+  top: -2.5vh;
+  width: 3vw;
+  margin-left: -6px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.buttonSex {
+  width: 10vw;
+  margin: 0vw 4vw;
+  border-radius: 10px;
+  height: 5vh;
+  margin-top: 5vh;
+  /* left: -30vw; */
+  position: relative;
+  background-color: #f8f4e3;
+  text-align: center;
+}
+
+.labelSex {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  top: -3vh;
+  left: -9vw;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.submitButton2 {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: 25vw;
+  top: 80vh;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+
+.clicked {
+  background-color: #b2675e !important;
+}
+
+.thirdContainer.slideOut {
+  transform: translateX(-220%);
+}
+
+.fourthContainer {
+  display: flex;
+  position: absolute;
+  top: 30vh;
+  flex-direction: column;
+  transition: transform 0.8s ease-in-out;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 700px;
+  position: absolute; /* Position it absolutely */
+  left: 200%; /* Start off-screen to the right */
+}
+
+.fourthContainer.next3 {
+  transform: translateX(-150%); /* Slide in from the right */
+}
+
+.formGoal {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.labelActivity {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 90vw;
+  margin-bottom: 10px;
+  top: -5vh;
+  text-align: center;
+  left: -33vw;
+  display: flex;
+  justify-content: center;
+}
+
+.inputFieldGoal {
+  position: relative;
+  width: 15vw;
+  font-size: 18px;
+  font-family: "NTR", sans-serif;
+  left: 3vw;
+  color: #fff;
+  font-size: 18px;
+  top: 5vh;
+  margin: 50px;
+  height: 5vh;
+  background-color: rgba(248, 244, 227, 0.5);
+  border-radius: 10px;
+}
+
+.labelActivity2 {
+  position: absolute;
+  font-family: "NTR", sans-serif;
+  font-size: 1.9rem;
+  color: #fff;
+  margin: 0px 50px;
+  width: 90vw;
+  margin-bottom: 10px;
+  top: 25vh;
+  text-align: center;
+  left: -29vw;
+  display: flex;
+  justify-content: center;
+}
+
+.activityContainer {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 35vh;
+  left: 3.5vw;
+}
+
+.buttonActivity {
+  width: 40vw;
+  margin: 0vw 4vw;
+  border-radius: 10px;
+  height: 6vh;
+  margin-top: 5vh;
+  /* left: -30vw; */
+  position: relative;
+  background-color: #f8f4e3;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "NTR", sans-serif;
+  font-size: 1.7rem;
+  color: #370909;
+}
+
+.submitButton3 {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: 7vw;
+  top: 80vh;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+.fourthContainer.slideOut4 {
+  transform: translateX(-300%); /* Slide in from the right */
+}
+
+
+.next4 {
+  transform: translateX(-250%);
+}
+
+.doneContainer {
+  display: flex;
+  position: absolute;
+  top: 30vh;
+  flex-direction: column;
+  transition: transform 0.8s ease-in-out;
+  width: 100%; /* Ensure it takes full width */
+  max-width: 700px;
+  position: absolute; /* Position it absolutely */
+  left: 300%; /* Start off-screen to the right */
+}
+
+.doneTitle {
+  position: absolute;
+  top: -20vh;
+  display: flex;
+  left: -25vw;
+  line-height: 100%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 2.5rem;
+  text-align: center;
+  width: 60vw;
+}
+
+.doneText {
+  position: absolute;
+  top: 2vh;
+  display: flex;
+  left: -25vw;
+  text-align: center;
+  line-height: 120%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 1.8rem;
+  width: 60vw;
+}
+
+.doneButton {
+  position: absolute;
+  width: 40vw;
+  border-radius: 10px;
+  height: 5vh;
+  background-color: #b2675e;
+  border-radius: 10px;
+  display: flex;
+  left: -15vw;
+  top: 40vh;
+  text-align: center;
+  font-weight: lighter;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2em;
+  border: 0px;
+}
+
+.doneLogo {
+  position: absolute;
+  top: 25vh;
+  display: flex;
+  left: -7vw;
+  text-align: center;
+  line-height: 120%;
+  font-family: "NTR", sans-serif;
+  color: #fff;
+  font-weight: lighter;
+  font-size: 1.8rem;
+  letter-spacing: -0.2rem;
+  width: 60vw;
+}

@@ -1,0 +1,93 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.scheduleDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.scheduleTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: "NTR", sans-serif;
+  color: white;
+}
+
+.scheduleInfo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "NTR", sans-serif;
+  color: white;
+}
+
+.exerciseName {
+  font-size: 1.5rem;
+  font-weight: 250;
+  text-align: center;
+  margin-bottom: 0;
+  font-family: "NTR", sans-serif;
+  color: white;
+}
+
+.set {
+  display: flex;
+  font-weight: 100;
+  flex-direction: row;
+  margin-top: -4vh;
+}
+
+.stickyDiv {
+  position: sticky;
+  top: -7vh;
+  height: 13vh;
+  display: flex;
+  padding: 1vh;
+  width: 100%;
+  flex-direction: row;
+  background-color: #370909;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.stickyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15vw;
+  border-radius: 15px;
+  margin-right: 10vw;
+  margin-bottom: 3vw;
+  height: 5vh;
+  background-color: #f8f4e3;
+  color: #370909;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2rem;
+  line-height: 120%;
+}
+
+.exercise{
+    border: 1px solid #B2675E;
+    border-radius: 10px;
+    margin: 4vh 0;
+    width: 70vw;
+    padding: 3vh 2vh;
+    background-color: rgba(178, 103, 94, 0.5);
+}
+
+.progressNone{
+    color: #b0afaf;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 100;
+    text-align: center;
+    line-height: 120%;
+    margin: 10px;
+}

@@ -1,0 +1,36 @@
+.navbar{
+    position: fixed;
+    bottom:-0.2px;
+    height: 13vh;
+    background-color: #370909;
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.navbarImg{
+    width: 30px;
+    height: 30px;
+}
+
+.navbarContainer{
+    position: relative;
+    margin-right: 10vw;
+    margin-top:2vh;
+    margin-left:10vw;
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+}
+
+.navbarButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+    font-family: "NTR", sans-serif;
+    font-size: 0.8rem;
+}

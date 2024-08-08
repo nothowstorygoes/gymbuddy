@@ -1,0 +1,44 @@
+.mainContainer{
+  height: 90vh;
+  width: 96vw;
+  display: flex;
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.name{
+  font-size: 3rem;
+  letter-spacing: -0.15em;
+  font-family:"NTR", sans-serif;
+  color: #fff;
+  margin-bottom:30vh;
+}
+
+.optionsContainer{
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.par{
+  text-align: center;
+  font-family: "NTR", sans-serif;
+  line-height: 120%;
+  font-size: 1.5rem;
+  color:#fff;
+}
+
+.login{
+  color: #B2675E;
+}
+
+.signup{
+  color:#D4CDC3;
+  font-size: 1.2rem;
+}
