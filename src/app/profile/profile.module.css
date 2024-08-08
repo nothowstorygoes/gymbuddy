@@ -1,0 +1,71 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
+}
+
+.propic{
+    width:150px;
+    height: 150px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.greeting{
+    font-family: "NTR", sans-serif;
+    font-size: 2rem;
+    font-weight: 100;
+    margin: 0;
+    color:#fff;
+}
+
+.name{
+    font-family: "NTR", sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color:#B2675E;
+    margin: 0;
+    line-height: 120%;
+}
+
+.greetingContainer{
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.editPropic{
+    position: absolute;
+    top: 120px;
+    left: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.editPropicImg{
+    width: 25px;
+    height: 25px;
+}
+
+.propicContainer{
+    position: relative;
+    margin-top: 7vh;
+}
+
+
+
+.mainMainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
