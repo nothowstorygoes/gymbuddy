@@ -1,71 +1,267 @@
-.mainContainer{
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4vh;
+}
+
+.propic {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.greeting {
+  font-family: "NTR", sans-serif;
+  font-size: 2rem;
+  font-weight: 100;
+  margin: 0;
+  color: #fff;
+}
+
+.name {
+  font-family: "NTR", sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #b2675e;
+  margin: 0;
+  line-height: 120%;
+}
+
+.greetingContainer {
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.editPropic {
+  position: absolute;
+  top: 120px;
+  left: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50px;
+}
+
+.editPropicImg {
+  width: 25px;
+  height: 25px;
+}
+
+.propicContainer {
+  position: relative;
+  margin-top: 7vh;
+}
+
+.mainMainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.infoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formInfos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
+}
+
+.variablesForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 2vh;
+}
+
+.variableInput {
+  width: 80%;
+  height: 80px;
+  color: #370909;
+  background-color: transparent;
+  font-family: "NTR", sans-serif;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 80%;
+  height: 40px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #370909;
+  font-family: "NTR", sans-serif;
+  font-size: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1vh;
+}
+
+.variable {
+  color: #fff;
+  width: 80%;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.variable2 {
+  color: #fff;
+  width: 80%;
+  font-size: 1.2rem;
+
+  text-align: right;
+}
+
+.mBasal {
+  font-family: "NTR", sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  text-align: justify;
+  margin: 2vh 0 0 0;
+  display: flex;
+  justify-content: center;
+  width: 85%;
+
+  align-items: center;
+}
+
+.mBasal span {
+  font-size: 1.5rem;
+}
+
+.mGoal {
+  font-family: "NTR", sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  margin: 0 0 2vh 0;
+  width: 65%;
+  text-align: center;
+  text-wrap: wrap;
+  line-height: 120%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonActivity{
+    width: 80%;
+    height: 40px;
+    background-color: #fff;
+    color: #370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1rem;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+    margin-top: 2vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.buttonActivity.active{
+    background-color: #b2675e;
+    color: #fff;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column ;
+    width: 80%;
     margin-top: 4vh;
 }
 
-.propic{
-    width:150px;
-    height: 150px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    object-fit: cover;
+.variableGoal{
+    color: #fff;
+    width: 80%;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 2vh;
 }
 
-.greeting{
-    font-family: "NTR", sans-serif;
-    font-size: 2rem;
-    font-weight: 100;
-    margin: 0;
-    color:#fff;
-}
-
-.name{
-    font-family: "NTR", sans-serif;
-    font-size: 2rem;
-    font-weight: 300;
-    color:#B2675E;
-    margin: 0;
-    line-height: 120%;
-}
-
-.greetingContainer{
-    width: 80vw;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.editPropic{
-    position: absolute;
-    top: 120px;
-    left: 110px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
+.submitButton{
+    width: 80%;
     height: 40px;
-    background-color: #fff;
-    border-radius: 50px;
-}
-
-.editPropicImg{
-    width: 25px;
-    height: 25px;
-}
-
-.propicContainer{
-    position: relative;
-    margin-top: 7vh;
-}
-
-
-
-.mainMainContainer{
+    background-color: #b2675e;
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1rem;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    border-radius: 10px;
+    margin-top: 8vh;
+    margin-bottom: 20vh;
+
 }
 
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modalContent{
+    width: 80%;
+    height: 15vh;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent p{
+    font-family: "NTR", sans-serif;
+    font-size: 1.3rem;
+    color: #370909;
+    margin-top: 2vh;
+}
+
+.closeButton{
+    height: 40px;
+    color: #370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.4rem;
+    border: none;
+    top: -2px;
+    left: 86%;
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    border-radius: 10px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
