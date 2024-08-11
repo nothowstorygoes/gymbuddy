@@ -1,0 +1,94 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-top:2vh;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.addFood{
+    font-size: 5rem;
+    color: #fff;
+    padding: 0;
+    margin-left:20vw;
+    font-weight: 300;
+    line-height: 100%;
+}
+
+.foodList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:15vh;
+    margin-top: 1rem;
+}
+  
+.deleteSwipe {
+    background-color: red;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 100%;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    width: 80vw;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.deleteSwipe p {
+    margin-right: 4vw;
+}
+
+.foodItemContainer {
+    position: relative;
+    overflow: hidden;
+    width: 80vw;
+    height: 8vh;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.foodItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    color: #370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    border: 3px solid #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.foodItem p {
+    margin: 0 4vw;
+}
+
+.foodCalories {
+    color: #B2675E;
+}

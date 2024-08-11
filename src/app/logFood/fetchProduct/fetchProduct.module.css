@@ -1,0 +1,54 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputField{
+    width: 80vw;
+    height: 5vh;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+    border-radius: 10px;
+    border: 3px solid #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #370909;
+    padding-left: 1vw;
+    font-size: 1.2rem;
+    font-family: "NTR", sans-serif;
+}
+
+.inputField::placeholder{
+    color: #370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+}
+
+.product{
+    width: 80vw;
+    height: 7vh;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productName{
+    color: #370909;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    width: 70vw;
+    text-align: center;
+}
+
+.productList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15vh;
+}
