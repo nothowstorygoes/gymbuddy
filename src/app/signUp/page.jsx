@@ -117,17 +117,17 @@ export default function SignUp() {
     };
 
     const wk = [];
-    const pr = [];     
+    const fd = [];     
     const sc = [];
     const uid = auth.currentUser.uid;
     const userRef = ref(storage, `${uid}/info.json`);
     const userWk = ref(storage, `${uid}/workout.json` );
     const userSc = ref(storage, `${uid}/schedule.json`);
-    const userPr = ref(storage, `${uid}/protein.json`)
+    const userFd = ref(storage, `${uid}/food.json`)
     await uploadString(userRef, JSON.stringify(userInfo));
     await uploadString(userWk, JSON.stringify(wk));
     await uploadString(userSc, JSON.stringify(sc));
-    await uploadString(userPr, JSON.stringify(pr));
+    await uploadString(userFd, JSON.stringify(fd));
   };
 
   //handler to call Google Auth Provider

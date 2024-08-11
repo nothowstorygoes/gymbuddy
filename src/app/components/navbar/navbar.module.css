@@ -7,6 +7,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    z-index: 999;
     flex-direction: row;
 }
 

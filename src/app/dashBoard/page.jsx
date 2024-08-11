@@ -5,12 +5,19 @@ import BarChart from "../components/chart";
 import { useRouter } from "next/navigation";
 import { auth } from "../firebase";
 import { storage } from "../firebase";
+import PieChart  from "../components/macroChart";
 import { ref, getDownloadURL } from "firebase/storage";
 import { useState, useEffect } from "react";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import { onAuthStateChanged } from "firebase/auth";
 import styles from "./dashboard.module.css";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 import Navbar from "../components/navbar/navbar";
+import { Pie } from "react-chartjs-2";
 
 const HomePage = () => {
   const router = useRouter();
@@ -20,13 +27,28 @@ const HomePage = () => {
   const [workoutData, setWorkoutData] = useState([]);
   const [NrWorkout, setNrWorkout] = useState(0);
   const [username, setUsername] = useState("");
+  const [calories, setCalories] = useState(0);
   const [message, setMessage] = useState("");
   const [proteinIntakeValues, setProteinIntakeValues] = useState([]);
   const [average, setAverage] = useState(0);
   const [DownloadisDone, setDownloadisDone] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [goal, setGoalString] = useState("");
+  const [mGoal, setMGoal] = useState(0);
+  const [loadingProgress, setLoadingProgress] = useState(true);
   const [chosenM, setChosenM] = useState("");
+  const [mBasal, setMBasal] = useState(0);
   const [schedules, setSchedules] = useState([]);
+  const [carbs, setCarbs] = useState(0);
+  const [fats, setFats] = useState(0);
+  const [proteins, setProteins] = useState(0);
+
+  // Define your custom styles
+  const customStyles = buildStyles({
+    pathColor: "#B2675E", // Path color
+    trailColor: "#D4CDC3", // Trail color
+    textColor: "#ff6347", // Text color
+  });
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -42,18 +64,20 @@ const HomePage = () => {
             setInfo(proteinIntake);
             setUsername(data.username);
             setChosenM(data.chosenMeasure);
+            setMBasal(data.mBasal);
+            setGoalString(data.activity);
           })
           .catch((error) => console.error("Error fetching info.json:", error));
         // Download protein.json
-        const proteinRef = ref(storage, `${user.uid}/protein.json`);
-        getDownloadURL(proteinRef)
+        const foodRef = ref(storage, `${user.uid}/food.json`);
+        getDownloadURL(foodRef)
           .then((url) => fetch(url))
           .then((response) => response.json())
           .then((data) => {
             setProteinArray(data); // Directly set the array
           })
           .catch((error) => {
-            console.error("Error fetching the protein.json data:", error);
+            console.error("Error fetching the food.json data:", error);
           });
         // Download workout.json
         const workoutRef = ref(storage, `${user.uid}/workout.json`);
@@ -62,17 +86,6 @@ const HomePage = () => {
           .then((response) => response.json())
           .then((data) => {
             setWorkoutData(data); // Directly set the array
-          })
-          .catch((error) => {
-            console.error("Error fetching the workout.json data:", error);
-          });
-        //Downlaod schedule.json
-        const scheduleRef = ref(storage, `${user.uid}/schedule.json`);
-        getDownloadURL(scheduleRef)
-          .then((url) => fetch(url))
-          .then((response) => response.json())
-          .then((data) => {
-            setSchedules(data); // Directly set the array
           })
           .catch((error) => {
             console.error("Error fetching the workout.json data:", error);
@@ -106,7 +119,7 @@ const HomePage = () => {
         proteinArray.forEach((entry) => {
           const date = new Date(entry.date);
           const dayOfWeek = date.getDay(); // 0 (Sun) to 6 (Sat)
-          const proteinSum = entry.proteinIntake.reduce(
+          const proteinSum = entry.food.reduce(
             (sum, item) => sum + item.protein,
             0
           );
@@ -123,7 +136,7 @@ const HomePage = () => {
       }
       if (average <= (infoGoal / 3) * 2 && average >= (infoGoal / 3) * 1) {
         setMessage(
-          "This week your protein intake is less then 2/3 of your goal."
+          "This week your protein intake is less than 2/3 of your goal."
         );
         setLoading(false);
       }
@@ -161,6 +174,82 @@ const HomePage = () => {
     console.log("Workouts this week:", workoutsThisWeek);
   }, [proteinArray, info, DownloadisDone, chosenM, workoutData]);
 
+  useEffect(() => {
+    if (DownloadisDone) {
+      let calGoal = 0;
+      switch (goal.toLowerCase()) {
+        case "cutting":
+          calGoal = -500;
+          break;
+        case "bulking":
+          calGoal = 500;
+          break;
+        case "maintenance":
+          calGoal = 0;
+          break;
+      }
+      setMGoal(mBasal + calGoal);
+      setLoadingProgress(false);
+    }
+  }, [goal, DownloadisDone]);
+
+  useEffect(() => {
+    console.log("Updated Goal:", mGoal);
+  }, [mGoal]);
+
+  useEffect(() => {
+    if (DownloadisDone) {
+      const currentDate = new Date().toDateString();
+
+      const matchingEntry = proteinArray.find(
+        (entry) => new Date(entry.date).toDateString() === currentDate
+      );
+
+      if (matchingEntry) {
+        const totalCalories = matchingEntry.food.reduce(
+          (sum, item) => sum + item.calories,
+          0
+        );
+        setCalories(totalCalories);
+      } else {
+        setCalories(0);
+      }
+    }
+  }, [proteinArray, DownloadisDone]);
+
+  useEffect(() => {
+    if (DownloadisDone) {
+      const currentDate = new Date().toDateString();
+  
+      const matchingEntry = proteinArray.find(
+        (entry) => new Date(entry.date).toDateString() === currentDate
+      );
+  
+      if (matchingEntry) {
+        const totalCarbs = matchingEntry.food.reduce(
+          (sum, item) => sum + item.carbo,
+          0
+        );
+        const totalFats = matchingEntry.food.reduce(
+          (sum, item) => sum + item.fat,
+          0
+        );
+        const totalProteins = matchingEntry.food.reduce(
+          (sum, item) => sum + item.protein,
+          0
+        );
+  
+        setCarbs(totalCarbs);
+        setFats(totalFats);
+        setProteins(totalProteins);
+      } else {
+        setCarbs(0);
+        setFats(0);
+        setProteins(0);
+      }
+    }
+  }, [proteinArray, DownloadisDone]);
+
   if (loading || !user) {
     return <LoadingSpinner />;
   }
@@ -168,6 +257,33 @@ const HomePage = () => {
   return (
     <main className={styles.mainContainer}>
       <div className={styles.welcomeTitle}>Ehi {username},</div>
+      
+        {loadingProgress ? (
+          ""
+        ) : (
+          <div className={styles.chartsContainer}>
+            <div className={styles.caloriesChart}>
+          <CircularProgressbarWithChildren
+            value={calories}
+            maxValue={mGoal}
+            styles={customStyles}
+          >
+            <p className={styles.caloriesNumber}>{calories} cal</p>
+          </CircularProgressbarWithChildren>
+          </div>
+          <div className={styles.pieChart}>
+          <PieChart value1={carbs} value2={fats} value3={proteins}/>
+          </div>
+          </div>
+        )}
+        <div className={styles.macroGoal}>
+      <p className={styles.carbs}>carbs</p> &nbsp; &nbsp;  <p className={styles.fats}>fats</p> &nbsp;  &nbsp; <p className={styles.proteins}>proteins</p>
+      </div>
+      
+      <div className={styles.caloriesGoal}>
+        Your goal is to eat {mGoal} calories per day. <br /> Go eat something!
+      </div>
+      
       <div className={styles.chartContainer}>
         <BarChart
           proteinIntake={info}
@@ -187,16 +303,6 @@ const HomePage = () => {
         Recent studies states that, under the right conditions, you could gain a
         maximum of {wkMsg} of muscle growth in just 5 weeks,
         <br /> exciting right?
-      </div>
-      <div className={styles.buttonContainer}>
-        <button className={styles.buttonLogProtein}>
-          <a href="/gymbuddy/logProtein">Log a protein intake</a>
-          <img src="/gymbuddy/protein.png" className={styles.imgButton} />
-        </button>
-        <button className={styles.buttonLogWorkout}>
-          <img src="/gymbuddy/workout.png" className={styles.imgButton} />
-          <a href="/gymbuddy/logWorkout">Log a workout</a>
-        </button>
       </div>
       <Navbar />
     </main>

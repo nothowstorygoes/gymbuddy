@@ -31,6 +31,7 @@
   font-family: "NTR", sans-serif;
   font-size: 1.2rem;
   font-weight: 100;
+  margin-bottom: 5vh;
   line-height: 120%;
 }
 
@@ -63,7 +64,7 @@
   width: 80vw;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow */
-
+margin-bottom: 20vh;
   background-color: rgba(178, 103, 94, 0.5);
   border-radius: 15px;
   line-height: 120%;
@@ -111,4 +112,77 @@
   align-items: center;
   text-align: right;
   margin-left: 10px;
+}
+
+.caloriesChart{
+  width: 30vw;
+  height: 30vw;
+}
+
+.pieChart{
+  width: 30vw;
+  height: 30vw;
+  margin-left:10vw;
+}
+
+.chartsContainer{
+  display: flex;
+  flex-direction: row;
+  margin-top:5vh;
+  margin-bottom:1vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.caloriesNumber{
+  font-size: 1.5rem;
+  color: #fff;
+  font-family: "NTR", sans-serif;
+  font-weight: 100;
+  position: relative;
+  text-align: center;
+}
+
+.caloriesGoal{
+  width: 80vw;
+  padding: 10px;
+  background-color: rgba(178, 103, 94, 0.5);
+  border-radius: 15px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow */
+  font-family: "NTR", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 100;
+  line-height: 120%;
+  margin-bottom: 3vh;
+}
+
+.carbs{
+  color : rgba(158, 42, 43, 1);
+}
+
+.fats{
+  color : rgba(216, 87, 42, 1);
+}
+
+.proteins{
+  color: rgba(247, 181, 56, 1);
+}
+
+.macroGoal{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 6vw;
+  align-items: center;
+  width: 80vw;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  color: #370909;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 100;
+  line-height: 120%;
 }

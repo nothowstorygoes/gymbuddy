@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import styles from "./navbar.module.css";
 import { onAuthStateChanged } from "firebase/auth";
@@ -58,9 +59,9 @@ export default function Navbar() {
           <img src="/gymbuddy/logWorkout.png" className={styles.navbarImg} loading="lazy" />
           <p>work out</p>
         </a>
-        <a href="/gymbuddy/protein" className={styles.navbarButton}>
+        <a href="/gymbuddy/logFood" className={styles.navbarButton}>
           <img src="/gymbuddy/logProtein.png" className={styles.navbarImg} loading="lazy" />
-          <p>log</p>
+          <p>diary</p>
         </a>
         <a href="/gymbuddy/profile" className={styles.navbarButton}>
           <img src={propic} className={styles.navbarPropic} loading="lazy" />
