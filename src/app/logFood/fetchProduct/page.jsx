@@ -40,7 +40,7 @@ function ProductFetcher() {
       const data = await response.json();
       setProducts(data.products);
     } catch (err) {
-      setError(response.status);
+      setError(err);
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,7 @@ function ProductFetcher() {
       />
 
       {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      {error && <p className={styles.error}>Error: {error}</p>}
 
       {!loading && products.length > 0 && (
         <div className={styles.productList}>

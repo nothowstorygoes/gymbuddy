@@ -52,3 +52,17 @@
     justify-content: center;
     margin-bottom: 15vh;
 }
+
+.error{
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    margin-top: 2vh;
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-wrap: wrap;
+}
