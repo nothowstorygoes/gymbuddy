@@ -29,15 +29,20 @@ function ProductFetcher() {
     setLoading(true);
     setError(null);
 
-    const userAgent = "gymBuddy/1.2 (pioesposito2003@gmail.com)";
+    const customUserAgent = "gymBuddy/1.2 (pioesposito2003@gmail.com)";
+
     let response; // Declare response outside the try block
     try {
+      const defaultUserAgent = navigator.userAgent;
+      // Combine the default User-Agent with the custom User-Agent
+      const combinedUserAgent = `${defaultUserAgent} ${customUserAgent}`;
+
       response = await fetch(
         `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&search_simple=1&action=process&json=1`,
         {
           method: "GET",
           headers: {
-            "User-Agent": userAgent,
+            "User-Agent": combinedUserAgent,
           },
         }
       );
