@@ -18,12 +18,10 @@ function ProductFetcher() {
       if (productName) {
         searchProducts();
       }
-    }, 300);
+    }, 500);
 
     return () => clearTimeout(delayDebounceFn);
   }, [productName]);
-
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   async function searchProducts() {
     setLoading(true);
