@@ -32,7 +32,6 @@ function ProductFetcher() {
     const userAgent = "gymBuddy/1.2 (pioesposito2003@gmail.com)";
     let response; // Declare response outside the try block
     try {
-      await delay(500); // Delay each request by 500ms
       response = await fetch(
         `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&search_simple=1&action=process&json=1`,
         {
@@ -46,8 +45,6 @@ function ProductFetcher() {
     } catch (err) {
       setError(err.message);
       console.log(err.message);
-      console.log(response.status);
-      console.log(response);
     } finally {
       setLoading(false);
     }
