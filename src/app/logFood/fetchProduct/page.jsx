@@ -44,8 +44,10 @@ function ProductFetcher() {
       const data = await response.json();
       setProducts(data.products);
     } catch (err) {
-      setError(err);
+      setError(err.message);
       console.log(err.message);
+      console.log(response.status);
+      console.log(response);
     } finally {
       setLoading(false);
     }
