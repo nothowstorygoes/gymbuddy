@@ -41,6 +41,9 @@ function ProductFetcher() {
       setProducts(data.products);
     } catch (err) {
       setError(err.message);
+      console.log(err.message);
+      console.log(response.status);
+      console.log(response);
     } finally {
       setLoading(false);
     }
