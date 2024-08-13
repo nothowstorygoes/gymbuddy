@@ -227,6 +227,7 @@ const HomePage = () => {
           0
         );
         setCalories(totalCalories);
+        console.log("Total calories:", totalCalories);
       } else {
         setCalories(0);
       }
