@@ -249,7 +249,7 @@ const ProductDetails = () => {
   );
 };
 
-export default function ProductDetails() {
+export default function ProductPage() {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <ProductDetails />
