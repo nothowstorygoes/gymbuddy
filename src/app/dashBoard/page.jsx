@@ -38,7 +38,6 @@ const HomePage = () => {
   const [loadingProgress, setLoadingProgress] = useState(true);
   const [chosenM, setChosenM] = useState("");
   const [mBasal, setMBasal] = useState(0);
-  const [schedules, setSchedules] = useState([]);
   const [carbs, setCarbs] = useState(0);
   const [fats, setFats] = useState(0);
   const [proteins, setProteins] = useState(0);
@@ -115,20 +114,37 @@ const HomePage = () => {
     if (DownloadisDone) {
       const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
       const values = Array(7).fill(0);
-      if (Array.isArray(proteinArray))
+  
+      // Get the current date
+      const currentDate = new Date();
+      const currentDay = currentDate.getDay();
+      
+      // Calculate the date for the Monday of the current week
+      const monday = new Date(currentDate);
+      monday.setDate(currentDate.getDate() - (currentDay === 0 ? 6 : currentDay - 1));
+      
+      // Calculate the date for the Sunday of the current week
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+  
+      if (Array.isArray(proteinArray)) {
         proteinArray.forEach((entry) => {
           const date = new Date(entry.date);
-          const dayOfWeek = date.getDay(); // 0 (Sun) to 6 (Sat)
-          const proteinSum = entry.food.reduce(
-            (sum, item) => sum + item.protein,
-            0
-          );
-          values[dayOfWeek === 0 ? 6 : dayOfWeek - 1] += proteinSum; // Adjust for Mon-Sun week
+          if (date >= monday && date <= sunday) {
+            const dayOfWeek = date.getDay(); // 0 (Sun) to 6 (Sat)
+            const proteinSum = entry.food.reduce(
+              (sum, item) => sum + item.protein,
+              0
+            );
+            values[dayOfWeek === 0 ? 6 : dayOfWeek - 1] += proteinSum; // Adjust for Mon-Sun week
+          }
         });
-
+      }
+  
       setProteinIntakeValues(values);
       const total = values.reduce((acc, val) => acc + val, 0);
-      setAverage(values.length ? total / values.length : 0);
+      const average = values.length ? total / values.length : 0;
+      setAverage(average);
       let infoGoal = parseInt(info);
       if (average <= infoGoal && average >= (infoGoal / 3) * 2) {
         setMessage("This week your protein intake is below your goal.");
