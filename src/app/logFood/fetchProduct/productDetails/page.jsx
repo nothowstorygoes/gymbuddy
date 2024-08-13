@@ -8,6 +8,7 @@ import { auth, storage } from "../../../firebase";
 import PieChart from "../../../components/macroChart";
 import { uploadString } from "firebase/storage";
 import { ref, getDownloadURL } from "firebase/storage";
+import { Suspense } from "react";
 import {
   CircularProgressbarWithChildren,
   buildStyles,
@@ -24,7 +25,7 @@ const customStyles = buildStyles({
   textColor: "#370909", // Text color
 });
 
-const productDetails = () => {
+const ProductDetails = () => {
   const params = useSearchParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
@@ -248,4 +249,10 @@ const productDetails = () => {
   );
 };
 
-export default productDetails;
+export default function ProductDetails() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <ProductDetails />
+    </Suspense>
+  );
+}
