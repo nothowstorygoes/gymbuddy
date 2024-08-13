@@ -13,17 +13,7 @@ function ProductFetcher() {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      if (productName) {
-        searchProducts();
-      }
-    }, 500);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [productName]);
-
-  async function searchProducts() {
+  const searchProducts = async() => {
     setLoading(true);
     setError(null);
 
@@ -53,6 +43,16 @@ function ProductFetcher() {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (productName) {
+        searchProducts();
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [productName]);
 
   const pushWithParams = (id) => {
     const params = new URLSearchParams({ id: id });
