@@ -27,8 +27,8 @@ function ProductFetcher() {
         {
           method: "GET",
           headers: {
-            "user-agent": customUserAgent,
-          }, 
+            "Authorization": customUserAgent,
+          },
         }
       );
       const data = await response.json();
