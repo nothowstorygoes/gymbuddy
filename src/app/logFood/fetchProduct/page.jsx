@@ -29,10 +29,10 @@ function ProductFetcher() {
         `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&search_simple=1&action=process&json=1`,
         {
           method: "GET",
-          mode: "cors",
+          /* mode: "cors",
           headers: {
             "User-Agent": combinedUserAgent,
-          },
+          }, */
         }
       );
       const data = await response.json();
