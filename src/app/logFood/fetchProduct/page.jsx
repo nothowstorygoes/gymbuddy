@@ -21,18 +21,14 @@ function ProductFetcher() {
 
     let response; // Declare response outside the try block
     try {
-      const defaultUserAgent = navigator.userAgent;
-      // Combine the default User-Agent with the custom User-Agent
-      const combinedUserAgent = `${defaultUserAgent} ${customUserAgent}`;
 
       response = await fetch(
         `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${productName}&search_simple=1&action=process&json=1`,
         {
           method: "GET",
-          /* mode: "cors",
           headers: {
-            "User-Agent": combinedUserAgent,
-          }, */
+            "user-agent": customUserAgent,
+          }, 
         }
       );
       const data = await response.json();
