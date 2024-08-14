@@ -6,6 +6,7 @@ import { auth, storage } from "../../firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Navbar from "../../components/navbar/navbar";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import LoadingSpinner from "@/app/components/loadingSpinner/loadingSpinner";
@@ -143,6 +144,7 @@ function SearchParamsSchedule() {
       ) : (
         ""
       )}
+      <Navbar />
     </main>
   );
 }

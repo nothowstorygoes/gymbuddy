@@ -94,6 +94,10 @@ export default function LogProtein() {
     });
   };
 
+  const truncateName = (name) => {
+    return name.length > 18 ? name.substring(0, 15) + "..." : name;
+  };
+
   return (
     <main className={styles.mainContainer}>
       {loading ? <LoadingSpinner /> : ""}
@@ -111,7 +115,7 @@ export default function LogProtein() {
           <FoodItem
             key={index}
             id={foodItem.id}
-            name={foodItem.name}
+            name={truncateName(foodItem.name)}
             weight={foodItem.weight}
             calories={foodItem.calories}
             unit={unit}

@@ -8,6 +8,7 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import styles from "./profile.module.css";
 import Navbar from "../components/navbar/navbar";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -17,11 +18,27 @@ export default function Profile() {
   const [mGoal, setmGoal] = useState(0);
   const [buttonActivity, setButtonActivity] = useState("");
   const [formValues, setFormValues] = useState({});
+  const router = useRouter();
+  const [currentTheme, setCurrentTheme] = useState("");
+  const [svgColor, setSvgColor] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+    setCurrentTheme(theme);
+  }, []);
+
 
   useEffect(() => {
+    if (currentTheme === "blue") {
+      setSvgColor("#1b4965");
+    } else if (currentTheme === "green") {
+      setSvgColor("#3a5a40");
+    } else if (currentTheme === "violet") {
+      setSvgColor("#8187dc");
+    } else {
+      setSvgColor("#370909");
+    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -32,7 +49,7 @@ export default function Profile() {
           .then((response) => response.json())
           .then((data) => {
             setInfo(data);
-            let goalInfo=0;
+            let goalInfo = 0;
             switch (data.activity.toLowerCase()) {
               case "cutting":
                 goalInfo = -500;
@@ -86,7 +103,7 @@ export default function Profile() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [currentTheme]);
 
   useEffect(() => {
     console.log(info);
@@ -228,10 +245,10 @@ export default function Profile() {
       setInfo(updatedInfo);
       setIsModalVisible(true);
 
-     // Hide modal after 2 seconds
-    setTimeout(() => {
-      setIsModalVisible(false);
-    }, 1000); 
+      // Hide modal after 2 seconds
+      setTimeout(() => {
+        setIsModalVisible(false);
+      }, 1000);
     }
   };
 
@@ -255,13 +272,23 @@ export default function Profile() {
       ) : (
         <div className={styles.mainMainContainer}>
           {isModalVisible && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <button className={styles.closeButton} onClick={closeModal}>x</button>
-            <p>Your changes have been saved!</p>
+            <div className={styles.modal}>
+              <div className={styles.modalContent}>
+                <button className={styles.closeButton} onClick={closeModal}>
+                  x
+                </button>
+                <p>Your changes have been saved!</p>
+              </div>
+            </div>
+          )}
+          <div className={styles.settingsButtonContainer}>
+            <button
+              className={styles.settingsButton}
+              onClick={() => router.push("/profile/settings")}
+            >
+              Settings
+            </button>
           </div>
-        </div>
-      )}
           <div className={styles.greetingContainer}>
             <p className={styles.greeting}>Good to see you, </p>
             <p className={styles.name}> &nbsp;{info.username}</p>
@@ -273,18 +300,32 @@ export default function Profile() {
               className={styles.propic}
             />
             <div className={styles.editPropic} onClick={handlePropicEdit}>
-              <img
-                src="/gymbuddy/edit.png"
-                alt="Edit Profile Picture"
+              <svg
+                width="800px"
+                height="800px"
+                viewBox="0 0 311.012 311.012"
                 className={styles.editPropicImg}
-              />
+              >
+                <g id="pen" transform="translate(-2346.464 -1805.801)">
+                  <path
+                    id="Path_11"
+                    data-name="Path 11"
+                    d="M2648.648,1861.794l-47.165-47.164a30.14,30.14,0,0,0-42.627,0l-197.433,197.43a12.111,12.111,0,0,0-3.438,6.937l-11.411,84.069a12.115,12.115,0,0,0,13.634,13.634l84.07-11.411a12.112,12.112,0,0,0,6.937-3.438l197.433-197.43a30.142,30.142,0,0,0,0-42.627Zm-211.677,220.035-64.247,8.72,8.721-64.246,139.906-139.9,55.525,55.526Zm194.543-194.541-37.5,37.5-55.526-55.525,37.5-37.5a5.913,5.913,0,0,1,8.362,0l47.165,47.164a5.91,5.91,0,0,1,0,8.361Z"
+                    fill={svgColor}
+                  />
+                </g>
+              </svg>
             </div>
           </div>
           <div className={styles.infoContainer}>
             <p className={styles.mBasal}>
-              Your basal metabolism is &nbsp;<span>{info.mBasal}</span>&nbsp; calories.
+              Your basal metabolism is &nbsp;<span>{info.mBasal}</span>&nbsp;
+              calories.
             </p>
-            <p className={styles.mGoal}>Since you&apos;re in {info.activity.toLowerCase()}, your calories intake should be &nbsp;{mGoal}&nbsp; calories.</p>
+            <p className={styles.mGoal}>
+              Since you&apos;re in {info.activity.toLowerCase()}, your calories
+              intake should be &nbsp;{mGoal}&nbsp; calories.
+            </p>
             <form className={styles.formInfos} onSubmit={handleSubmit}>
               <div className={styles.variablesForm}>
                 <div className={styles.variableInput}>
@@ -331,21 +372,33 @@ export default function Profile() {
                   <label className={styles.variableGoal}>Goal</label>
                   <button
                     type="button"
-                    className={`${styles.buttonActivity} ${buttonActivity.toLowerCase() === "cutting" ? styles.active : ""}`}
+                    className={`${styles.buttonActivity} ${
+                      buttonActivity.toLowerCase() === "cutting"
+                        ? styles.active
+                        : ""
+                    }`}
                     onClick={() => handleActivityClick("Cutting")}
                   >
                     Cutting
                   </button>
                   <button
                     type="button"
-                    className={`${styles.buttonActivity} ${buttonActivity.toLowerCase() === "bulking" ? styles.active : ""}`}
+                    className={`${styles.buttonActivity} ${
+                      buttonActivity.toLowerCase() === "bulking"
+                        ? styles.active
+                        : ""
+                    }`}
                     onClick={() => handleActivityClick("Bulking")}
                   >
                     Bulking
                   </button>
                   <button
                     type="button"
-                    className={`${styles.buttonActivity} ${buttonActivity.toLowerCase() === "maintenance" ? styles.active : ""}`}
+                    className={`${styles.buttonActivity} ${
+                      buttonActivity.toLowerCase() === "maintenance"
+                        ? styles.active
+                        : ""
+                    }`}
                     onClick={() => handleActivityClick("Maintenance")}
                   >
                     Maintenance

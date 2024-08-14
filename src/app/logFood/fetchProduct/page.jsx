@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../../components/navbar/navbar";
 import styles from "./fetchProduct.module.css";
+import LoadingSpinner from "@/app/components/loadingSpinner/loadingSpinner";
 /* import { BarcodeScanner } from 'react-barcode-scanner'
 import "react-barcode-scanner/polyfill" */
 
@@ -63,7 +64,7 @@ function ProductFetcher() {
         placeholder="Enter product name..."
       />
 
-      {loading && <p>Loading...</p>}
+      {loading && <LoadingSpinner />}
       {error && <p className={styles.error}>Error: {error.message}</p>}
 
       {!loading && products.length > 0 && (

@@ -37,7 +37,7 @@
 
 .scheduleItem p{
     font-family: "NTR", sans-serif;
-    color: #370909;
+    color: var(--primary-color);
     font-size: 1.8rem;
     text-align: center;
 }
@@ -72,7 +72,7 @@
 .modalContent p{
     font-family: "NTR", sans-serif;
     font-size: 1.5rem;
-    color: #370909;
+    color: var(--primary-color);
     margin: 1vh 3vh;
 }
 
@@ -92,7 +92,7 @@
     align-items: center;
     height: 5vh;
     border-radius: 25px;
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
     color: #fff;
     font-family: "NTR", sans-serif;
     font-size: 1rem;

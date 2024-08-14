@@ -27,7 +27,7 @@
     font-family: "NTR", sans-serif;
     font-size: 1.3rem;
     width: 50vw;
-    color: #370909;
+    color: var(--primary-color);
     text-align: left;
     margin-left:5vw;
     line-height: 120%;}
@@ -38,7 +38,7 @@
     align-items: center;
     justify-content: center;
     max-height: 0;
-    transition: max-height 0.5s ease;
+    transition: max-height 0.7s ease-in-out;
     overflow: hidden;
 }
 
@@ -56,7 +56,7 @@
 .exerciseInstructions{
     font-family: "NTR", sans-serif;
     font-size: 1.3rem;
-    color: #370909;
+    color: var(--primary-color);
     text-align: justify;
     margin: 2vh 5vw;
     line-height: 120%;
@@ -72,7 +72,7 @@
 }
 
 .exercise.selected {
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
 }
 
 
@@ -84,7 +84,7 @@
     height: 3rem;
     padding-top: 2%;
     margin: 2vw 2vh;
-    color: #370909;
+    color: var(--primary-color);
     transition: transform 0.5s ease;
     transform-origin: center center;
     display: flex;
@@ -114,7 +114,7 @@
     height: 10vh;
     padding-top: 2%;
     margin: 2vw 2vh;
-    color: #370909;
+    color: var(--primary-color);
     transition: transform 0.5s ease;
 }
 

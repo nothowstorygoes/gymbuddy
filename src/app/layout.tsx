@@ -36,14 +36,50 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const showDiv = useWindowSizeCheck();
-
   return (
     <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 'default';
+                const root = document.documentElement;
 
+                if (theme === 'blue') {
+                  root.style.setProperty('--primary-color', '#1b4965');
+                  root.style.setProperty('--secondary-color', '#62b6cb');
+                  root.style.setProperty('--secondary-lowOpacity-color', 'rgba(98, 182, 203, 0.5)');
+                  root.style.setProperty('--secondary-svgLoading-color', '#62b6cb');
+                } else if (theme === 'green') {
+                  root.style.setProperty('--primary-color', '#3a5a40');
+                  root.style.setProperty('--secondary-color', '#a3b18a');
+                  root.style.setProperty('--secondary-lowOpacity-color' , 'rgba(163, 177, 138, 0.5)');
+                  root.style.setProperty('--secondary-svgLoading-color' , '#a3b18a');
+                } else if (theme === 'violet') {
+                  root.style.setProperty('--primary-color', '#8187dc');
+                  root.style.setProperty('--secondary-color', '#bbadff');
+                  root.style.setProperty('--secondary-lowOpacity-color' , 'rgba(87, 173, 255, 0.5)');
+                  root.style.setProperty('--secondary-svgLoading-color' , '#bbadff');
+                } else {
+                  root.style.setProperty('--primary-color', '#370909');
+                  root.style.setProperty('--secondary-color', '#b2675e');
+                  root.style.setProperty('--secondary-lowOpacity-color' , 'rgba(178, 103, 94, 0.5)');
+                  root.style.setProperty('--secondary-svgLoading-color' , '#b2675e');
+                }
+              })();
+            `,
+          }}
+        />
         <link rel="apple-touch-icon" href="/gymbuddy/icon-192x192.png" />
-        <link rel="apple-touch-icon-120x120" href="/gymbuddy/icon-192x192.png" />
-        <link rel="apple-touch-icon-120x120-precomposed" href="/gymbuddy/icon-192x192.png" />
+        <link
+          rel="apple-touch-icon-120x120"
+          href="/gymbuddy/icon-192x192.png"
+        />
+        <link
+          rel="apple-touch-icon-120x120-precomposed"
+          href="/gymbuddy/icon-192x192.png"
+        />
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
@@ -158,7 +194,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} id="root">
         {showDiv ? (
           <div className={styles.container}>
             <ScreenAlert />

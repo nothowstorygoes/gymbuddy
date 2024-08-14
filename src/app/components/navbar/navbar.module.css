@@ -2,7 +2,7 @@
     position: fixed;
     bottom:-0.2px;
     height: 13vh;
-    background-color: #370909;
+    background-color: var(--primary-color);
     width: 100vw;
     align-items: center;
     display: flex;

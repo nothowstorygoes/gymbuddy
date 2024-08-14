@@ -25,7 +25,7 @@
   font-family: "NTR", sans-serif;
   font-size: 2rem;
   font-weight: 300;
-  color: #b2675e;
+  color: var(--secondary-color);
   margin: 0;
   line-height: 120%;
 }
@@ -34,6 +34,7 @@
   width: 80vw;
   display: flex;
   align-items: center;
+  margin-top: 5vh;
   flex-direction: column;
 }
 
@@ -94,7 +95,7 @@
 .variableInput {
   width: 80%;
   height: 80px;
-  color: #370909;
+  color: var(--primary-color);
   background-color: transparent;
   font-family: "NTR", sans-serif;
   font-size: 1rem;
@@ -110,7 +111,7 @@
   height: 40px;
   border: none;
   background-color: rgba(255, 255, 255, 0.5);
-  color: #370909;
+  color: var(--primary-color);
   font-family: "NTR", sans-serif;
   font-size: 1rem;
   border-radius: 10px;
@@ -167,7 +168,7 @@
     width: 80%;
     height: 40px;
     background-color: #fff;
-    color: #370909;
+    color: var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1rem;
     border: none;
@@ -180,7 +181,7 @@
 }
 
 .buttonActivity.active{
-    background-color: #b2675e;
+    background-color: var(--secondary-color);
     color: #fff;
 }
 
@@ -204,7 +205,7 @@
 .submitButton{
     width: 80%;
     height: 40px;
-    background-color: #b2675e;
+    background-color: var(--secondary-color);
     color: #fff;
     font-family: "NTR", sans-serif;
     font-size: 1rem;
@@ -245,13 +246,13 @@
 .modalContent p{
     font-family: "NTR", sans-serif;
     font-size: 1.3rem;
-    color: #370909;
+    color: var(--primary-color);
     margin-top: 2vh;
 }
 
 .closeButton{
     height: 40px;
-    color: #370909;
+    color: var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1.4rem;
     border: none;
@@ -264,4 +265,31 @@
     border-radius: 10px;
     margin-top: 2vh;
     margin-bottom: 2vh;
+}
+
+.settingsButtonContainer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    background-color: var(--primary-color);
+    top: 0;
+    z-index: 1000;
+    left: 0;
+    height: 9vh;
+}
+
+.settingsButton{
+    width: 20vw;
+    height: 5vh;
+    color: var(--primary-color);
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4vw;
 }

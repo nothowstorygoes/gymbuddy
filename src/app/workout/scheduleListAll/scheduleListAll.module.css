@@ -1,12 +1,13 @@
 .schedule{
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
     width: 45vw; /* Adjust width to fit two items per row */
     height: 10vh;
-    border-radius: 10px;
+    border-radius: 15px;
     color: #fff;
     font-family: "NTR", sans-serif;
     font-size: 1.5rem;
     text-align: center;
+    margin-top: 2vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +27,7 @@
     padding: 1vh;
     width: 100%;
     flex-direction: row;
-    background-color: #370909;
+    background-color: var(--primary-color);
     justify-content: flex-end;
   }
   
@@ -38,7 +39,7 @@
     border-radius: 15px;
     height: 5vh;
     background-color: #f8f4e3;
-    color: #370909;
+    color: var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1.2rem;
     line-height: 120%;

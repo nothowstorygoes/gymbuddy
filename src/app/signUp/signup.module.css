@@ -169,7 +169,7 @@
   width: 40vw;
   border-radius: 10px;
   height: 5vh;
-  background-color: #b2675e;
+  background-color: var(--secondary-color);
   border-radius: 10px;
   display: flex;
   left: 5vw;
@@ -229,7 +229,7 @@
   width: 30vw;
   border-radius: 10px;
   height: 7vh;
-  background-color: #b2675e;
+  background-color: var(--secondary-color);
   border-radius: 10px;
   display: flex;
   top: 30vh;
@@ -336,7 +336,7 @@
 .buttonMeasure p {
   font-family: "NTR", sans-serif;
   font-size: 1.4rem;
-  color: #370909;
+  color: var(--primary-color);
   position: absolute;
   top: -2.5vh;
   width: 20vw;
@@ -356,7 +356,7 @@
 .buttonSex p {
   font-family: "NTR", sans-serif;
   font-size: 1.4rem;
-  color: #370909;
+  color: var(--primary-color);
   position: absolute;
   top: -2.5vh;
   width: 3vw;
@@ -394,7 +394,7 @@
   width: 40vw;
   border-radius: 10px;
   height: 5vh;
-  background-color: #b2675e;
+  background-color: var(--secondary-color);
   border-radius: 10px;
   display: flex;
   left: 25vw;
@@ -410,7 +410,7 @@
 }
 
 .clicked {
-  background-color: #b2675e !important;
+  background-color: var(--secondary-color) !important;
 }
 
 .thirdContainer.slideOut {
@@ -508,7 +508,7 @@
   align-items: center;
   font-family: "NTR", sans-serif;
   font-size: 1.7rem;
-  color: #370909;
+  color: var(--primary-color);
 }
 
 .submitButton3 {
@@ -516,7 +516,7 @@
   width: 40vw;
   border-radius: 10px;
   height: 5vh;
-  background-color: #b2675e;
+  background-color: var(--secondary-color);
   border-radius: 10px;
   display: flex;
   left: 7vw;
@@ -584,7 +584,7 @@
   width: 40vw;
   border-radius: 10px;
   height: 5vh;
-  background-color: #b2675e;
+  background-color: var(--secondary-color);
   border-radius: 10px;
   display: flex;
   left: -15vw;
