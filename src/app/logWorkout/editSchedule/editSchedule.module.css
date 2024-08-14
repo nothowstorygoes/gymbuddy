@@ -66,7 +66,7 @@
 }
 
 .removeButton{
-    background-color: #370909;
+    background-color: var(--primary-color);
     border-radius: 25px;
     color: #fff;
     border: solid 2px #fff;
@@ -82,7 +82,7 @@
     border-radius: 25px;
     width: 30vw;
     margin: 5vw;
-    color: #370909;
+    color: var(--primary-color);
     font-family: "NTR", sans-serif;
     display: flex;
     justify-content: center;
@@ -96,7 +96,7 @@
     align-items: center;
     width: 80vw;
     margin-top: 5vh;
-    color: #370909;
+    color: var(--primary-color);
     margin-bottom: 5vh;
     border-radius: 25px;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);

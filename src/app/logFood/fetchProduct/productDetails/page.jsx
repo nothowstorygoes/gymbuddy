@@ -19,11 +19,7 @@ import "react-circular-progressbar/dist/styles.css";
 import LoadingSpinner from "../../../components/loadingSpinner/loadingSpinner";
 
 // Define your custom styles
-const customStyles = buildStyles({
-  pathColor: "#370909", // Path color
-  trailColor: "#ffffff", // Trail color
-  textColor: "#370909", // Text color
-});
+
 
 const ProductDetails = () => {
   const params = useSearchParams();
@@ -35,6 +31,27 @@ const ProductDetails = () => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const id = params.get("id");
+  const [theme, setTheme] = useState('default');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'default';
+    setTheme(savedTheme);
+  }, []);
+
+  const getThemeColors = (theme) => {
+    switch (theme) {
+      case 'blue':
+        return { pathColor: '#62b6cb', trailColor: '#1b4965', textColor: '#1b4965' };
+      case 'green':
+        return { pathColor: '#a3b18a', trailColor: '#3a5a40', textColor: '#3a5a40' };
+      case 'violet':
+        return { pathColor: '#bbadff', trailColor: '#8187dc', textColor: '#8187dc' };
+      default:
+        return { pathColor: '#b2675e', trailColor: '#370909', textColor: '#370909' };
+    }
+  };
+
+  const customStyles = buildStyles(getThemeColors(theme));
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -56,7 +73,7 @@ const ProductDetails = () => {
           } catch (err) {
             setError(err.message);
           } finally {
-            setTimeout(() => setLoading(false), 500);
+            setLoading(false);
           }
         };
         fetchProduct();

@@ -38,16 +38,55 @@ const HomePage = () => {
   const [loadingProgress, setLoadingProgress] = useState(true);
   const [chosenM, setChosenM] = useState("");
   const [mBasal, setMBasal] = useState(0);
+  const [theme, setTheme] = useState("default");
   const [carbs, setCarbs] = useState(0);
   const [fats, setFats] = useState(0);
   const [proteins, setProteins] = useState(0);
+  const [carbsColor, setCarbsColor] = useState("");
+  const [proteinColor, setProteinColor] = useState("");
+  const [fatsColor, setFatsColor] = useState("");
 
-  // Define your custom styles
-  const customStyles = buildStyles({
-    pathColor: "#B2675E", // Path color
-    trailColor: "#D4CDC3", // Trail color
-    textColor: "#ff6347", // Text color
-  });
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'default';
+    setTheme(savedTheme);
+  }, []);
+
+  const getThemeColors = (theme) => {
+    switch (theme) {
+      case 'blue':
+        return { pathColor: '#62b6cb', trailColor: '#1b4965', textColor: '#1b4965' };
+      case 'green':
+        return { pathColor: '#a3b18a', trailColor: '#3a5a40', textColor: '#3a5a40' };
+      case 'violet':
+        return { pathColor: '#bbadff', trailColor: '#8187dc', textColor: '#8187dc' };
+      default:
+        return { pathColor: '#b2675e', trailColor: '#370909', textColor: '#370909' };
+    }
+  };
+
+  const customStyles = buildStyles(getThemeColors(theme));
+
+  useEffect(() => {
+    if(theme === 'blue') {
+      setCarbsColor("#bee9e8");
+      setProteinColor("#00798c");
+      setFatsColor("#006ba6");
+    } else if(theme === 'green') {
+      setCarbsColor("#b5e48c");
+      setProteinColor("#168aad");
+      setFatsColor("#34a0a4");
+    } else if(theme === 'violet') {
+      setCarbsColor("#edf67d");
+      setProteinColor("#724cf9");
+      setFatsColor("#f896d8");
+    } else {
+      setCarbsColor("rgba(158, 42, 43, 1)");
+      setProteinColor("rgba(216, 87, 42, 1)");
+      setFatsColor("rgba(247, 181, 56, 1)");
+    }
+  }, [theme]);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -294,7 +333,7 @@ const HomePage = () => {
           </div>
         )}
         <div className={styles.macroGoal}>
-      <p className={styles.carbs}>carbs</p> &nbsp; &nbsp;  <p className={styles.fats}>fats</p> &nbsp;  &nbsp; <p className={styles.proteins}>proteins</p>
+      <p className={styles.carbs} style={{color : `${carbsColor}`}}>carbs</p> &nbsp; &nbsp;  <p className={styles.fats} style={{color: `${fatsColor}`}}>fats</p> &nbsp;  &nbsp; <p className={styles.proteins} style={{color: `${proteinColor}`}}>proteins</p>
       </div>
       
       <div className={styles.caloriesGoal}>

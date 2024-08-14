@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useEffect } from "react"
+import Navbar from "../../components/navbar/navbar"
 import styles from './scheduleListAll.module.css'
 
 export default function ScheduleListAll() {
@@ -65,6 +66,7 @@ export default function ScheduleListAll() {
                     </div>
                 )
             })}
+            <Navbar />
         </main>
     )
 }

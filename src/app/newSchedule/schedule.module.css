@@ -62,7 +62,7 @@
     border-radius: 25px;
     height: 30vw;
     background-color: #F8F4E3;
-    color:#370909;
+    color:var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1.7rem;
     line-height: 120%;
@@ -84,7 +84,7 @@
 }
 
 .selected{
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
     color: #fff;
 }
 
@@ -95,7 +95,7 @@
     width: 40vw;
     border-radius: 15px;
     height: 15vw;
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
     color:#fff;
     font-family: "NTR", sans-serif;
     font-size: 1.7rem;
@@ -147,8 +147,8 @@
     width: 30vw;
     border-radius: 25px;
     height: 20vw;
-    background-color: #B2675E;
-    color:#370909;
+    background-color: var(--secondary-color);
+    color:var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1.5rem;
     line-height: 120%;
@@ -164,7 +164,7 @@
     width: 100%;
     flex-direction: row;
     align-items: flex-end;
-    background-color: #370909;
+    background-color: var(--primary-color);
     justify-content:flex-end;
 }
 
@@ -179,7 +179,7 @@
     width: 100%;
     flex-direction: row;
     align-items: flex-end;
-    background-color: #370909;
+    background-color: var(--primary-color);
     justify-content:flex-end;
 }
 
@@ -191,7 +191,7 @@
     border-radius: 15px;
     height: 5vh;
     background-color: #F8F4E3;
-    color:#370909;
+    color:var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1.2rem;
     line-height: 120%;
@@ -249,7 +249,7 @@
     width: 40vw;
     border-radius: 15px;
     height: 15vw;
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
     color:#fff;
     font-family: "NTR", sans-serif;
     font-size: 1.5rem;

@@ -28,7 +28,7 @@
   border-radius: 10px;
   border: 3px solid #fff;
   background-color: rgba(255, 255, 255, 0.5);
-  color: #370909;
+  color: var(--primary-color);
   padding-left: 1vw;
   font-size: 1.2rem;
   font-family: "NTR", sans-serif;
@@ -71,7 +71,7 @@
 .circularProgressbar p {
   font-family: "NTR", sans-serif;
   font-size: 1.2rem;
-  color: #370909;
+  color: var(--primary-color);
 }
 
 .pieChart {
@@ -99,14 +99,14 @@
 }
 
 .nutrientName {
-  color: #b2675e;
+  color: var(--secondary-color);
   margin: 0;
   line-height: 0%;
   padding: 0;
 }
 
 .nutrientValue {
-  color: #370909;
+  color: var(--primary-color);
   line-height: 70%;
 
   margin: 0;
@@ -124,7 +124,7 @@
 }
 
 .nutrientLevelsTitle {
-  color: #370909;
+  color: var(--primary-color);
   font-family: "NTR", sans-serif;
   font-size: 1.8rem;
   font-weight: 100;
@@ -135,7 +135,7 @@
 .nutrientLevel {
   font-family: "NTR", sans-serif;
   font-size: 1.2rem;
-  color: #370909;
+  color: var(--primary-color);
   margin-left: 2vw;
   line-height: 150%;
   list-style-position: inside;
@@ -144,7 +144,7 @@
 
 .saveButton {
   margin-bottom: 15vh;
-  background-color: #b2675e;
+  background-color: var(--secondary-color);
   color: #fff;
   font-family: "NTR", sans-serif;
   font-size: 1.2rem;
@@ -170,7 +170,7 @@
 
 .backButton {
     background-color: #fff;
-    color: #370909;
+    color: var(--primary-color);
     justify-content: center;
     width: 15vw;
     height: 5vh;

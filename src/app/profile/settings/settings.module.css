@@ -1,0 +1,160 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContainer h1{
+    font-size: 2rem;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.settingsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 7vh;
+    margin-bottom: 15vh;
+}
+
+.settingsItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    padding: 1rem;
+}
+
+.settingsItem h2{
+    font-size: 1.5rem;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.settingsItemContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+}
+
+.settingsItemContent p{
+    font-size: 1.2rem;
+    font-family: "NTR", sans-serif;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.buttonSetting{
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    color: var(--primary-color);
+    font-family: "NTR", sans-serif;
+    font-size: 1.2em;
+    border-radius: 10px;
+    margin-left: 5vw;
+    width: 30vw;
+    margin-right: 5vw;
+    padding: 10px 20px;
+    margin-top: 1rem;
+}
+
+.buttonSetting.active{
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.backButtonContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98vw;
+    height: 7vh;
+    margin-bottom: 3vh;
+    display: flex;
+    background-color: var(--primary-color);
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .backButton {
+      background-color: #fff;
+      color: var(--primary-color);
+      justify-content: center;
+      width: 15vw;
+      height: 5vh;
+      border-radius: 10px;
+      margin-top: 3vh;
+      margin-right: 3vw;
+      align-items: center;
+      display: flex;
+  }
+
+  .themeSettingsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+  }
+  
+.theme {
+    width: 45%; /* Adjust the width to fit two buttons per row */
+    height: 5vh;
+    border-radius: 10px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+  
+ .theme.active {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  .logOutContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .logout{
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    color: var(--primary-color);
+    font-family: "NTR", sans-serif;
+    font-size: 1.2em;
+    border-radius: 10px;
+    margin-left: 5vw;
+    width: 30vw;
+    margin-right: 5vw;
+    padding: 10px 20px;
+  }

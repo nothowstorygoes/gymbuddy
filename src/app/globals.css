@@ -1,6 +1,14 @@
 body{
-  background-color: #370909;
+  background-color: var(--primary-color);
   -webkit-tap-highlight-color: transparent;
+}
+
+:root{
+  --primary-color: #370909;
+  --secondary-color: #b2675e;
+  --secondary-lowOpacity-color: rgba(178, 103, 94, 0.5);
+  --secondary-svgLoading-color: #b2675e;
+  --tertiary-color: #fff;
 }
 
 a{

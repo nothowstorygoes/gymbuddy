@@ -75,7 +75,7 @@
     margin-top: 5vh;
     border-radius: 10px;
     height: 5vh;
-    background-color: #B2675E;
+    background-color: var(--secondary-color);
     border-radius: 10px;
     display: flex;
     text-align: center;

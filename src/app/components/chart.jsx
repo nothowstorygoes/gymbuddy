@@ -8,7 +8,28 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+
 const BarChart = ({proteinIntake, dataProtein, chosenM}) => {
+    const [theme, setTheme] = useState('default');
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme') || 'default';
+        setTheme(savedTheme);
+      }, []);
+    
+      const getThemeColors = (theme) => {
+        switch (theme) {
+          case 'blue':
+            return "rgba(98, 182, 203, 0.5)";
+          case 'green':
+            return "rgba(163, 177, 138, 0.5)";
+          case 'violet':
+            return "rgba(87, 173, 255, 0.5)";
+          default:
+            return "rgba(178, 103, 94, 0.5)";
+        }
+      };
+    
+      const themeBasedColor = getThemeColors(theme);
     let proteinGoal=proteinIntake;
     if(chosenM ==="imperial") {proteinGoal=Math.floor(proteinIntake/453.6)}
     const data = {
@@ -17,7 +38,7 @@ const BarChart = ({proteinIntake, dataProtein, chosenM}) => {
             {
                 label: 'Your protein intake',
                 data: dataProtein,
-                backgroundColor: 'rgba(178, 103, 94, 0.5)',
+                backgroundColor: `${themeBasedColor}`,
                 borderWidth: 0,
                 borderRadius: 10,
             },
