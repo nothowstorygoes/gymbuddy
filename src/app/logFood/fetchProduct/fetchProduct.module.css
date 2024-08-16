@@ -6,10 +6,8 @@
 }
 
 .inputField{
-    width: 80vw;
+    width: 50vw;
     height: 5vh;
-    margin-top: 5vh;
-    margin-bottom: 2vh;
     border-radius: 10px;
     border: 3px solid #fff;
     background-color: rgba(255, 255, 255, 0.5);
@@ -65,4 +63,41 @@
     align-items: center;
     text-align: center;
     text-wrap: wrap;
+}
+
+.buttonFrom{
+    width: 15vw;
+    height: 5vh;
+    font-family: "NTR", sans-serif; 
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    margin-left: 3vw;
+}
+
+.buttonFrom.active{
+    color: #fff;
+    background-color: var(--secondary-color);
+}
+
+.fromContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 35vw;
+    margin-left:2vw;
+}
+
+.titleContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
+    width: 90vw;
 }
