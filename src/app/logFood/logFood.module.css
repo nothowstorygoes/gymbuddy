@@ -8,7 +8,6 @@
 .title{
     font-size: 2rem;
     margin-bottom: 1rem;
-    margin-top:2vh;
     font-family: "NTR", sans-serif;
     color: #fff;
     display: flex;
@@ -91,4 +90,39 @@
 
 .foodCalories {
     color: var(--secondary-color);
+}
+
+.noData{
+    width: 80vw;
+    font-family: "NTR" , sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+}
+
+.dateContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2vh;
+}
+
+.buttonDate{
+    padding:0;
+    margin:0;
+    height: 40px;
+}
+
+.date{
+    font-family: "NTR", sans-serif;
+    font-size: 2rem;
+    font-weight: 100;
+    color: var(--secondary-color);
+    display: flex;
+    width: 60vw;
+    justify-content: center;
+    align-items: center;
 }
