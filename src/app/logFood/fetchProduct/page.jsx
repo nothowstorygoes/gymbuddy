@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import Navbar from "../../components/navbar/navbar";
 import styles from "./fetchProduct.module.css";
 import LoadingSpinner from "@/app/components/loadingSpinner/loadingSpinner";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 /* import { BarcodeScanner } from 'react-barcode-scanner'
 import "react-barcode-scanner/polyfill" */
 
@@ -12,6 +14,8 @@ function ProductFetcher() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const params = useSearchParams();
+  const date = params.get("date");
   const router = useRouter();
 
   const searchProducts = async() => {
@@ -50,7 +54,7 @@ function ProductFetcher() {
   }, [productName]);
 
   const pushWithParams = (id) => {
-    const params = new URLSearchParams({ id: id });
+    const params = new URLSearchParams({ id: id , date: date});
     router.push(`/logFood/fetchProduct/productDetails?${params.toString()}`);
   };
 
@@ -93,4 +97,10 @@ function ProductFetcher() {
   );
 }
 
-export default ProductFetcher;
+export default function ProductFetch(){
+  return (
+    <Suspense>
+      <ProductFetcher />
+    </Suspense>
+  );
+}

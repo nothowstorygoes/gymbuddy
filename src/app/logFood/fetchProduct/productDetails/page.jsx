@@ -31,6 +31,7 @@ const ProductDetails = () => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const id = params.get("id");
+  const date = params.get("date");
   const [theme, setTheme] = useState('default');
 
   useEffect(() => {
@@ -119,7 +120,6 @@ const ProductDetails = () => {
   };
 
   const handleSave = async () => {
-    const date = new Date().toDateString();
     const weightValue = weight;
     const productData = {
       id: product._id,
