@@ -81,7 +81,7 @@ export default function Profile() {
           })
           .catch((error) => console.error("Error fetching info.json:", error));
       }
-      if (info.propic === null) {
+      if (!info.propic) {
         setInfo((prevInfo) => ({ ...prevInfo, propic: "" }));
         setTempPropic("/gymbuddy/profile.png");
         setTimeout(() => {
