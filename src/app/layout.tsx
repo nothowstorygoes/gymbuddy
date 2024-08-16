@@ -57,9 +57,9 @@ export default function RootLayout({
                   root.style.setProperty('--secondary-lowOpacity-color' , 'rgba(163, 177, 138, 0.5)');
                   root.style.setProperty('--secondary-svgLoading-color' , '#a3b18a');
                 } else if (theme === 'violet') {
-                  root.style.setProperty('--primary-color', '#8187dc');
-                  root.style.setProperty('--secondary-color', '#bbadff');
-                  root.style.setProperty('--secondary-lowOpacity-color' , 'rgba(87, 173, 255, 0.5)');
+                  root.style.setProperty('--primary-color', '#564592');
+                  root.style.setProperty('--secondary-color', '#ea698b');
+                  root.style.setProperty('--secondary-lowOpacity-color' , 'rgba(234, 105, 139, 0.5)');
                   root.style.setProperty('--secondary-svgLoading-color' , '#bbadff');
                 } else {
                   root.style.setProperty('--primary-color', '#370909');

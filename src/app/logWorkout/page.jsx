@@ -92,6 +92,7 @@ export default function LogWorkout() {
             return (
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
+                        <button onClick={() => setModalClick(false)} className={styles.closeButton}>    X    </button>
                         <p>Would you like to edit <b>{item.name}</b> before logging it?</p>
                         <div className={styles.buttonContainer}>
                             

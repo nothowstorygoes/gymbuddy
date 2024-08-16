@@ -74,6 +74,7 @@
     font-size: 1.5rem;
     color: var(--primary-color);
     margin: 1vh 3vh;
+    text-align: center;
 }
 
 .buttonContainer{
@@ -82,7 +83,19 @@
     position: relative;
     justify-content: space-between;
     align-items: center;
+    margin-top:2vh;
     width: 55vw;
+}
+
+.closeButton{
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    position: relative;
+    font-weight: 300;
+    line-height: 0%;
+    margin-left: 70vw;
+    margin-right: 4vw;
 }
 
 .button{
