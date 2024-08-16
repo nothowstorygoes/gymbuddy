@@ -171,6 +171,7 @@
     color: var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1rem;
+    font-weight: 100;
     border: none;
     display: flex;
     justify-content: center;
@@ -210,6 +211,7 @@
     font-family: "NTR", sans-serif;
     font-size: 1rem;
     border: none;
+    font-weight: 100;
     display: flex;
     justify-content: center;
     align-items: center;

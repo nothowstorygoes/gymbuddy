@@ -82,8 +82,8 @@ export default function Settings() {
       // Set other variables for the dark theme
     } else if (theme === "violet") {
         setCurrentTheme("violet");
-      root.style.setProperty("--primary-color", "#8187dc");
-      root.style.setProperty("--secondary-color", "#bbadff");
+      root.style.setProperty("--primary-color", "#564592");
+      root.style.setProperty("--secondary-color", "#ea698b");
       // Set other variables for the dark theme
     } else {
         setCurrentTheme("default");
