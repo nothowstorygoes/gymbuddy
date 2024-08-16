@@ -87,29 +87,33 @@
 }
 
 .backButtonContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 98vw;
-    height: 7vh;
-    margin-bottom: 3vh;
     display: flex;
-    background-color: var(--primary-color);
     justify-content: flex-end;
     align-items: center;
+    width: 100%;
+    position: fixed;
+    background-color: var(--primary-color);
+    top: -8vh;
+    z-index: 1000;
+    left: 0;
+    height: 18vh;
   }
+
+
   
   .backButton {
-      background-color: #fff;
-      color: var(--primary-color);
-      justify-content: center;
-      width: 15vw;
-      height: 5vh;
-      border-radius: 10px;
-      margin-top: 3vh;
-      margin-right: 3vw;
-      align-items: center;
-      display: flex;
+    width: 20vw;
+    height: 5vh;
+    color: var(--primary-color);
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 9vh;
+    display: flex;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4vw;
   }
 
   .themeSettingsContainer {
