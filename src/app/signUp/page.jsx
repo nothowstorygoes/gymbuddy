@@ -113,7 +113,8 @@ export default function SignUp() {
       goal: goal,
       activity: activity,
       mBasal: mBasal,
-      proteinIntake: proteinIntake
+      proteinIntake: proteinIntake,
+      propic: false
     };
 
     const wk = [];
