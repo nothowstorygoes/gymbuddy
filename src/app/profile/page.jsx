@@ -81,7 +81,7 @@ export default function Profile() {
           })
           .catch((error) => console.error("Error fetching info.json:", error));
       }
-      if (!info.propic) {
+      if (info.propic==false) {
         setInfo((prevInfo) => ({ ...prevInfo, propic: "" }));
         setTempPropic("/gymbuddy/profile.png");
         setTimeout(() => {
@@ -110,9 +110,6 @@ export default function Profile() {
   }, [info]);
 
   const handlePropicEdit = () => {
-    if (info.propic === undefined) {
-      setInfo((prevInfo) => ({ ...prevInfo, propic: "" }));
-    }
     console.log("im in");
     const input = document.createElement("input");
     input.type = "file";
