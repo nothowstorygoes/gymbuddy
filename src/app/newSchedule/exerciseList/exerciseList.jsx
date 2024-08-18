@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./exerciseList.module.css";
+import Image from "next/image";
 
 const ExerciseList = ({
   part,
@@ -13,6 +14,8 @@ const ExerciseList = ({
   const [id, setId] = useState("");
   const [currentTheme, setCurrentTheme] = useState("");
   const [svgColor, setSvgColor] = useState("");
+  const [filter, setFilter] = useState('');
+
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -40,24 +43,18 @@ const ExerciseList = ({
   const fetchExercises = async (part) => {
     console.log("Fetching exercises...");
     const response = await fetch(
-      `https://wger.de/api/v2/exercisebaseinfo/?category=${part}&limit=${number}`,
+      `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${part}?limit=${number}&offset=0`,
       {
-        method: "GET",
-        headers: {
-          Authorization: `Token ${process.env.NEXT_PUBLIC_APIEXERCISES}`,
-        },
+        method: 'GET',
+  headers: {
+    'x-rapidapi-key': process.env.NEXT_PUBLIC_APIEXERCISES,
+    'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
+  }
       }
     );
     const data = await response.json();
-    if (Array.isArray(data.results)) {
-      const filteredExercises = data.results.flatMap((result) =>
-        result.exercises.filter(
-          (exercise) =>
-            exercise.language === 2 &&
-            /(with|and|is|your)/i.test(exercise.description)
-        )
-      );
-      setExercises(filteredExercises);
+    if (Array.isArray(data)) {
+      setExercises(data);
     } else {
       setExercises([]);
     }
@@ -76,22 +73,32 @@ const ExerciseList = ({
     }));
   };
 
-  const handleExName = (exercisesId) => {
-    setId(exercisesId);
-  };
-
-  const handleButtonClick = (exerciseId, exerciseName) => {
-    updateSelectedExercises(exerciseId, exerciseName);
+  const handleButtonClick = (exerciseId, exerciseName, exerciseGif, exerciseInstruction) => {
+    updateSelectedExercises(exerciseId, exerciseName , exerciseGif, exerciseInstruction);
   };
 
   const isSelected = (exerciseId) => {
     return selectedExercises.some((exercise) => exercise.id === exerciseId);
   };
 
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const filteredExercises = exercises.filter((exercise) =>
+    exercise.name.toLowerCase().includes(filter.toLowerCase())
+  );
   return (
     <div className={styles.listContainer}>
-      {Array.isArray(exercises) &&
-        exercises.map((exercise, index) => (
+      <input
+        type="text"
+        placeholder="Filter exercises..."
+        value={filter}
+        onChange={handleFilterChange}
+        className={styles.filterInput}
+      />
+      {Array.isArray(filteredExercises) &&
+        filteredExercises.map((exercise, index) => (
           <div
             key={index}
             className={`${styles.exercise} ${
@@ -121,7 +128,7 @@ const ExerciseList = ({
                 }`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleButtonClick(exercise.id, exercise.name);
+                  handleButtonClick(exercise.id, exercise.name, exercise.gifUrl, exercise.instructions);
                 }}
               >
                 +
@@ -130,12 +137,12 @@ const ExerciseList = ({
             <div
               className={`${styles.exerciseDescription} ${
                 visibleDetails[index] ? styles.expanded : ""
-              }`}
-            >
+              }`}>
+            
+              <Image src={exercise.gifUrl} alt=""className={styles.exerciseGif} width={200} height={200} priority={false}/>
               <div
                 className={styles.exerciseInstructions}
-                dangerouslySetInnerHTML={{ __html: exercise.description }}
-              ></div>
+              >{exercise.instructions}</div>
             </div>
           </div>
         ))}

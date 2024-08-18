@@ -25,12 +25,12 @@ function NewScheduleSaveChild() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user);
+        setUser(user)
       } else {
         router.push("/login");
       }
     });
-  });
+  },[user]);
 
   const handleBack = () => {
     const params = new URLSearchParams({
@@ -45,7 +45,6 @@ function NewScheduleSaveChild() {
     const schedule = {
       name: name,
       exercises: savedExercises,
-      bodyParts: selectedBodyParts,
     };
     console.log(schedule);
     const scheduleRef = ref(storage, `${user.uid}/schedule.json`);
@@ -85,6 +84,8 @@ function NewScheduleSaveChild() {
       return {
         id: exercise.id,
         name: exercise.name,
+        instructions: exercise.instructions,
+        gif: exercise.gif,
         sets: exerciseInfos[exercise.id] || [],
       };
     });
@@ -132,6 +133,7 @@ function NewScheduleSaveChild() {
             Back
           </div>
         </div>
+        <div className={styles.titleSave}>Add sets and reps for your exercises in <b>{name}</b></div>
         {selectedExercises.map((exercise) => (
           <div key={exercise.id} className={styles.exerciseInfoSelected}>
             <div className={styles.exerciseName}>{exercise.name}</div>
