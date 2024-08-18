@@ -16,7 +16,7 @@ function ScheduleExerciseChild() {
   const name = searchParams.get("name");
   const router = useRouter();
 
-  const updateSelectedExercises = (exerciseId, exerciseName) => {
+  const updateSelectedExercises = (exerciseId, exerciseName, exerciseGif ,exerciseInstructions) => {
     setSelectedExercises((prevSelected) => {
       if (prevSelected.some((exercise) => exercise.id === exerciseId)) {
         console.log(selectedExercises);
@@ -25,7 +25,7 @@ function ScheduleExerciseChild() {
       } else {
         console.log(selectedExercises);
 
-        return [...prevSelected, { id: exerciseId, name: exerciseName }];
+        return [...prevSelected, { id: exerciseId, name: exerciseName, gif: exerciseGif, instructions: exerciseInstructions}];
       }
     });
   };
@@ -78,7 +78,7 @@ function ScheduleExerciseChild() {
 
             <div id="exerciseList" className={styles.exerciseList}>
               <ExerciseList
-                part={part.part}
+                part={part.display}
                 updateSelectedExercises={updateSelectedExercises}
                 selectedExercises={selectedExercises}
                 setLoading={setLoading}

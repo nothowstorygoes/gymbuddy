@@ -140,3 +140,19 @@
     padding: 10px;
 }
 
+.filterInput{
+    width: 70vw;
+    height: 7vh;
+    background-color: var(--secondary-lowOpacity-color);
+    border: 1px solid var(--secondary-color);
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 100;
+    border-radius: 15px;
+    margin-bottom: 4vh;
+}
+
+.filterInput::placeholder{
+    color: #fff;
+}

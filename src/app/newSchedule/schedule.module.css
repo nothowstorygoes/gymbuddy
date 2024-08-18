@@ -261,3 +261,19 @@
     width: 40vw;
     margin-top: 7vh;
 }
+
+.titleSave{
+    width: 70vw;
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 100;
+    color: #fff;
+    line-height: 120%;
+    margin-bottom: 3vh;
+    /* margin-top: 10vh; */
+    text-align: center;
+}
+
+.titleSave b{
+    color: var(--secondary-color);
+}

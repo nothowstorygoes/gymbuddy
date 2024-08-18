@@ -9,16 +9,17 @@ import Navbar from "../components/navbar/navbar";
 
 const bodyParts = [
   {
-    display: "Chest",
-    part: 11,
+    display: "Chest"
   },
-  { display: "Back", part: 12 },
-  { display: "Legs", part: 9 },
-  { display: "Shoulders", part: 13 },
-  { display: "Arms", part: 8 },
-  { display: "Abs", part: 10 },
-  { display: "Calves", part: 14 },
-  { display: "Cardio", part: 15 },
+  { display: "Back" },
+  { display: "Upper Legs" },
+  { display: "Lower Legs"},
+  { display: "Upper Arms" },
+  { display: "Lower Arms" },
+  { display: "Neck"},
+  { display: "Cardio"},
+  { display: "Shoulders"},
+  { display: "Waist"}
 ];
 
 export default function NewSchedule() {
@@ -40,11 +41,14 @@ export default function NewSchedule() {
   });
 
   const handleButtonClick = (partObj) => {
-    setSelectedBodyParts((prevParts) =>
-      prevParts.some((p) => p.part === partObj.part)
-        ? prevParts.filter((p) => p.part !== partObj.part)
-        : [...prevParts, partObj]
-    );
+    setSelectedBodyParts((prevParts) => {
+      const isPresent = prevParts.some((p) => p.display.toLowerCase() === partObj.display.toLowerCase());
+      if (isPresent) {
+        return prevParts.filter((p) => p.display.toLowerCase() !== partObj.display.toLowerCase());
+      } else {
+        return [...prevParts, { ...partObj, display: partObj.display.toLowerCase() }];
+      }
+    });
   };
 
   useEffect(() => {
@@ -91,15 +95,15 @@ export default function NewSchedule() {
         </form>
         <div className={styles.buttonContainer}>
           {bodyParts.map((bodyPart, index) => (
-            <button
-              key={index}
-              className={`${styles.buttonBodyPart} ${
-                selectedBodyParts.includes(bodyPart) ? styles.selected : ""
-              }`}
-              onClick={() => handleButtonClick(bodyPart)}
-            >
-              {bodyPart.display}
-            </button>
+          <button
+          key={index}
+          className={`${styles.buttonBodyPart} ${
+            selectedBodyParts.some((p) => p.display.toLowerCase() === bodyPart.display.toLowerCase()) ? styles.selected : ""
+          }`}
+          onClick={() => handleButtonClick(bodyPart)}
+        >
+          {bodyPart.display}
+        </button>
           ))}
           <div className={styles.errorContainer}>
             {error && <p className={styles.error}>{error}</p>}
