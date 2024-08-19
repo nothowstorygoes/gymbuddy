@@ -6,12 +6,15 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/navbar";
 import styles from './scheduleListAll.module.css';
-import { SwipeableList, SwipeableListItem, SwipeAction, TrailingActions } from 'react-swipeable-list';
-import 'react-swipeable-list/dist/styles.css'; // Ensure this line is present
+import {SwipeAction, TrailingActions } from 'react-swipeable-list';
+import slStyles from "../../components/swipeableList/swipeableList.module.css"
+import SwipeableListComponent from '../../components/swipeableList/swipeableListComponent';
+import LoadingSpinner from "../..//components/loadingSpinner/loadingSpinner";
 
 export default function ScheduleListAll() {
     const [savedSchedules, setSavedSchedules] = useState([]);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
@@ -35,6 +38,7 @@ export default function ScheduleListAll() {
                         .then((response) => response.json())
                         .then((data) => {
                             setSavedSchedules(data);
+                            setLoading(false);
                         })
                         .catch((error) => console.error("Error fetching schedules.json:", error));
                 })
@@ -64,13 +68,20 @@ export default function ScheduleListAll() {
             .then(() => console.log("Schedule deleted"))
             .catch((error) => console.error("Error deleting schedule:", error));
     };
+    const renderScheduleItem = (schedule) => (
+        <div onClick={() => pushWithParams({ schedule })} className={slStyles.item}>
+            {schedule.name}
+        </div>
+    );
 
-    const trailingActions = (scheduleName) => (
+    const keyExtractor = (schedule) => schedule.name;
+
+    const getTrailingActions = (schedule) => (
         <TrailingActions>
             <SwipeAction
                 destructive={true}
-                onClick={() => handleDelete(scheduleName)}
-                className={styles.itemDelete}
+                onClick={() => handleDelete(schedule.name)}
+                className={slStyles.itemDelete}
             >
                 Delete
             </SwipeAction>
@@ -79,21 +90,17 @@ export default function ScheduleListAll() {
 
     return (
         <main className={styles.mainContainer}>
+            {loading ? <LoadingSpinner/> : ""}
             <div className={styles.stickyDiv}>
                 <div className={styles.stickyButton} onClick={handleBack}>Back</div>
             </div>
             <p className={styles.title}>Your Schedules</p>
-            <SwipeableList className={styles.list}>
-                {savedSchedules.map((schedule) => (
-                    <SwipeableListItem
-                        key={schedule.name}
-                        trailingActions={trailingActions(schedule.name)}
-                        className={styles.swipeableListItem}
-                        onClick={() => pushWithParams({ schedule })}
-                    > <div className={styles.item}>{schedule.name}</div>
-                    </SwipeableListItem>
-                ))}
-            </SwipeableList>
+            <SwipeableListComponent
+                items={savedSchedules}
+                renderItem={renderScheduleItem}
+                keyExtractor={keyExtractor}
+                getTrailingActions={getTrailingActions}
+            />
             <Navbar />
         </main>
     );

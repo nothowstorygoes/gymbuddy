@@ -34,34 +34,31 @@
 }
   
 .deleteSwipe {
-    background-color: red;
-    color: white;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    height: 100%;
-    font-family: "NTR", sans-serif;
-    font-size: 1.2rem;
-    width: 80vw;
     position: absolute;
-    right: 0;
     top: 0;
-    bottom: 0;
-    z-index: 1;
-    transition: transform 0.3s ease;
+    right: 0;
+    font-family: "NTR", sans-serif !important;
+    font-size: 1.5rem !important;
+    color: #fff;
+    background-color: red;
+    display: flex !important;
+    text-align: right !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    height: 7vh;
+    width: 80vw;
 }
 
-.deleteSwipe p {
+.deleteSwipe p{
     margin-right: 4vw;
 }
+
 
 .foodItemContainer {
     position: relative;
     overflow: hidden;
     width: 80vw;
-    height: 8vh;
-    margin-bottom: 1rem;
-    border-radius: 15px;
+    height: 7vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -78,8 +75,6 @@
     color: var(--primary-color);
     font-family: "NTR", sans-serif;
     font-size: 1.2rem;
-    border: 3px solid #fff;
-    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
 }

@@ -8,7 +8,7 @@ const ExerciseList = ({
   part,
   updateSelectedExercises,
   selectedExercises,
-  setLoading,
+  setLoading, // Receive setLoading as a prop
 }) => {
   const [exercises, setExercises] = useState([]);
   const [visibleDetails, setVisibleDetails] = useState({});
@@ -48,7 +48,7 @@ const ExerciseList = ({
       console.error("Error fetching exercises:", error);
       setExercises([]);
     }
-    setLoading(false);
+    setLoading(false); // Update loading state after fetching exercises
   };
 
   const fetchGifUrl = async (exerciseId) => {

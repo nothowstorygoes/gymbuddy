@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
 function ScheduleExerciseChild() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Lifted loading state
   const [selectedExercises, setSelectedExercises] = useState([]);
   const searchParams = useSearchParams();
   const number = searchParams.get("number");
@@ -80,7 +80,7 @@ function ScheduleExerciseChild() {
                 part={part.display}
                 updateSelectedExercises={updateSelectedExercises}
                 selectedExercises={selectedExercises}
-                setLoading={setLoading}
+                setLoading={setLoading} // Pass setLoading to ExerciseList
                 loading={loading}
                 number={number}
               />
