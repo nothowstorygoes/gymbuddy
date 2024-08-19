@@ -16,7 +16,6 @@ function NewScheduleSaveChild() {
   const selectedExercises = JSON.parse(searchParams.get("selectedExercises"));
   const selectedBodyParts = JSON.parse(searchParams.get("bodyParts"));
   const name = searchParams.get("name");
-  const number = searchParams.get("number");
   const [exerciseSets, setExerciseSets] = useState({});
   const [exerciseInfos, setExerciseInfos] = useState({});
   const router = useRouter();
@@ -36,7 +35,6 @@ function NewScheduleSaveChild() {
     const params = new URLSearchParams({
         name: name.toString(),
         bodyParts: JSON.stringify(selectedBodyParts),
-        number: number.toString(),
       });
         router.push(`/newSchedule/ScheduleExercise?${params.toString()}`);
   };
@@ -84,8 +82,7 @@ function NewScheduleSaveChild() {
       return {
         id: exercise.id,
         name: exercise.name,
-        instructions: exercise.instructions,
-        gif: exercise.gif,
+        part: exercise.part,
         sets: exerciseInfos[exercise.id] || [],
       };
     });

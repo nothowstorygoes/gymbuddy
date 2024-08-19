@@ -16,7 +16,7 @@ function ScheduleExerciseChild() {
   const name = searchParams.get("name");
   const router = useRouter();
 
-  const updateSelectedExercises = (exerciseId, exerciseName, exerciseGif ,exerciseInstructions) => {
+  const updateSelectedExercises = (exerciseId, exerciseName, exercisePart) => {
     setSelectedExercises((prevSelected) => {
       if (prevSelected.some((exercise) => exercise.id === exerciseId)) {
         console.log(selectedExercises);
@@ -25,7 +25,7 @@ function ScheduleExerciseChild() {
       } else {
         console.log(selectedExercises);
 
-        return [...prevSelected, { id: exerciseId, name: exerciseName, gif: exerciseGif, instructions: exerciseInstructions}];
+        return [...prevSelected, { id: exerciseId, name: exerciseName , part: exercisePart}];
       }
     });
   };
@@ -35,7 +35,6 @@ function ScheduleExerciseChild() {
     const params = new URLSearchParams({
         name: name.toString(),
         bodyParts: JSON.stringify(selectedBodyParts),
-        number: number.toString(),
         selectedExercises: JSON.stringify(selectedExercises),
       });
       router.push(`/newSchedule/newScheduleSave?${params.toString()}`);

@@ -118,6 +118,13 @@ export default function Profile() {
       const file = e.target.files[0];
       const proPicRef = ref(storage, `${user.uid}/proPic.png`);
       setTempPropic(URL.createObjectURL(file));
+      // Convert the image file to a Base64 string
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = reader.result;
+      localStorage.setItem("profileImage", base64String);
+    };
+    reader.readAsDataURL(file);
       const uploadTask = uploadBytesResumable(proPicRef, file);
       uploadTask.on(
         "state_changed",

@@ -68,7 +68,6 @@ export default function NewSchedule() {
       const params = new URLSearchParams({
         name: name.toString(),
         bodyParts: JSON.stringify(selectedBodyParts),
-        number: number.toString()
       });
       router.push(`/newSchedule/ScheduleExercise?${params.toString()}`);
     }
@@ -108,18 +107,6 @@ export default function NewSchedule() {
           <div className={styles.errorContainer}>
             {error && <p className={styles.error}>{error}</p>}
           </div>
-          <form className={styles.formContainer}>
-            <label className={styles.label}>
-              How many exercises would you like to see?
-            </label>
-            <input
-              className={styles.input}
-              type="number"
-              required
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </form>
           <button onClick={handleNext} className={styles.nextButton}>
             Next
           </button>
