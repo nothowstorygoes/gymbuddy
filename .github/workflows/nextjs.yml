@@ -80,7 +80,6 @@ jobs:
           NEXT_PUBLIC_STORAGEBUCKET : ${{secrets.NEXT_PUBLIC_STORAGEBUCKET}}
           NEXT_PUBLIC_MESSAGINGSENDERID : ${{secrets.NEXT_PUBLIC_MESSAGINGSENDERID}}
           NEXT_PUBLIC_APPID : ${{secrets.NEXT_PUBLIC_APPID}}
-          NEXT_PUBLIC_APIEXERCISES : ${{secrets.NEXT_PUBLIC_APIEXERCISES}}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
