@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 import styles from "./logFood.module.css";
 
-export default function logFood() {
+export default function LogFood() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [foodData, setFoodData] = useState([]);
