@@ -6,12 +6,13 @@ import { auth, storage } from "../firebase";
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/navbar";
 import FoodItem from "./foodItem";
+import SwipeableListComponentFood from "../components/swipeableList//foodList/swipeablefood";
+import { SwipeAction, TrailingActions } from "react-swipeable-list";
 import { useRouter } from "next/navigation";
-
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 import styles from "./logFood.module.css";
 
-export default function LogProtein() {
+export default function logFood() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [foodData, setFoodData] = useState([]);
@@ -41,7 +42,6 @@ export default function LogProtein() {
       setSvgColor("#bbadff");
     }
   }, [theme]);
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -103,12 +103,10 @@ export default function LogProtein() {
     }
   }, [allData, currentDate]);
 
-  const onDelete = (id ) => {
+  const onDelete = (id) => {
     const newFoodData = foodData.filter((foodItem) => foodItem.id !== id);
     console.log(newFoodData);
     setFoodData(newFoodData);
-    // Get today's date in the required format (assuming 'YYYY-MM-DD')
-    // Update allData with the new food data for today's date
     setAllData((prevAllData) => {
       const index = prevAllData.findIndex((data) => data.date === currentDate.toDateString());
       if (index !== -1) {
@@ -117,7 +115,6 @@ export default function LogProtein() {
           ...newAllData[index],
           food: newFoodData,
         };
-        // Upload the updated allData
         const foodRef = ref(storage, `${user.uid}/food.json`);
         uploadString(foodRef, JSON.stringify(newAllData));
         console.log("deleted");
@@ -153,6 +150,27 @@ export default function LogProtein() {
     const params = new URLSearchParams({ date: date });
     router.push(`/logFood/fetchProduct?${params.toString()}`);
   };
+
+  const renderItem = (foodItem) => (
+    <FoodItem
+      id={foodItem.id}
+      name={truncateName(foodItem.name)}
+      weight={foodItem.weight}
+      calories={foodItem.calories}
+      unit={unit}
+      onDelete={onDelete}
+    />
+  );
+
+  const keyExtractor = (foodItem) => foodItem.id;
+
+  const getTrailingActions = (foodItem) => (
+    <TrailingActions>
+      <SwipeAction onClick={() => onDelete(foodItem.id)}>
+        <div className={styles.deleteSwipe}><p>Delete</p></div>
+      </SwipeAction>
+    </TrailingActions>
+  );
 
   return (
     <main className={styles.mainContainer}>
@@ -204,19 +222,13 @@ export default function LogProtein() {
               No meals present in our records..
             </div>
           ) : (
-            ""
-          )}
-          {foodData.map((foodItem, index) => (
-            <FoodItem
-              key={index}
-              id={foodItem.id}
-              name={truncateName(foodItem.name)}
-              weight={foodItem.weight}
-              calories={foodItem.calories}
-              unit={unit}
-              onDelete={onDelete}
+            <SwipeableListComponentFood
+              items={foodData}
+              renderItem={renderItem}
+              keyExtractor={keyExtractor}
+              getTrailingActions={getTrailingActions}
             />
-          ))}
+          )}
         </div>
       )}
       <Navbar />

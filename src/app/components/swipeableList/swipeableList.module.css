@@ -1,0 +1,49 @@
+.swipeableListItem{
+    position: relative !important;
+    width: 45vw !important;
+    height: 7vh !important;
+    overflow: hidden !important;
+    border-radius: 15px !important;
+    transition: transform 0.3s !important;
+    font-family: "NTR", sans-serif !important;
+    font-size: 1.5rem !important;
+    color: #fff;
+    margin: 4vw;
+    
+  }
+  
+  .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--secondary-color); /* Your custom styles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    width: 45vw;
+  }
+  
+  .itemDelete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: "NTR", sans-serif !important;
+    font-size: 1.5rem !important;
+    color: #fff;
+    background-color: red;
+    display: flex !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 7vh;
+    width: 45vw;
+  }
+  
+  .list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+  }
