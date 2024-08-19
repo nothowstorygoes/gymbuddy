@@ -14,36 +14,12 @@ export default function Navbar() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        const infoRef = ref(storage, `${user.uid}/info.json`);
-        getDownloadURL(infoRef)
-          .then((url) => fetch(url))
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data.propic);
-            if (data.propic === true) {
-              const picRef = ref(storage, `${user.uid}/proPic.png`);
-              getDownloadURL(picRef).then((url) => {
-                fetch(url)
-                  .then((res) => res.blob())
-                  .then((blob) => {
-                    const img = URL.createObjectURL(blob);
-                    console.log(img);
-                    localStorage.setItem("propic", img); // Cache the image URL
-                    setPropic(img);
-                  });
-              });
-            } else {
-              setPropic("/gymbuddy/profile.png");
-            }
-          });
-      }
-    });
-
-    // Check if the image is already cached
-    const cachedPropic = localStorage.getItem("propic");
-    if (cachedPropic) {
-      setPropic(cachedPropic);
-    }
+        const storedPropic = localStorage.getItem("profileImage");
+        if (storedPropic) {
+          setPropic(storedPropic);
+        }else {setPropic("/gymbuddy/profile.png");}
+          }
+        });
 
     return () => unsubscribe();
   }, []);

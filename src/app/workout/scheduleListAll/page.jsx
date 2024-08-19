@@ -1,29 +1,30 @@
 'use client'
-import {auth , storage} from "../../firebase"
-import { getDownloadURL, ref } from "firebase/storage"
-import { onAuthStateChanged } from "firebase/auth"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useEffect } from "react"
-import Navbar from "../../components/navbar/navbar"
-import styles from './scheduleListAll.module.css'
+import { auth, storage } from "../../firebase";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import Navbar from "../../components/navbar/navbar";
+import styles from './scheduleListAll.module.css';
+import { SwipeableList, SwipeableListItem, SwipeAction, TrailingActions } from 'react-swipeable-list';
+import 'react-swipeable-list/dist/styles.css'; // Ensure this line is present
 
 export default function ScheduleListAll() {
-    const [savedSchedules, setSavedSchedules] = useState([])
-    const [user,setUser] = useState(null);
-    const router = useRouter()
+    const [savedSchedules, setSavedSchedules] = useState([]);
+    const [user, setUser] = useState(null);
+    const router = useRouter();
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUser(user)
-                console.log("User is signed in")
+                setUser(user);
+                console.log("User is signed in");
             } else {
-                console.log("No user is signed in")
+                console.log("No user is signed in");
                 router.push("/login");
             }
-        })
-    },[user, router]);
+        });
+    }, [router]);
 
     useEffect(() => {
         if (user) {
@@ -33,25 +34,48 @@ export default function ScheduleListAll() {
                     fetch(url)
                         .then((response) => response.json())
                         .then((data) => {
-                            setSavedSchedules(data)
+                            setSavedSchedules(data);
                         })
-                        .catch((error) => console.error("Error fetching schedules.json:", error))
+                        .catch((error) => console.error("Error fetching schedules.json:", error));
                 })
-                .catch((error) => console.error("Error getting download URL:", error))
+                .catch((error) => console.error("Error getting download URL:", error));
         }
-    },[user])
+    }, [user]);
 
     const pushWithParams = (item) => {
         console.log(item);
-        if(item.schedule){
-        const params = new URLSearchParams({ name: item.schedule.name.toString() });
-        router.push(`/workout/schedule?${params.toString()}`);
-      }};
+        if (item.schedule) {
+            const params = new URLSearchParams({ name: item.schedule.name.toString() });
+            router.push(`/workout/schedule?${params.toString()}`);
+        }
+    };
 
-      const handleBack = () => {  
+    const handleBack = () => {
         router.push("/workout");
-    return
-      };
+        return;
+    };
+
+    const handleDelete = (scheduleName) => {
+        console.log(`Delete schedule: ${scheduleName}`);
+        const updatedSchedules = savedSchedules.filter(schedule => schedule.name !== scheduleName);
+        setSavedSchedules(updatedSchedules);
+        const schedulesRef = ref(storage, `${user.uid}/schedule.json`);
+        uploadString(schedulesRef, JSON.stringify(updatedSchedules))
+            .then(() => console.log("Schedule deleted"))
+            .catch((error) => console.error("Error deleting schedule:", error));
+    };
+
+    const trailingActions = (scheduleName) => (
+        <TrailingActions>
+            <SwipeAction
+                destructive={true}
+                onClick={() => handleDelete(scheduleName)}
+                className={styles.itemDelete}
+            >
+                Delete
+            </SwipeAction>
+        </TrailingActions>
+    );
 
     return (
         <main className={styles.mainContainer}>
@@ -59,14 +83,18 @@ export default function ScheduleListAll() {
                 <div className={styles.stickyButton} onClick={handleBack}>Back</div>
             </div>
             <p className={styles.title}>Your Schedules</p>
-            {savedSchedules.map((schedule) => {
-                return (
-                    <div key={schedule.name} onClick={() => pushWithParams({schedule})} className={styles.schedule}>
-                        {schedule.name}
-                    </div>
-                )
-            })}
+            <SwipeableList className={styles.list}>
+                {savedSchedules.map((schedule) => (
+                    <SwipeableListItem
+                        key={schedule.name}
+                        trailingActions={trailingActions(schedule.name)}
+                        className={styles.swipeableListItem}
+                        onClick={() => pushWithParams({ schedule })}
+                    > <div className={styles.item}>{schedule.name}</div>
+                    </SwipeableListItem>
+                ))}
+            </SwipeableList>
             <Navbar />
         </main>
-    )
+    );
 }

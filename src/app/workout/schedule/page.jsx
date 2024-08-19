@@ -109,8 +109,8 @@ function SearchParamsSchedule() {
     return;
   };
 
-  const handleClickExercise = (name) => {
-    const params = new URLSearchParams({name: name, schedule : matchingSchedule.name});
+  const handleClickExercise = (name, part) => {
+    const params = new URLSearchParams({name: name, part: part});
     router.push(`/workout/schedule/exercise?${params.toString()}`)
   }
   
@@ -131,7 +131,7 @@ function SearchParamsSchedule() {
               if (exerciseData.length <= 1)
                 {return (
                   <div key={exercise.name} className={styles.exercise}>
-                  <button className={styles.exerciseName} onClick={() => handleClickExercise(exercise.name)}>{exercise.name}</button>
+                  <button className={styles.exerciseName} onClick={() => handleClickExercise(exercise.name, exercise.part)}>{exercise.name}</button>
                   <div className={styles.progressNone}>
                     There isn&apos;t enough data to show a graph for this exercise.
                   </div>
@@ -140,7 +140,7 @@ function SearchParamsSchedule() {
               else{
                 return (
                   <div key={exercise.name} className={styles.exercise}>
-                    <button className={styles.exerciseName} onClick={() => handleClickExercise(exercise.name)}>{exercise.name}</button>
+                    <button className={styles.exerciseName} onClick={() => handleClickExercise(exercise.name, exercise.part)}>{exercise.name}</button>
                     <LineChart sets={exerciseData} />
                   </div>
                 );}
