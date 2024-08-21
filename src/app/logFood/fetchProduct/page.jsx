@@ -3,11 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../../components/navbar/navbar";
 import styles from "./fetchProduct.module.css";
-import LoadingSpinner from "@/app/components/loadingSpinner/loadingSpinner";
+import LoadingSpinner from "../../components/loadingSpinner/loadingSpinner";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-/* import { BarcodeScanner } from 'react-barcode-scanner'
-import "react-barcode-scanner/polyfill" */
 
 function ProductFetcher() {
   const [productName, setProductName] = useState("");
@@ -77,7 +75,7 @@ function ProductFetcher() {
       </div>
 
       {loading && <LoadingSpinner />}
-      {error && <p className={styles.error}>Error: {error.message}</p>}
+      {error && <p className={styles.error}>Error: {error}</p>}
 
       {!loading && products.length > 0 && (
         <div className={styles.productList}>
