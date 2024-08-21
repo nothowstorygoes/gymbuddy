@@ -9,15 +9,19 @@
     color:#fff;
     margin-top:5vh;
     font-family: "NTR", sans-serif;
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
     font-weight: 100;
+}
+
+.divider{
+    width: 80vw;
 }
 
 .exerciseName{
     color:#fff;
     font-family: "NTR", sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.9rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,24 +39,42 @@
     text-align: left;
 }
 
-.formInfo{
+.formInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80vw;
+    width: 100%; /* Adjust width to fit within the grid */
     margin-bottom: 2vh;
+  }
+
+.exerciseFormInfoSet{
+    background-color: var(--secondary-lowOpacity-color);
+    border-radius: 15px;
+    margin: 2vw;
+    padding:4vw;
 }
 
 .input {
     position: relative;
-    width: 70vw;
+    width: 30vw;
     font-family: "NTR", sans-serif;
     color: #fff;
     font-size: 18px;
+    padding:1vw;
+    border: none;
     height: 5vh;
-    background-color: rgba(248, 244, 227, 0.5);
-    border-radius: 25px;
+    background-color: var(--secondary-color);
+    border-radius: 15px;
+  }
+
+  .setsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    margin-bottom: 2vh;
   }
 
 
@@ -60,10 +82,10 @@
     margin-bottom:10vh;
 }
 
-.formContainer{
-    display: flex;
-    flex-direction: column;
-}
+.formContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 
 .removeButton{
     background-color: var(--primary-color);
@@ -110,3 +132,35 @@
     justify-content: center;
     align-items: center;
 }
+
+.backButtonContainer {
+    position: sticky;
+    top: -7vh;
+    height: 15vh;
+    display: flex;
+    z-index: 1000;
+    padding: 1vh;
+    width: 100%;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    align-items: flex-end;
+    justify-content: flex-end;
+    }
+  
+  
+    
+    .backButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15vw;
+      border-radius: 15px;
+      margin-right: 10vw;
+      margin-bottom: 3vw;
+      height: 5vh;
+      background-color: #f8f4e3;
+      color: var(--primary-color);
+      font-family: "NTR", sans-serif;
+      font-size: 1.2rem;
+      line-height: 120%;
+    }

@@ -167,7 +167,8 @@ const ProductDetails = () => {
   return (
     <main className={styles.mainContainer}>
       <Navbar />
-      {loading ? <LoadingSpinner /> : ""}
+      {loading ? <LoadingSpinner /> : (
+        <div>
       <div className={styles.backButtonContainer}>
         <button className={styles.backButton} onClick={() => router.back()}>
           Back
@@ -262,6 +263,8 @@ const ProductDetails = () => {
           Save
         </button>
       </div>
+      </div>
+      )}
     </main>
   );
 };

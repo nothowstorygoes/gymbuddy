@@ -1,10 +1,8 @@
 "use client"
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./navbar.module.css";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, storage } from "../../firebase";
-import { useState, useEffect } from "react";
-import { getDownloadURL, ref } from "firebase/storage";
+import { auth } from "../../firebase";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -17,9 +15,11 @@ export default function Navbar() {
         const storedPropic = localStorage.getItem("profileImage");
         if (storedPropic) {
           setPropic(storedPropic);
-        }else {setPropic("/gymbuddy/profile.png");}
-          }
-        });
+        } else {
+          setPropic("/gymbuddy/profile.png");
+        }
+      }
+    });
 
     return () => unsubscribe();
   }, []);

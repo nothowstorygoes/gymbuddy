@@ -1,10 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, storage } from "../firebase";
-import { useState, useEffect } from "react";
-import { uploadBytesResumable } from "firebase/storage";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import {
+  uploadBytesResumable,
+  getDownloadURL,
+  ref,
+  uploadString,
+} from "firebase/storage";
 import styles from "./profile.module.css";
 import Navbar from "../components/navbar/navbar";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
@@ -28,45 +31,24 @@ export default function Profile() {
     setCurrentTheme(theme);
   }, []);
 
-
   useEffect(() => {
-    if (currentTheme === "blue") {
-      setSvgColor("#1b4965");
-    } else if (currentTheme === "green") {
-      setSvgColor("#3a5a40");
-    } else if (currentTheme === "violet") {
-      setSvgColor("#8187dc");
-    } else {
-      setSvgColor("#370909");
-    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        // Download info.json
         const infoRef = ref(storage, `${user.uid}/info.json`);
         getDownloadURL(infoRef)
           .then((url) => fetch(url))
           .then((response) => response.json())
           .then((data) => {
             setInfo(data);
-            let goalInfo = 0;
-            switch (data.activity.toLowerCase()) {
-              case "cutting":
-                goalInfo = -500;
-                break;
-              case "bulking":
-                goalInfo = 500;
-                break;
-              case "maintenance":
-                goalInfo = 0;
-                break;
-              default:
-                goalInfo = 0;
-            }
+            const goalInfo =
+              data.activity.toLowerCase() === "cutting"
+                ? -500
+                : data.activity.toLowerCase() === "bulking"
+                ? 500
+                : 0;
             setmGoal(Math.floor(data.mBasal + goalInfo));
             setButtonActivity(data.activity);
-
-            // Set form values with the relevant properties from the fetched data
             setFormValues({
               username: data.username,
               weight: data.weight,
@@ -74,31 +56,30 @@ export default function Profile() {
               goal: data.goal,
               mBasal: data.mBasal,
               activity: data.activity,
-              // Add other relevant properties here
             });
-            console.log(data);
-            console.log(formValues);
           })
           .catch((error) => console.error("Error fetching info.json:", error));
-      }
-      if (info.propic==false) {
-        setInfo((prevInfo) => ({ ...prevInfo, propic: "" }));
-        setTempPropic("/gymbuddy/profile.png");
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      } else {
-        getDownloadURL(ref(storage, `${user.uid}/proPic.png`)).then((url) => {
-          fetch(url)
+
+        if (info.propic === false) {
+          setInfo((prevInfo) => ({ ...prevInfo, propic: "" }));
+          setTempPropic("/gymbuddy/profile.png");
+          setTimeout(() => setLoading(false), 500);
+        } else {
+          getDownloadURL(ref(storage, `${user.uid}/proPic.png`))
+            .then((url) => fetch(url))
             .then((res) => res.blob())
             .then((blob) => {
               const img = URL.createObjectURL(blob);
               setTempPropic(img);
-              setTimeout(() => {
-                setLoading(false);
-              }, 500);
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                const base64String = reader.result;
+                localStorage.setItem("profileImage", base64String);
+              };
+              reader.readAsDataURL(blob);
+              setTimeout(() => setLoading(false), 500);
             });
-        });
+        }
       }
     });
 
@@ -106,11 +87,13 @@ export default function Profile() {
   }, [currentTheme]);
 
   useEffect(() => {
-    console.log(info);
-  }, [info]);
+    if (currentTheme === "blue") setSvgColor("#1b4965");
+    else if (currentTheme === "green") setSvgColor("#3a5a40");
+    else if (currentTheme === "violet") setSvgColor("#8187dc");
+    else setSvgColor("#370909");
+  }, [currentTheme]);
 
   const handlePropicEdit = () => {
-    console.log("im in");
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
@@ -118,13 +101,12 @@ export default function Profile() {
       const file = e.target.files[0];
       const proPicRef = ref(storage, `${user.uid}/proPic.png`);
       setTempPropic(URL.createObjectURL(file));
-      // Convert the image file to a Base64 string
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result;
-      localStorage.setItem("profileImage", base64String);
-    };
-    reader.readAsDataURL(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        localStorage.setItem("profileImage", base64String);
+      };
+      reader.readAsDataURL(file);
       const uploadTask = uploadBytesResumable(proPicRef, file);
       uploadTask.on(
         "state_changed",
@@ -132,21 +114,10 @@ export default function Profile() {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(`Upload is ${progress}% done`);
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
         },
-        (error) => {
-          console.error(error);
-        },
+        (error) => console.error(error),
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
             setTempPropic(downloadURL);
           });
         }
@@ -155,23 +126,22 @@ export default function Profile() {
       const infoRef = ref(storage, `${user.uid}/info.json`);
       uploadString(infoRef, JSON.stringify({ ...info, propic: true }));
     };
-    input.click(); // Trigger the file input click
+    input.click();
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
-  };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let isChanged = false;
     const updatedInfo = { ...info };
 
-    // Check for changes
     for (const key in formValues) {
       if (formValues[key] !== info[key]) {
         updatedInfo[key] = formValues[key];
@@ -180,67 +150,28 @@ export default function Profile() {
     }
 
     if (isChanged) {
-      // Update info.json
-      let basalSex = 0;
-      let mBasalW = 0;
-      let mBasalH = 0;
-      let activityLevel = 0;
-      let goalLevel = 0;
-      let mBasal = 0;
-      let proteinIntake = 0;
-
-      if (info.sex === "M") {
-        basalSex = 5;
-      } else {
-        basalSex = -161;
-      }
-
-      if (info.chosenMeasure === "imperial") {
-        mBasalW = parseFloat(updatedInfo.weight) / 2.2;
-        mBasalH = parseFloat(updatedInfo.height) * 2.54;
-      } else {
-        mBasalW = parseFloat(updatedInfo.weight);
-        mBasalH = parseFloat(updatedInfo.height);
-      }
-
-      switch (parseInt(updatedInfo.goal)) {
-        case 0:
-          activityLevel = 1.2;
-          break;
-        case 1:
-        case 2:
-          activityLevel = 1.375;
-          break;
-        case 3:
-        case 4:
-        case 5:
-          activityLevel = 1.55;
-          break;
-        case 6:
-        case 7:
-          activityLevel = 1.725;
-          break;
-        default:
-          activityLevel = 1.2;
-      }
-      console.log(updatedInfo.activity);
-      switch (updatedInfo.activity) {
-        case "Cutting":
-          goalLevel = -500;
-          break;
-        case "Bulking":
-          goalLevel = 500;
-          break;
-        case "Maintenance":
-          goalLevel = 0;
-          break;
-        default:
-          goalLevel = 0;
-      }
-      mBasal =
+      const basalSex = info.sex === "M" ? 5 : -161;
+      const mBasalW =
+        info.chosenMeasure === "imperial"
+          ? parseFloat(updatedInfo.weight) / 2.2
+          : parseFloat(updatedInfo.weight);
+      const mBasalH =
+        info.chosenMeasure === "imperial"
+          ? parseFloat(updatedInfo.height) * 2.54
+          : parseFloat(updatedInfo.height);
+      const activityLevel = [1.2, 1.375, 1.55, 1.725][
+        Math.min(Math.floor(updatedInfo.goal / 2), 3)
+      ];
+      const goalLevel =
+        updatedInfo.activity === "Cutting"
+          ? -500
+          : updatedInfo.activity === "Bulking"
+          ? 500
+          : 0;
+      const mBasal =
         (10 * mBasalW + 6.25 * mBasalH - 5 * info.age + basalSex) *
         activityLevel;
-      proteinIntake = Math.floor(((mBasal + goalLevel) * 30) / 100 / 4);
+      const proteinIntake = Math.floor(((mBasal + goalLevel) * 30) / 100 / 4);
       updatedInfo.mBasal = Math.floor(mBasal);
       updatedInfo.proteinIntake = proteinIntake;
       setmGoal(Math.floor(mBasal + goalLevel));
@@ -248,20 +179,13 @@ export default function Profile() {
       await uploadString(infoRef, JSON.stringify(updatedInfo));
       setInfo(updatedInfo);
       setIsModalVisible(true);
-
-      // Hide modal after 2 seconds
-      setTimeout(() => {
-        setIsModalVisible(false);
-      }, 1000);
+      setTimeout(() => setIsModalVisible(false), 1000);
     }
   };
 
-  const closeModal = () => {
-    setIsModalVisible(false);
-  };
+  const closeModal = () => setIsModalVisible(false);
 
   const handleActivityClick = (activity) => {
-    console.log(activity);
     setButtonActivity(activity);
     setFormValues((prevValues) => ({
       ...prevValues,

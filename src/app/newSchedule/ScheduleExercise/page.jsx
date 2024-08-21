@@ -45,7 +45,9 @@ function ScheduleExerciseChild() {
     };
 
   useEffect(() => {
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
   }, []);
 
   return (
@@ -66,14 +68,11 @@ function ScheduleExerciseChild() {
       <div className={`${styles.exerciseListContainer}`}>
         {selectedBodyParts.map((part, index) => (
           <div key={index} className={styles.subContainer}>
-            {loading ? (
-              <LoadingSpinner />
-            ) : (
+
               <div className={styles.bodyPartName}>
                 Here&apos;s a list for{" "}
                 <div className={styles.buttonName}>{part.display}</div>
               </div>
-            )}
 
             <div id="exerciseList" className={styles.exerciseList}>
               <ExerciseList

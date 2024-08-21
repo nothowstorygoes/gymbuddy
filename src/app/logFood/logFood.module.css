@@ -11,6 +11,7 @@
     font-family: "NTR", sans-serif;
     color: #fff;
     display: flex;
+    justify-content: center;
     flex-direction: row;
     text-align: center;
 }

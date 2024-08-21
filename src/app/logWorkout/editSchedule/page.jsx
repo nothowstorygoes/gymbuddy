@@ -119,16 +119,23 @@ function EditScheduleChild() {
     // You can send savedData to a server or save it locally
   };
 
+
   return (
     <main className={styles.mainContainer}>
+            <div className={styles.backButtonContainer}>
+        <button className={styles.backButton} onClick={() => router.back()}>
+          Back
+        </button>
+      </div>
       <p className={styles.title}>{schedule.name}</p>
+      <hr className={styles.divider}/>
       {schedule.exercises.map((exercise) => (
         <div key={exercise.id} className={styles.exerciseInfoSelected}>
           <div className={styles.exerciseName}>{exercise.name}</div>
+          <div className={styles.setsContainer}>
           <form className={styles.formContainer}>
             {exercise.sets.map((set, setIndex) => (
               <div key={setIndex} className={styles.exerciseFormInfoSet}>
-                <hr className={styles.divider} />
                 <div className={styles.formInfo}>
                   <label className={styles.formLabel}>Reps</label>
                   <input
@@ -168,6 +175,7 @@ function EditScheduleChild() {
               </div>
             ))}
           </form>
+          </div>
           <div className={styles.buttonContainer}>
             <button
               type="button"
