@@ -77,8 +77,9 @@ export default function LogFood() {
                 } else {
                   setFoodData([]);
                 }
-
-                setLoading(false);
+                setTimeout(() => {
+                  setLoading(false);
+                }, 500);  
               });
           })
           .catch((error) => {
@@ -173,63 +174,63 @@ export default function LogFood() {
   );
 
   return (
-    <main className={styles.mainContainer}>
-      {loading ? <LoadingSpinner /> : ""}
-      <div className={styles.dateContainer}>
-        <button onClick={handlePrevDate} className={styles.buttonDate}>
-          <svg
-            width="40px"
-            height="40px"
-            viewBox="0 0 1024 1024"
-          >
-            <path
-              d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z"
-              fill={svgColor}
-            />
-          </svg>
-        </button>
-        <p className={styles.date}>{formattedDate}</p>
-        <button onClick={handleNextDate} className={styles.buttonDate}>
-          <svg
-            width="40px"
-            height="40px"
-            viewBox="0 0 1024 1024"
-          >
-            <path
-              d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-              fill={svgColor}
-            />
-          </svg>
-        </button>
-      </div>
-      <div className={styles.title}>
-        <p>Nutrition Diary</p>
-        <button
-          onClick={() => addFood(formattedDate)}
-          className={styles.addFood}
-        >
-          +
-        </button>
-      </div>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className={styles.foodList}>
-          {foodData.length === 0 ? (
-            <div className={styles.noData}>
-              No meals present in our records..
-            </div>
-          ) : (
-            <SwipeableListComponentFood
-              items={foodData}
-              renderItem={renderItem}
-              keyExtractor={keyExtractor}
-              getTrailingActions={getTrailingActions}
-            />
-          )}
+      <main className={styles.mainContainer}>
+        {loading ? <LoadingSpinner /> : (
+        <div>
+          <div className={styles.dateContainer}>
+            <button onClick={handlePrevDate} className={styles.buttonDate}>
+              <svg
+                width="40px"
+                height="40px"
+                viewBox="0 0 1024 1024"
+              >
+                <path
+                  d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z"
+                  fill={svgColor}
+                />
+              </svg>
+            </button>
+            <p className={styles.date}>{formattedDate}</p>
+            <button onClick={handleNextDate} className={styles.buttonDate}>
+              <svg
+                width="40px"
+                height="40px"
+                viewBox="0 0 1024 1024"
+              >
+                <path
+                  d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
+                  fill={svgColor}
+                />
+              </svg>
+            </button>
+          </div>
+          <div className={styles.title}>
+            <p>Nutrition Diary</p>
+            <button
+              onClick={() => addFood(formattedDate)}
+              className={styles.addFood}
+            >
+              +
+            </button>
+          </div>
+  
+          <div className={styles.foodList}>
+            {foodData.length === 0 ? (
+              <div className={styles.noData}>
+                No meals present in our records..
+              </div>
+            ) : (
+              <SwipeableListComponentFood
+                items={foodData}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+                getTrailingActions={getTrailingActions}
+              />
+            )}
+          </div>
         </div>
-      )}
-      <Navbar />
-    </main>
-  );
+        )}
+        <Navbar />
+      </main>
+    );
 }

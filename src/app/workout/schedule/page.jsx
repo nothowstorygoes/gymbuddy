@@ -82,8 +82,7 @@ function SearchParamsSchedule() {
             console.error("Error fetching workout.json:", error)
           );
       });
-      setLoading(false);
-    }
+      setTimeout(() => setLoading(false), 500);}
   }, [name, user]);
 
   const getExerciseData = (exerciseName) => {
