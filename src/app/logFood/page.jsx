@@ -16,7 +16,7 @@ export default function LogFood() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [foodData, setFoodData] = useState([]);
-  const [chosenMeasure, setChosenMeausure] = useState("");
+  const [chosenMeasure, setChosenMeasure] = useState("");
   const [unit, setUnit] = useState("");
   const router = useRouter();
   const [allData, setAllData] = useState([]);
@@ -52,9 +52,9 @@ export default function LogFood() {
           .then((url) => fetch(url))
           .then((response) => response.json())
           .then((data) => {
-            setChosenMeausure(data.chosenMeasure);
+            setChosenMeasure(data.chosenMeasure);
             if (chosenMeasure === "imperial") {
-              setUnit("libs");
+              setUnit("lbs");
             } else {
               setUnit("g");
             }
@@ -181,7 +181,6 @@ export default function LogFood() {
             width="40px"
             height="40px"
             viewBox="0 0 1024 1024"
-            class="icon"
           >
             <path
               d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z"
@@ -195,7 +194,6 @@ export default function LogFood() {
             width="40px"
             height="40px"
             viewBox="0 0 1024 1024"
-            class="icon"
           >
             <path
               d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
