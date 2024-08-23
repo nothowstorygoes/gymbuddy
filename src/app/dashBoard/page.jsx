@@ -5,7 +5,7 @@ import BarChart from "../components/chart";
 import { useRouter } from "next/navigation";
 import { auth } from "../firebase";
 import { storage } from "../firebase";
-import PieChart  from "../components/macroChart";
+import PieChart from "../components/macroChart";
 import { ref, getDownloadURL } from "firebase/storage";
 import { useState, useEffect } from "react";
 import {
@@ -45,38 +45,54 @@ const HomePage = () => {
   const [carbsColor, setCarbsColor] = useState("");
   const [proteinColor, setProteinColor] = useState("");
   const [fatsColor, setFatsColor] = useState("");
-
+  const [caloriesMsg, setCaloriesMsg] = useState("");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'default';
+    const savedTheme = localStorage.getItem("theme") || "default";
     setTheme(savedTheme);
   }, []);
 
   const getThemeColors = (theme) => {
     switch (theme) {
-      case 'blue':
-        return { pathColor: '#62b6cb', trailColor: '#1b4965', textColor: '#1b4965' };
-      case 'green':
-        return { pathColor: '#a3b18a', trailColor: '#3a5a40', textColor: '#3a5a40' };
-      case 'violet':
-        return { pathColor: '#bbadff', trailColor: '#8187dc', textColor: '#8187dc' };
+      case "blue":
+        return {
+          pathColor: "#62b6cb",
+          trailColor: "#1b4965",
+          textColor: "#1b4965",
+        };
+      case "green":
+        return {
+          pathColor: "#a3b18a",
+          trailColor: "#3a5a40",
+          textColor: "#3a5a40",
+        };
+      case "violet":
+        return {
+          pathColor: "#bbadff",
+          trailColor: "#8187dc",
+          textColor: "#8187dc",
+        };
       default:
-        return { pathColor: '#b2675e', trailColor: '#370909', textColor: '#370909' };
+        return {
+          pathColor: "#b2675e",
+          trailColor: "#370909",
+          textColor: "#370909",
+        };
     }
   };
 
   const customStyles = buildStyles(getThemeColors(theme));
 
   useEffect(() => {
-    if(theme === 'blue') {
+    if (theme === "blue") {
       setCarbsColor("#bee9e8");
       setProteinColor("#00798c");
       setFatsColor("#006ba6");
-    } else if(theme === 'green') {
+    } else if (theme === "green") {
       setCarbsColor("#b5e48c");
       setProteinColor("#168aad");
       setFatsColor("#34a0a4");
-    } else if(theme === 'violet') {
+    } else if (theme === "violet") {
       setCarbsColor("#edf67d");
       setProteinColor("#724cf9");
       setFatsColor("#f896d8");
@@ -86,7 +102,6 @@ const HomePage = () => {
       setFatsColor("rgba(247, 181, 56, 1)");
     }
   }, [theme]);
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -132,6 +147,9 @@ const HomePage = () => {
         router.push("/login");
       }
       setDownloadisDone(true);
+
+      return () => unsubscribe();
+    
     });
 
     return () => unsubscribe();
@@ -153,20 +171,23 @@ const HomePage = () => {
     if (DownloadisDone) {
       const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
       const values = Array(7).fill(0);
-  
+
       // Get the current date
       const currentDate = new Date();
       const currentDay = currentDate.getDay();
-      
+
       // Calculate the date for the Monday of the current week
       const monday = new Date(currentDate);
-      monday.setDate(currentDate.getDate() - (currentDay === 0 ? 6 : currentDay - 1));
-      
+      monday.setDate(
+        currentDate.getDate() - (currentDay === 0 ? 6 : currentDay - 1)
+      );
+
       // Calculate the date for the Sunday of the current week
       const sunday = new Date(monday);
       sunday.setDate(monday.getDate() + 6);
-  
+
       if (Array.isArray(proteinArray)) {
+        console.log("Protein array:", proteinArray);
         proteinArray.forEach((entry) => {
           const date = new Date(entry.date);
           if (date >= monday && date <= sunday) {
@@ -179,7 +200,7 @@ const HomePage = () => {
           }
         });
       }
-  
+
       setProteinIntakeValues(values);
       const total = values.reduce((acc, val) => acc + val, 0);
       const average = values.length ? total / values.length : 0;
@@ -267,8 +288,15 @@ const HomePage = () => {
         );
         setCalories(totalCalories);
         console.log("Total calories:", totalCalories);
+        if (totalCalories <= mGoal && totalCalories >= (mGoal / 3) * 2) {
+          setCaloriesMsg("You are on track with your calories., good job!");
+        }
+        if (totalCalories <= (mGoal / 3) * 2 && totalCalories >= mGoal / 3) {
+          setCaloriesMsg("Go eat something, now!");
+        }
       } else {
         setCalories(0);
+        setCaloriesMsg("You are not eating enough, this is dangerous.");
       }
     }
   }, [proteinArray, DownloadisDone]);
@@ -276,11 +304,11 @@ const HomePage = () => {
   useEffect(() => {
     if (DownloadisDone) {
       const currentDate = new Date().toDateString();
-  
+
       const matchingEntry = proteinArray.find(
         (entry) => new Date(entry.date).toDateString() === currentDate
       );
-  
+
       if (matchingEntry) {
         const totalCarbs = matchingEntry.food.reduce(
           (sum, item) => sum + item.carbo,
@@ -294,7 +322,7 @@ const HomePage = () => {
           (sum, item) => sum + item.protein,
           0
         );
-  
+
         setCarbs(totalCarbs);
         setFats(totalFats);
         setProteins(totalProteins);
@@ -306,61 +334,132 @@ const HomePage = () => {
     }
   }, [proteinArray, DownloadisDone]);
 
+  const messages = [
+    "Recent studies state that, under the right conditions, you could gain a maximum of 2kg of muscle growth in just 5 weeks, exciting right?",
+    "Did you know that sweat is just fat crying? Keep up the good work and you'll see results in no time!",
+    "You miss 100% of the shots you don't take. So go ahead and take that shot, you got this!",
+    "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+    "Go to the f****ing gym! You can do it and you know it!",
+    "The only bad workout is the one that didn't happen. So go ahead and make it happen!",
+    "You are one workout away from a good mood, so go ahead and make it happen!",
+    "You are stronger than you think, so go ahead and prove it to yourself!",
+    "You are one step closer to your goal, keep going!",
+    "Transform your body, transform your life. You got this!",
+    "Great things never come from comfort zones. So go ahead and push yourself!",
+  ];
+
+  const [randomMessage, setRandomMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    setRandomMessage(messages[randomIndex]);
+    const date = new Date();
+    const currentHour = date.getHours();
+
+    if (currentHour >= 22 || currentHour < 1) {
+      if (calories < 1200) {
+        setShowModal(true);
+      } 
+   } 
+  }, [calories]);
+
   if (loading || !user) {
     return <LoadingSpinner />;
   }
 
   return (
     <main className={styles.mainContainer}>
-      <div className={styles.welcomeTitle}>Ehi {username},</div>
-      
-        {loadingProgress ? (
-          ""
-        ) : (
-          <div className={styles.chartsContainer}>
-            <div className={styles.caloriesChart}>
-          <CircularProgressbarWithChildren
-            value={calories}
-            maxValue={mGoal}
-            styles={customStyles}
-          >
-            <p className={styles.caloriesNumber}>{calories} cal</p>
-          </CircularProgressbarWithChildren>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className={styles.mainMainContainer}>
+          <div className={styles.welcomeTitle}>Ehi {username},</div>
+          {calories === 0 ? (
+            <div className={styles.noData}>
+              You haven&apos;t logged any food today,
+              <br /> no cool charts for you!
+            </div>
+          ) : (
+            <div>
+              <div className={styles.chartsContainer}>
+                <div className={styles.caloriesChart}>
+                  <CircularProgressbarWithChildren
+                    value={calories}
+                    maxValue={mGoal}
+                    styles={customStyles}
+                  >
+                    <p className={styles.caloriesNumber}>{calories} cal</p>
+                  </CircularProgressbarWithChildren>
+                </div>
+                <div className={styles.pieChart}>
+                  <PieChart value1={carbs} value2={fats} value3={proteins} />
+                </div>
+              </div>
+
+              <div className={styles.macroGoal}>
+                <p className={styles.carbs} style={{ color: `${carbsColor}` }}>
+                  carbs
+                </p>{" "}
+                &nbsp; &nbsp;{" "}
+                <p className={styles.fats} style={{ color: `${fatsColor}` }}>
+                  fats
+                </p>{" "}
+                &nbsp; &nbsp;{" "}
+                <p
+                  className={styles.proteins}
+                  style={{ color: `${proteinColor}` }}
+                >
+                  proteins
+                </p>
+              </div>
+            </div>
+          )}
+          <div className={styles.caloriesGoal}>
+            Your goal is to eat {mGoal} calories per day. <br /> {caloriesMsg}
           </div>
-          <div className={styles.pieChart}>
-          <PieChart value1={carbs} value2={fats} value3={proteins}/>
+
+          {proteinIntakeValues.length === 0 ? (
+            <div className={styles.noData}>
+              You haven&apos;t logged anything for over a week..
+            </div>
+          ) : (
+            <div className={styles.chartContainer}>
+              <BarChart
+                proteinIntake={info}
+                dataProtein={proteinIntakeValues}
+                chosenMeasure={chosenM}
+              />
+            </div>
+          )}
+          <div className={styles.messageGoal}>
+            {message} Your goal is set to {infoChMs}.
           </div>
-          </div>
-        )}
-        <div className={styles.macroGoal}>
-      <p className={styles.carbs} style={{color : `${carbsColor}`}}>carbs</p> &nbsp; &nbsp;  <p className={styles.fats} style={{color: `${fatsColor}`}}>fats</p> &nbsp;  &nbsp; <p className={styles.proteins} style={{color: `${proteinColor}`}}>proteins</p>
-      </div>
-      
-      <div className={styles.caloriesGoal}>
-        Your goal is to eat {mGoal} calories per day. <br /> Go eat something!
-      </div>
-      
-      <div className={styles.chartContainer}>
-        <BarChart
-          proteinIntake={info}
-          dataProtein={proteinIntakeValues}
-          chosenMeasure={chosenM}
-        />
-      </div>
-      <div className={styles.messageGoal}>
-        {message} Your goal is set to {infoChMs}.
-      </div>
-      <div className={styles.wkNumber}>
-        You worked out&nbsp;&nbsp;
-        <p className={styles.nrWorkout}> {NrWorkout} </p>&nbsp;&nbsp;times this
-        week
-      </div>
-      <div className={styles.wkMessage}>
-        Recent studies states that, under the right conditions, you could gain a
-        maximum of {wkMsg} of muscle growth in just 5 weeks,
-        <br /> exciting right?
-      </div>
-      <Navbar />
+          {NrWorkout === 0 ? (
+            <div className={styles.noData}>
+              You haven&apos;t worked out yet this week..
+            </div>
+          ) : (
+            <div className={styles.wkNumber}>
+              You worked out&nbsp;&nbsp;
+              <p className={styles.nrWorkout}> {NrWorkout} </p>&nbsp;&nbsp;times
+              this week
+            </div>
+          )}
+          <div className={styles.wkMessage}>{randomMessage}</div>
+          <Navbar />
+          {showModal && (
+            <div className={styles.modal}>
+              <div className={styles.modalContent}>
+                <p>You haven&apos;t logged any food today, eating less than 1200 calories per day is a dangerous habit.</p>
+                <div className={styles.buttonContainer}>
+                <button onClick={() => setShowModal(false)} className={styles.closeButton}>Close</button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>     
+      )}
     </main>
   );
 };

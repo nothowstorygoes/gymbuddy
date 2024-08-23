@@ -16,6 +16,7 @@ function EditScheduleChild() {
   const router = useRouter();
   const scheduleName = search.get("name");
   const [schedule, setSchedule] = useState(null);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -119,6 +120,52 @@ function EditScheduleChild() {
     // You can send savedData to a server or save it locally
   };
 
+  const handleSaveWithChanges = () => {
+    const scheduleRef = ref(storage, `${user.uid}/schedule.json`);
+    getDownloadURL(scheduleRef)
+      .then((url) => fetch(url))
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // Find the schedule with the matching name
+        const scheduleIndex = data.findIndex(
+          (schedule) => schedule.name === scheduleName
+        );
+        if (scheduleIndex !== -1) {
+          // Remove the old schedule
+          data.splice(scheduleIndex, 1);
+        }
+        // Set the new schedule
+        const newSchedule = {
+          name: schedule.name,
+          exercises: schedule.exercises.map((exercise) => ({
+            id: exercise.id,
+            part: exercise.part,
+            name: exercise.name,
+            sets: exercise.sets.map((set) => ({
+              reps: set.reps,
+              weight: set.weight,
+            })),
+          })),
+        };
+        // Add the new schedule to the data
+        data.push(newSchedule);
+        // Convert the updated data to JSON
+        const updatedDataJson = JSON.stringify(data);
+        // Upload the new data to schedule.json
+        uploadString(scheduleRef, updatedDataJson)
+          .then(() => {
+            console.log("Schedule updated successfully");
+            handleSave();
+          })
+          .catch((error) => {
+            console.error("Error uploading updated schedule:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error fetching schedule.json:", error);
+      });
+  };
 
   return (
     <main className={styles.mainContainer}>
@@ -197,10 +244,22 @@ function EditScheduleChild() {
       <button
         type="button"
         className={styles.savedSchedule}
-        onClick={handleSave}
+        onClick={()=> setModal(true)}
       >
         Save Schedule
       </button>
+      {modal && (
+            <div className={styles.modal}>
+              <div className={styles.modalContent}>
+                <p>Do you wish to save the changes to the schedule <b>permanently</b>?</p>
+                <div className={styles.buttonContainer}>
+                <button onClick={() => {setModal(false) ; handleSave()}} className={styles.closeButton}>No</button>
+                <button onClick={() => {setModal(false) ; handleSaveWithChanges()}} className={styles.saveButton}>Yes</button>
+
+                </div>
+              </div>
+            </div>
+          )}
     </main>
   );
 }

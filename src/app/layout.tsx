@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -185,6 +186,8 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/> 
+
         <meta name="apple-mobile-web-app-title" content="GymBuddy" />
         <link rel="manifest" href="/gymbuddy/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

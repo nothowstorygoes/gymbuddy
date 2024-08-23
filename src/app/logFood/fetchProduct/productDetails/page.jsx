@@ -137,8 +137,29 @@ const ProductDetails = () => {
       const response = await fetch(url);
       const data = await response.json();
 
+      // Get the current date
+      const currentDate = new Date();
+
+      const filteredData = data.filter((entry) => {
+        const entryDate = new Date(entry.date);
+        const diffTime = Math.abs(currentDate - entryDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays > 14) {
+          console.log("Deleted entry (older than 14 days):", entry);
+          return false;
+        }
+        
+        if (entry.food && entry.food.length === 0) {
+          console.log("Deleted entry (empty food property):", entry);
+          return false;
+        }
+        
+        return true;
+      });
+
       // Check if there is an entry with the current date
-      let dateEntry = data.find((entry) => entry.date === date);
+      let dateEntry = filteredData.find((entry) => entry.date === date);
 
       if (dateEntry) {
         // Append the new product to the existing entry
@@ -149,11 +170,11 @@ const ProductDetails = () => {
           date: date,
           food: [productData],
         };
-        data.push(dateEntry);
+        filteredData.push(dateEntry);
       }
 
       // Convert the updated data to a JSON string
-      const updatedData = JSON.stringify(data);
+      const updatedData = JSON.stringify(filteredData);
 
       // Upload the updated data back to the storage using uploadString
       await uploadString(foodRef, updatedData);

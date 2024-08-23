@@ -98,7 +98,9 @@ export default function Settings() {
 
   return (
     <main className={styles.mainContainer}>
-      {loading ? <LoadingSpinner /> : ""}
+      {loading ? <LoadingSpinner /> : (
+        <div>
+      
       <div className={styles.backButtonContainer}>
         <button className={styles.backButton} onClick={() => router.back()}>
           Back
@@ -166,14 +168,15 @@ export default function Settings() {
               Space Violet
             </button>
           </div>
+          </div>
           <div className={styles.settingsItem}>
-            <h2>Log Out</h2>
             <div className={styles.logOutContainer}>
               <button onClick={logOut} className={styles.logout}>Log Out</button>
             </div>
-          </div>
         </div>
       </div>
+    </div>
+      )}
       <Navbar/>
     </main>
   );
