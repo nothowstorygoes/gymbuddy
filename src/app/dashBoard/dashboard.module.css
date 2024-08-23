@@ -12,6 +12,13 @@
   width: 90vw;
 }
 
+.mainMainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .mainContainer {
   display: flex;
   justify-content: center;
@@ -64,7 +71,7 @@
   width: 80vw;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow */
-margin-bottom: 20vh;
+  margin-bottom: 20vh;
   background-color: var(--secondary-lowOpacity-color);
   border-radius: 15px;
   line-height: 120%;
@@ -85,7 +92,7 @@ margin-bottom: 20vh;
   align-items: center;
   flex-direction: row;
   margin-top: 10vh;
-  margin-bottom:20vh;
+  margin-bottom: 20vh;
 }
 
 .buttonLogProtein {
@@ -114,27 +121,27 @@ margin-bottom: 20vh;
   margin-left: 10px;
 }
 
-.caloriesChart{
+.caloriesChart {
   width: 30vw;
   height: 30vw;
 }
 
-.pieChart{
+.pieChart {
   width: 30vw;
   height: 30vw;
-  margin-left:10vw;
+  margin-left: 10vw;
 }
 
-.chartsContainer{
+.chartsContainer {
   display: flex;
   flex-direction: row;
-  margin-top:5vh;
-  margin-bottom:1vh;
+  margin-top: 5vh;
+  margin-bottom: 1vh;
   justify-content: center;
   align-items: center;
 }
 
-.caloriesNumber{
+.caloriesNumber {
   font-size: 1.5rem;
   color: #fff;
   font-family: "NTR", sans-serif;
@@ -143,7 +150,7 @@ margin-bottom: 20vh;
   text-align: center;
 }
 
-.caloriesGoal{
+.caloriesGoal {
   width: 80vw;
   padding: 10px;
   background-color: var(--secondary-lowOpacity-color);
@@ -158,19 +165,19 @@ margin-bottom: 20vh;
   margin-bottom: 3vh;
 }
 
-.carbs{
-  color : rgba(158, 42, 43, 1);
+.carbs {
+  color: rgba(158, 42, 43, 1);
 }
 
-.fats{
-  color : rgba(216, 87, 42, 1);
+.fats {
+  color: rgba(216, 87, 42, 1);
 }
 
-.proteins{
+.proteins {
   color: rgba(247, 181, 56, 1);
 }
 
-.macroGoal{
+.macroGoal {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -185,4 +192,82 @@ margin-bottom: 20vh;
   font-size: 1.2rem;
   font-weight: 100;
   line-height: 120%;
+}
+
+.noData {
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: var(--secondary-lowOpacity-color);
+  border: 2px solid #fff;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: "NTR", sans-serif;
+  font-weight: 100;
+  width: 80vw;
+  height: 15vh;
+  position: relative;
+  text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 5vw;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  height: 30vh;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  margin-top: -3vh;
+}
+
+.modalContent p {
+  font-family: "NTR", sans-serif;
+  font-size: 1.4rem;
+  margin-top: 20vh;
+  margin-left: 4vw;
+  color: var(--primary-color);
+  /* margin: 1vh 3vh; */
+  text-align: center;
+  margin-right: 4vw;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2vh;
+}
+
+.closeButton {
+  font-family: "NTR", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  position: relative;
+  font-weight: 300;
+  line-height: 0%;
+  height: 10vw;
+  margin-top: 0vh;
+  background: var(--secondary-color);
 }

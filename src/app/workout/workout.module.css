@@ -133,3 +133,75 @@
     font-weight: 100;
     text-align: center;
 }
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .modalContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 22vh;
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    margin-top: -3vh;
+  }
+  
+  .modalContent p{
+    font-family: "NTR", sans-serif;
+    font-size: 1.4rem;
+    margin-top: 1vh;
+    margin-left: 4vw;
+    color: var(--primary-color);
+    /* margin: 1vh 3vh; */
+    text-align: center;
+    margin-right: 4vw;
+  }
+  
+  .buttonContainer{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .closeButton{
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    position: relative;
+    font-weight: 300;
+    line-height: 0%;
+    height: 10vw;
+    margin-top: 0vh;
+    background: var(--secondary-color);
+  }
+
+  .deleteButton
+{
+    font-family: "NTR", sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    position: relative;
+    font-weight: 300;
+    line-height: 0%;
+    height: 10vw;
+    margin-top: 0vh;
+    background: red ;
+    margin-left: 20vw;
+}

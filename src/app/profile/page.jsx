@@ -12,6 +12,8 @@ import styles from "./profile.module.css";
 import Navbar from "../components/navbar/navbar";
 import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 import { useRouter } from "next/navigation";
+import { CircularProgressbar , buildStyles} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -23,13 +25,47 @@ export default function Profile() {
   const [formValues, setFormValues] = useState({});
   const router = useRouter();
   const [currentTheme, setCurrentTheme] = useState("");
+  const [uploadProgress, setUploadProgress] = useState(null);
   const [svgColor, setSvgColor] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     setCurrentTheme(theme);
   }, []);
+
+  
+  const getThemeColors = (theme) => {
+    switch (theme) {
+      case "blue":
+        return {
+          pathColor: "#62b6cb",
+          trailColor: "#ffffff",
+          textColor: "#1b4965",
+        };
+      case "green":
+        return {
+          pathColor: "#a3b18a",
+          trailColor: "#ffffff",
+          textColor: "#3a5a40",
+        };
+      case "violet":
+        return {
+          pathColor: "#bbadff",
+          trailColor: "#ffffff",
+          textColor: "#8187dc",
+        };
+      default:
+        return {
+          pathColor: "#b2675e",
+          trailColor: "#ffffff",
+          textColor: "#370909",
+        };
+    }
+  };
+
+  const customStyles = buildStyles(getThemeColors(currentTheme));
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -111,14 +147,15 @@ export default function Profile() {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress); // Update upload progress
           console.log(`Upload is ${progress}% done`);
         },
         (error) => console.error(error),
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setTempPropic(downloadURL);
+            setUploadProgress(null); // Reset upload progress after completion
           });
         }
       );
@@ -221,7 +258,13 @@ export default function Profile() {
             <p className={styles.greeting}>Good to see you, </p>
             <p className={styles.name}> &nbsp;{info.username}</p>
           </div>
+          
           <div className={styles.propicContainer}>
+          {uploadProgress !== null && (
+            <div className={styles.progressContainer}>
+            <CircularProgressbar maxValue={100} value={uploadProgress} styles={customStyles}/>
+            </div>
+          )}
             <img
               src={tempPropic}
               alt="Profile Picture"
