@@ -181,14 +181,14 @@ export default function SignUp() {
             className={styles.provider}
             onClick={() => handleProviderClick("email")}
           >
-            <img src="/gymbuddy/email.png" className={styles.providerIcon} />
+            <img src="/gymbuddy/assets/email.png" className={styles.providerIcon} />
             <p>email and password</p>
           </button>
           <button
             className={styles.provider}
             onClick={() => handleProviderClick("google")}
           >
-            <img src="/gymbuddy/google.png" className={styles.providerIcon} />
+            <img src="/gymbuddy/assets/google.png" className={styles.providerIcon} />
             <p>google</p>
           </button>
         </div>

@@ -16,7 +16,7 @@ export default function Navbar() {
         if (storedPropic) {
           setPropic(storedPropic);
         } else {
-          setPropic("/gymbuddy/profile.png");
+          setPropic("/gymbuddy/assets/profile.png");
         }
       }
     });
@@ -28,15 +28,15 @@ export default function Navbar() {
     <div className={styles.navbar}>
       <div className={styles.navbarContainer}>
         <a href="/gymbuddy/dashBoard" className={styles.navbarButton}>
-          <img src="/gymbuddy/dashboard.png" className={styles.navbarImg} loading="lazy" />
+          <img src="/gymbuddy/assets/dashboard.png" className={styles.navbarImg} loading="lazy" />
           <p>dashboard</p>
         </a>
         <a href="/gymbuddy/workout" className={styles.navbarButton}>
-          <img src="/gymbuddy/logWorkout.png" className={styles.navbarImg} loading="lazy" />
+          <img src="/gymbuddy/assets/logWorkout.png" className={styles.navbarImg} loading="lazy" />
           <p>work out</p>
         </a>
         <a href="/gymbuddy/logFood" className={styles.navbarButton}>
-          <img src="/gymbuddy/logProtein.png" className={styles.navbarImg} loading="lazy" />
+          <img src="/gymbuddy/assets/logProtein.png" className={styles.navbarImg} loading="lazy" />
           <p>diary</p>
         </a>
         <a href="/gymbuddy/profile" className={styles.navbarButton}>
