@@ -141,7 +141,7 @@ export default function Login() {
             </div>
           </form>
             <button onClick={handleGoogleLogin} className={styles.googleLoginButton}>
-                <img src="/gymbuddy/google.png"/> Login with Google
+                <img src="/gymbuddy/assets/google.png"/> Login with Google
             </button>
             <button onClick={() => router.push("/signUp")} className={styles.signupButton}>
                 Sign up

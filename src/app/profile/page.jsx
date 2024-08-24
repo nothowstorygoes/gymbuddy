@@ -98,7 +98,7 @@ export default function Profile() {
 
         if (info.propic === false) {
           setInfo((prevInfo) => ({ ...prevInfo, propic: "" }));
-          setTempPropic("/gymbuddy/profile.png");
+          setTempPropic("/gymbuddy/assets/profile.png");
           setTimeout(() => setLoading(false), 500);
         } else {
           getDownloadURL(ref(storage, `${user.uid}/proPic.png`))
