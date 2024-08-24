@@ -17,8 +17,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18",
-    "react-swipeable-list": "^1.9.3",
-    "terser": "^5.31.6"
+    "react-swipeable-list": "^1.9.3"
   },
   "devDependencies": {
     "@types/node": "^20",
