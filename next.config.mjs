@@ -8,6 +8,17 @@ const withPWA = withPWAInit({
   },
   runtimeCaching: [
     {
+      urlPattern: /^\/~offline\/.*/i,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'offline-cache',
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
+        },
+      },
+    },
+    {
       urlPattern: /.*/i,
       handler: 'NetworkOnly',
       options: {

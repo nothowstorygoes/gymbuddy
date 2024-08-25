@@ -96,6 +96,10 @@ export default function Settings() {
     localStorage.setItem("theme", theme);
   }
 
+  const goOffline = () => {
+    router.push("/~offline");
+  }
+
   return (
     <main className={styles.mainContainer}>
       {loading ? <LoadingSpinner /> : (
@@ -104,6 +108,9 @@ export default function Settings() {
       <div className={styles.backButtonContainer}>
         <button className={styles.backButton} onClick={() => router.back()}>
           Back
+        </button>
+        <button className={styles.offlineButton} onClick={goOffline}>
+          Go Offline
         </button>
       </div>
 
