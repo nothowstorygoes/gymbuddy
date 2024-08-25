@@ -19,21 +19,14 @@ const withPWA = withPWAInit({
       },
     },
     {
-      urlPattern: /.*/i,
-      handler: 'NetworkOnly',
+      urlPattern: /^\/~offline\/exerciseListAll\/.*/i,
+      handler: 'CacheFirst',
       options: {
-        cacheName: 'network-only',
-        networkTimeoutSeconds: 10,
-        plugins: [
-          {
-            cacheWillUpdate: async ({ request, response, event }) => {
-              if (!response || response.status !== 200) {
-                return caches.match('/~offline');
-              }
-              return response;
-            },
-          },
-        ],
+        cacheName: 'offline-cache',
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month,
+        },
       },
     },
   ],
