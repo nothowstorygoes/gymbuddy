@@ -9,6 +9,13 @@
 # testing
 /coverage
 
+/public/fallback-*.js
+/public/sw.js 
+/public/workbox-*.js
+/public/workbox-*.js.map
+/public/sw.js.map
+/public/fallback-development.js
+
 # next.js
 /.next/
 /out/
@@ -34,3 +41,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+public/sw.js
