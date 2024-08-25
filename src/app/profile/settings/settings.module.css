@@ -108,6 +108,22 @@
     align-items: center;
     width: 15vw;
     border-radius: 15px;
+    margin-right: 3vw;
+    margin-bottom: 3vw;
+    height: 5vh;
+    background-color: #f8f4e3;
+    color: var(--primary-color);
+    font-family: "NTR", sans-serif;
+    font-size: 1.2rem;
+    line-height: 120%;
+  }
+
+  .offlineButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 27vw;
+    border-radius: 15px;
     margin-right: 10vw;
     margin-bottom: 3vw;
     height: 5vh;

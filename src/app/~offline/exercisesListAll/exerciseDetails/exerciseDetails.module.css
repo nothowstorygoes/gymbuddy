@@ -1,0 +1,66 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title{
+    font-size: 2.5rem;
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    font-weight: 100;
+    margin-bottom: 2rem;
+}
+
+.exerciseContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10vh;
+}
+
+.image{
+    border-radius: 15px;
+}
+
+.instruction{
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 100%;
+    width: 80vw;
+    font-family: "NTR", sans-serif;
+    font-weight: 100;
+}
+
+.backButtonContainer {
+    position: sticky;
+    top: -7vh;
+    height: 15vh;
+    display: flex;
+    padding: 1vh;
+    width: 100%;
+    flex-direction: row;
+    background-color: var(--primary-color);
+    align-items: flex-end;
+    justify-content: flex-end;
+    }
+  
+  
+    
+    .backButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15vw;
+      border-radius: 15px;
+      margin-right: 3vw;
+      margin-bottom: 3vw;
+      height: 5vh;
+      background-color: #f8f4e3;
+      color: var(--primary-color);
+      font-family: "NTR", sans-serif;
+      font-size: 1.2rem;
+      line-height: 120%;
+    }

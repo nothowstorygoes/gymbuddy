@@ -112,6 +112,63 @@ function SearchParamsSchedule() {
     const params = new URLSearchParams({name: name, part: part});
     router.push(`/workout/schedule/exercise?${params.toString()}`)
   }
+
+  const handleSaveOffline = async () => {
+   
+    const fetchImageAsBase64 = async (url) => {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+      });
+  };
+
+  const fetchInstructions = async (part, name) => {
+    const instructionsRef = ref(storage, `exercises/${part}.json`);
+    const instructionsUrl = await getDownloadURL(instructionsRef);
+    const response = await fetch(instructionsUrl);
+    const data = await response.json();
+    const exercise = data.find(exercise => exercise.name === name);
+    return exercise ? exercise.instructions : null;
+};
+
+  const updatedExercises = await Promise.all(matchingSchedule.exercises.map(async (exercise) => {
+      const imageRef = ref(storage, `exercises/gifs/${exercise.name}.gif`);
+      const imageUrl = await getDownloadURL(imageRef);
+      const base64Image = await fetchImageAsBase64(imageUrl);
+      const instructions = await fetchInstructions(exercise.part, exercise.name);
+
+      return {
+          ...exercise,
+          image: base64Image,
+          instructions
+      };
+  }));
+
+  const updatedSchedule = {
+      ...matchingSchedule,
+      exercises: updatedExercises
+  };
+
+// Retrieve existing schedules from localStorage
+const existingSchedules = localStorage.getItem("schedule");
+let schedulesArray = [];
+
+if (existingSchedules) {
+    try {
+        schedulesArray = JSON.parse(existingSchedules);
+    } catch (error) {
+        console.error("Failed to parse existing schedules from localStorage:", error);
+    }
+}
+
+// Append the new schedule object to the array
+schedulesArray.push(updatedSchedule);
+
+// Save the updated array back to localStorage
+localStorage.setItem("schedule", JSON.stringify(schedulesArray));};
   
   return (
     <main className={styles.mainContainer}>
@@ -120,6 +177,7 @@ function SearchParamsSchedule() {
         <div className={styles.stickyButton} onClick={handleBack}>
           Back
         </div>
+       
       </div>
       {matchingSchedule ? (
         <div className={styles.scheduleDetails}>
@@ -149,6 +207,9 @@ function SearchParamsSchedule() {
       ) : (
         ""
       )}
+       <div className={styles.offlineButton} onClick={handleSaveOffline}>
+          Download for offline use
+        </div>
       <Navbar />
     </main>
   );
