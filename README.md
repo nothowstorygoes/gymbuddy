@@ -3,6 +3,10 @@
 
 Welcome to **gymBuddy**! This Progressive Web App (PWA) is designed to help you stay on top of your fitness goals, whether it's tracking your meals or planning your workouts. With an extensive exercise database and integrated nutritional information, gymBuddy makes managing your health easier than ever.
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/nothowstorygoes/gymbuddy/nextjs.yml) ![GitHub package.json version](https://img.shields.io/github/package-json/v/nothowstorygoes/gymbuddy)
+
+
+
 # 🚀 Features
 
 
