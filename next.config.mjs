@@ -4,7 +4,9 @@ const withPWA = withPWAInit({
   dest: "public",
   register: true,
   fallbacks: {
-    document: '/~offline', // Fallback for all page requests
+    document: '/~offline',
+    document: '/~offline/exerciseListAll',
+    document: '/~offline/exerciseListAll/exerciseDetails' // Fallback for all page requests
   },
   runtimeCaching: [
     {
