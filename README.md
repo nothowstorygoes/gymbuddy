@@ -23,7 +23,6 @@ Welcome to **gymBuddy**! This Progressive Web App (PWA) is designed to help you 
 ### 🎯 Easy to Use
 - **User-Friendly Interface**: Navigate through the app seamlessly with a clean and intuitive design.
 - **Responsive Design**: Access gymBuddy from your smartphone to use it!
-- **Offline Support**: As a PWA, gymBuddy offers offline support for your schedule, ensuring you can check out proper form of an exercise even if there is no signal in your gym!
 
   ![gym](https://github.com/user-attachments/assets/ac8e4ead-0055-4784-83c3-016771b222a2)
 
