@@ -1,0 +1,27 @@
+.offlineContainer{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.offline{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+
+.offline h1{
+    font-size: 2rem;
+    color: #fff;
+    font-family: "NTR", sans-serif;
+    margin-bottom: 5vh;
+}
+
+.offline p{
+    font-size: 1rem;
+    color: var(--secondary-color);
+    font-family: "NTR", sans-serif;
+}

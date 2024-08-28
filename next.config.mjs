@@ -4,34 +4,8 @@ const withPWA = withPWAInit({
   dest: "public",
   register: true,
   fallbacks: {
-    document: '/~offline',
-    document: '/~offline/exerciseListAll',
-    document: '/~offline/exerciseListAll/exerciseDetails' // Fallback for all page requests
+    document: "/~offline",
   },
-  runtimeCaching: [
-    {
-      urlPattern: /^\/~offline\/.*/i,
-      handler: 'CacheFirst',
-      options: {
-        cacheName: 'offline-cache',
-        expiration: {
-          maxEntries: 50,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
-        },
-      },
-    },
-    {
-      urlPattern: /^\/~offline\/exerciseListAll\/.*/i,
-      handler: 'CacheFirst',
-      options: {
-        cacheName: 'offline-cache',
-        expiration: {
-          maxEntries: 50,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month,
-        },
-      },
-    },
-  ],
 });
 
 export default withPWA({
