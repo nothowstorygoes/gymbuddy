@@ -109,9 +109,6 @@ export default function Settings() {
         <button className={styles.backButton} onClick={() => router.back()}>
           Back
         </button>
-        <button className={styles.offlineButton} onClick={goOffline}>
-          Go Offline
-        </button>
       </div>
 
       <div className={styles.settingsContainer}>

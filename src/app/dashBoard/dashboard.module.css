@@ -71,7 +71,7 @@
   width: 80vw;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added shadow */
-  margin-bottom: 20vh;
+  margin-bottom: 10vh;
   background-color: var(--secondary-lowOpacity-color);
   border-radius: 15px;
   line-height: 120%;
@@ -270,4 +270,79 @@
   height: 10vw;
   margin-top: 0vh;
   background: var(--secondary-color);
+}
+
+.weightChart{
+  width: 80vw;
+  height: 30vh;
+  margin-bottom: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input{
+  width: 50vw;
+  height: 5vh;
+  margin-top: 22vh;
+  border-radius: 15px;
+  border: 1px solid var(--secondary-color);
+  padding: 10px;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+
+.buttonSave{
+  width: 50vw;
+  height: 5vh;
+  margin-top: 2vh;
+  border-radius: 15px;
+  padding: 10px;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.buttonClose{
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  margin-top: 2vh;
+  border-radius: 15px;
+  padding: 10px;
+  font-family: "NTR", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 100;
+  border: 1px solid var(--secondary-color);
+  background-color: #fff;;
+  color: var(--primary-color);
+}
+
+.buttonContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+}
+
+.logWeightButton{
+  width: 40vw;
+  height: 7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-lowOpacity-color);
+  border-radius: 15px;
+  border: 1px solid var(--secondary-color);
+  margin-top: 2vh;
 }

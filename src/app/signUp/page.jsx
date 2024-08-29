@@ -119,13 +119,16 @@ export default function SignUp() {
 
     const wk = [];
     const fd = [];     
+    const w = [{"weight" : weight}];
     const sc = [];
     const uid = auth.currentUser.uid;
+    const weightRef = ref(storage, `${uid}/weight.json`);
     const userRef = ref(storage, `${uid}/info.json`);
     const userWk = ref(storage, `${uid}/workout.json` );
     const userSc = ref(storage, `${uid}/schedule.json`);
     const userFd = ref(storage, `${uid}/food.json`)
     await uploadString(userRef, JSON.stringify(userInfo));
+    await uploadString(weightRef, JSON.stringify(w));
     await uploadString(userWk, JSON.stringify(wk));
     await uploadString(userSc, JSON.stringify(sc));
     await uploadString(userFd, JSON.stringify(fd));

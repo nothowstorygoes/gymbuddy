@@ -2,11 +2,12 @@
 "use client";
 import React from "react";
 import BarChart from "../components/chart";
+import WeightChart from "../components/weightChart";
 import { useRouter } from "next/navigation";
 import { auth } from "../firebase";
 import { storage } from "../firebase";
 import PieChart from "../components/macroChart";
-import { ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL, uploadString } from "firebase/storage";
 import { useState, useEffect } from "react";
 import {
   CircularProgressbarWithChildren,
@@ -46,6 +47,10 @@ const HomePage = () => {
   const [proteinColor, setProteinColor] = useState("");
   const [fatsColor, setFatsColor] = useState("");
   const [caloriesMsg, setCaloriesMsg] = useState("");
+  const [weightArray, setWeightArray] = useState([]);
+  const [newWeight, setNewWeight] = useState(0);
+  const [showWeightModal, setShowWeightModal] = useState(false);
+  const [infoComplete, setInfoComplete] = useState([]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "default";
@@ -114,6 +119,7 @@ const HomePage = () => {
           .then((response) => response.json())
           .then((data) => {
             const proteinIntake = data.proteinIntake;
+            setInfoComplete(data);
             setInfo(proteinIntake);
             setUsername(data.username);
             setChosenM(data.chosenMeasure);
@@ -143,6 +149,18 @@ const HomePage = () => {
           .catch((error) => {
             console.error("Error fetching the workout.json data:", error);
           });
+        const weightRef = ref(storage, `${user.uid}/weight.json`);
+        getDownloadURL(weightRef)
+          .then((url) => fetch(url))
+          .then((response) => response.json())
+          .then((data) => {
+            setWeightArray(data);
+            console.table(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching the weight.json data:", error);
+          }
+        );
       } else {
         router.push("/login");
       }
@@ -364,6 +382,71 @@ const HomePage = () => {
    } 
   }, [calories]);
 
+  
+
+  const weightUpdate = () => {
+    const currentDate = new Date().toDateString();
+    const newWeightEntry = { date: currentDate, weight: parseInt(newWeight) };
+    const updatedWeightArray = [...weightArray];
+    const existingEntryIndex = updatedWeightArray.findIndex(
+      (entry) => new Date(entry.date).toDateString() === currentDate
+    );
+
+    if (existingEntryIndex !== -1) {
+      updatedWeightArray[existingEntryIndex] = newWeightEntry;
+    } else {
+      updatedWeightArray.push(newWeightEntry);
+    }
+
+    const weightRef = ref(storage, `${user.uid}/weight.json`);
+    const updatedWeightData = JSON.stringify(updatedWeightArray);
+    uploadString(weightRef, updatedWeightData)
+      .then(() => {
+        console.log("Weight data updated successfully");
+        setWeightArray(updatedWeightArray);
+        setShowWeightModal(false);
+      })
+      .catch((error) => {
+        console.error("Error updating weight data:", error);
+      });
+        const basalSex = infoComplete.sex === "M" ? 5 : -161;
+    const mBasalW =
+      infoComplete.chosenMeasure === "imperial"
+        ? parseFloat(newWeight) / 2.2
+        : parseFloat(newWeight);
+    const mBasalH =
+      infoComplete.chosenMeasure === "imperial"
+        ? parseFloat(infoComplete.height) * 2.54
+        : parseFloat(infoComplete.height);
+    const activityLevel = [1.2, 1.375, 1.55, 1.725][
+      Math.min(Math.floor(infoComplete.goal / 2), 3)
+    ];
+    const goalLevel =
+    infoComplete.activity === "Cutting"
+        ? -500
+        : infoComplete.activity === "Bulking"
+        ? 500
+        : 0;
+    const mBasal =
+      (10 * mBasalW + 6.25 * mBasalH - 5 * infoComplete.age + basalSex) * activityLevel;
+    const proteinIntake = Math.floor(((mBasal + goalLevel) * 30) / 100 / 4);
+    const updatedInfo = {
+      ...infoComplete,
+      weight: newWeight,
+      mBasal: Math.floor(mBasal),
+      proteinIntake,
+    };
+
+    const infoRef = ref(storage, `${user.uid}/info.json`);
+    uploadString(infoRef, JSON.stringify(updatedInfo))
+      .then(() => {
+        console.log("Info data updated successfully");
+      })
+      .catch((error) => {
+        console.error("Error updating info data:", error);
+      });
+  };
+
   if (loading || !user) {
     return <LoadingSpinner />;
   }
@@ -447,6 +530,10 @@ const HomePage = () => {
             </div>
           )}
           <div className={styles.wkMessage}>{randomMessage}</div>
+          <div className={styles.weightChart}>
+            <WeightChart datas={weightArray}/>
+            <button onClick={()=> setShowWeightModal(true)} className={styles.logWeightButton}>Log Weight</button>
+          </div>
           <Navbar />
           {showModal && (
             <div className={styles.modal}>
@@ -454,6 +541,17 @@ const HomePage = () => {
                 <p>You haven&apos;t logged any food today, eating less than 1200 calories per day is a dangerous habit.</p>
                 <div className={styles.buttonContainer}>
                 <button onClick={() => setShowModal(false)} className={styles.closeButton}>Close</button>
+                </div>
+              </div>
+            </div>
+          )}
+          {showWeightModal && (
+            <div className={styles.modal}>
+              <div className={styles.modalContent}>
+                <input type="number" placeholder="Enter your weight" onChange={(e) => setNewWeight(e.target.value)} className={styles.input}/>
+                <div className={styles.buttonContainer}>
+                <button onClick={() => weightUpdate()} className={styles.buttonSave}>Save</button>
+                <button onClick={() => setShowWeightModal(false)} className={styles.buttonClose}>Close</button>
                 </div>
               </div>
             </div>
