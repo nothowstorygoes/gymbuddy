@@ -14,6 +14,7 @@ import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 import { useRouter } from "next/navigation";
 import { CircularProgressbar , buildStyles} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import useUpdateInfoStats from "../components/updateInfoStats";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -187,33 +188,7 @@ export default function Profile() {
     }
 
     if (isChanged) {
-      const basalSex = info.sex === "M" ? 5 : -161;
-      const mBasalW =
-        info.chosenMeasure === "imperial"
-          ? parseFloat(updatedInfo.weight) / 2.2
-          : parseFloat(updatedInfo.weight);
-      const mBasalH =
-        info.chosenMeasure === "imperial"
-          ? parseFloat(updatedInfo.height) * 2.54
-          : parseFloat(updatedInfo.height);
-      const activityLevel = [1.2, 1.375, 1.55, 1.725][
-        Math.min(Math.floor(updatedInfo.goal / 2), 3)
-      ];
-      const goalLevel =
-        updatedInfo.activity === "Cutting"
-          ? -500
-          : updatedInfo.activity === "Bulking"
-          ? 500
-          : 0;
-      const mBasal =
-        (10 * mBasalW + 6.25 * mBasalH - 5 * info.age + basalSex) *
-        activityLevel;
-      const proteinIntake = Math.floor(((mBasal + goalLevel) * 30) / 100 / 4);
-      updatedInfo.mBasal = Math.floor(mBasal);
-      updatedInfo.proteinIntake = proteinIntake;
-      setmGoal(Math.floor(mBasal + goalLevel));
-      const infoRef = ref(storage, `${user.uid}/info.json`);
-      await uploadString(infoRef, JSON.stringify(updatedInfo));
+      useUpdateInfoStats(user.uid);
       setInfo(updatedInfo);
       setIsModalVisible(true);
       setTimeout(() => setIsModalVisible(false), 1000);
@@ -310,17 +285,7 @@ export default function Profile() {
                   />
                 </div>
                 <div className={styles.variableInput}>
-                  <label className={styles.variable2}>Weight</label>
-                  <input
-                    type="number"
-                    className={styles.input}
-                    name="weight"
-                    value={formValues.weight}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className={styles.variableInput}>
-                  <label className={styles.variable}>Height</label>
+                  <label className={styles.variable2}>Height</label>
                   <input
                     type="number"
                     className={styles.input}
@@ -330,7 +295,7 @@ export default function Profile() {
                   />
                 </div>
                 <div className={styles.variableInput}>
-                  <label className={styles.variable2}>Activity level</label>
+                  <label className={styles.variable}>Activity level</label>
                   <input
                     type="number"
                     className={styles.input}
