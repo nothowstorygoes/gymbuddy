@@ -14,7 +14,6 @@ import LoadingSpinner from "../components/loadingSpinner/loadingSpinner";
 import { useRouter } from "next/navigation";
 import { CircularProgressbar , buildStyles} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import useUpdateInfoStats from "../components/updateInfoStats";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -188,8 +187,44 @@ export default function Profile() {
     }
 
     if (isChanged) {
-      useUpdateInfoStats(user.uid);
-      setInfo(updatedInfo);
+      const basalSex = info.sex === "M" ? 5 : -161;
+      const mBasalW =
+      info.chosenMeasure === "imperial"
+          ? parseFloat(info.weight) / 2.2
+          : parseFloat(info.weight);
+      const mBasalH =
+      info.chosenMeasure === "imperial"
+          ? parseFloat(formValues.height) * 2.54
+          : parseFloat(formValues.height);
+      const activityLevel = [1.2, 1.375, 1.55, 1.725][
+        Math.min(Math.floor(formValues.goal / 2), 3)
+      ];
+      const goalLevel =
+      formValues.activity === "Cutting"
+          ? -500
+          : formValues.activity === "Bulking"
+          ? 500
+          : 0;
+      const mBasal =
+        (10 * mBasalW + 6.25 * mBasalH - 5 * info.age + basalSex) * activityLevel;
+      const proteinIntake = Math.floor(((mBasal + goalLevel) * 30) / 100 / 4);
+      setmGoal(Math.floor(mBasal + goalLevel));
+      const updatedInfo = {
+        ...info,
+        height: formValues.height,
+        activity: formValues.activity,
+        mBasal: Math.floor(mBasal),
+        proteinIntake,
+      };
+  
+      const infoRef = ref(storage, `${user.uid}/info.json`);
+      uploadString(infoRef, JSON.stringify(updatedInfo))
+        .then(() => {
+          console.log("Info data updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating info data:", error);
+        });      setInfo(updatedInfo);
       setIsModalVisible(true);
       setTimeout(() => setIsModalVisible(false), 1000);
     }
