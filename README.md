@@ -24,7 +24,7 @@ Welcome to **gymBuddy**! This Progressive Web App (PWA) is designed to help you 
 - **User-Friendly Interface**: Navigate through the app seamlessly with a clean and intuitive design.
 - **Responsive Design**: Access gymBuddy from your smartphone to use it!
 
-  ![gym](https://github.com/user-attachments/assets/ac8e4ead-0055-4784-83c3-016771b222a2)
+![bannerGym](https://github.com/user-attachments/assets/a68bd2fa-0fa7-4382-9f4b-5d90442f7cf5)
 
 
 ## 🛠️ Tech Stack
