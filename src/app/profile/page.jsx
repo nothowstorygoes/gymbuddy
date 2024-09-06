@@ -93,28 +93,29 @@ export default function Profile() {
               mBasal: data.mBasal,
               activity: data.activity,
             });
+            if (data.propic === false) {
+              setTempPropic("/gymbuddy/assets/profile.png");
+              setTimeout(() => setLoading(false), 500);
+            } else {
+              getDownloadURL(ref(storage, `${user.uid}/proPic.png`))
+                .then((url) => fetch(url))
+                .then((res) => res.blob())
+                .then((blob) => {
+                  const img = URL.createObjectURL(blob);
+                  setTempPropic(img);
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    const base64String = reader.result;
+                    localStorage.setItem("profileImage", base64String);
+                  };
+                  reader.readAsDataURL(blob);
+                  setTimeout(() => setLoading(false), 500);
+                });
+            }
           })
           .catch((error) => console.error("Error fetching info.json:", error));
 
-        if (info.propic === false) {
-          setTempPropic("/gymbuddy/assets/profile.png");
-          setTimeout(() => setLoading(false), 500);
-        } else {
-          getDownloadURL(ref(storage, `${user.uid}/proPic.png`))
-            .then((url) => fetch(url))
-            .then((res) => res.blob())
-            .then((blob) => {
-              const img = URL.createObjectURL(blob);
-              setTempPropic(img);
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                const base64String = reader.result;
-                localStorage.setItem("profileImage", base64String);
-              };
-              reader.readAsDataURL(blob);
-              setTimeout(() => setLoading(false), 500);
-            });
-        }
+        
       }
     });
 
