@@ -85,6 +85,7 @@ export default function Profile() {
                 : 0;
             setmGoal(Math.floor(data.mBasal + goalInfo));
             setButtonActivity(data.activity);
+            console.log(data);
             setFormValues({
               username: data.username,
               weight: data.weight,
@@ -187,6 +188,7 @@ export default function Profile() {
     }
 
     if (isChanged) {
+      console.log("Form values:", formValues);
       const basalSex = info.sex === "M" ? 5 : -161;
       const mBasalW =
       info.chosenMeasure === "imperial"
@@ -213,6 +215,7 @@ export default function Profile() {
         ...info,
         height: formValues.height,
         activity: formValues.activity,
+        goal: formValues.goal,
         mBasal: Math.floor(mBasal),
         proteinIntake,
       };
